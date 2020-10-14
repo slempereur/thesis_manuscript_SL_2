@@ -1,0 +1,163 @@
+\providecommand{\main}{../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+                    
+\section{Amélioration de l'analyse morphométrique}
+%
+Dans l'état actuel des algorithmes,
+la détection d'anomalies est effectués sur la seule base du volume totale de chaque région segmentée.
+%
+Cette stratégie permet la détection de défaut dans le volume des tissus, mais ne permet pas de juger de leur qualité. 
+%
+Il est ainsi impossible de mesurer une potentielle déformation du cerveau n'ayant pas affecté le volume total de celui-ci, comme la réduction d'une région particulière au profit d'une autre.
+
+Afin d'améliorer les capacités d'analyse permises par l'outil développé, il est donc nécessaire de mettre en place de nouvelles mesures.
+
+    \subsection{Ajout de mesures morphologiques}
+
+%
+En utilisant les algorithmes actuellement développés au cours de cette thèse,
+cinq volumes sont segmentés: l'échantillon entier, sa matière blanche, sa matière grise et ses deux cristallins.
+%
+De ces segmentation, il est possible d'extraire cinq volumes supplémentaire.
+%
+Le premier est le cerveau entier, considéré comme l'union entre la matière blanche et la matière grise.
+%
+En utilisant les segmentations des cristallins et la segmentation de la matière blanche, il est possible d'obtenir la segmentation de chaque oeil dans leur ensemble.
+%
+Enfin, l'association entre la segmentation de la larve entière et la segmentation du cerveau peut permettre de séparer la tête du corps.
+%
+Ces dix segmentations peuvent alors être étudié pour obtenir différentes métriques.
+
+%
+Les métriques les plus simples sont le volume, la surface et la plus grande longueur de chaque volume.
+% Cas de la larve entière
+Pour les segmentation de la larve entière, de la tête et du corps,
+il s'agit des seules mesures directes pertinentes.
+%
+En effet, la procédure de montage ne permet pas d'assurer la conservation de la forme original de l'échantillon.
+%
+Il apparaît donc impossible de faire des analyses plus approfondies sur ces volumes.
+%
+De la même manière, les segmentations des cristallins étant basés sur la conservation des plus grands éléments quasi sphériques,
+il parait peu pertinent d'effectuer d'autres mesures que le volume total et la surface totale de chaque cristallins.
+
+%
+Concernant les autres segmentations, plusieurs métriques supplémentaires semblent intéressantes.
+%
+La mesure de la sphéricité de chaque segmentation donne une information sur la compacticité de chaque volume.
+%
+De la même manière, il est possible de mesurer l'excentricité de l'ellipsoïde englobant chaque volume, ce qui compare le plus grand et le plus petit demi-axes décrivant l'ellipsoïde englobant, donnant ainsi une information sur la forme de chaque volume.
+%
+La mesure des harmoniques sphériques de chaque volume peut aussi permettre d'améliorer l'analyse de potentiels défauts.
+
+% Ratios
+En complément à ces mesures génériques, il est possible de mesurer différents ratios apportant chacun une information spécifique.
+%
+Nous allons maintenant voir quelques exemples.
+%
+Le ratio entre le volume de matière blanche et le volume total du cerveau donne une estimation de la neurogénèse au sein de l'échantillon.
+%
+Le ratio entre volume de l'oeil droit et volume de l'oeil gauche peut informer d'une anomalie dans la symétrie du l'échantillon.
+%
+Le ratio du volume des yeux sur le volume totale de la larve permet de détecter une microphtalmie relative.
+%
+Le ratio du volume du cristallin gauche sur le volume totale de l'oeil gauche informe sur une anomalie de la formation de la rétine.
+%
+Le ratio du volume de la tête sur le volume totale de la tête permet de détecter une anomalie dans la taille de la tête dans son ensemble.
+%
+Couplé au ratio du volume total du cerveau sur le volume de la larve, il peut permettre de détecter une anomalie dans les région non cérébrale de la tête, comme les branchies ou les mandibules.
+%
+Ces ratios permettent donc de fournir des informations complémentaires apportant une meilleur descriptions des échantillons.
+
+%
+En utilisant les segmentations obtenus, il est aussi possible d'obtenir des mesures plus spécifiques.
+%
+Voici différents exemples.
+%
+Mesurer la distance entre les deux cristallins, ce qui permet d'avoir une approximation de la largeur du télencéphale.
+%
+Mesurer la surface de la limite entre la tête et le corps de l'échantillon, ce qui permet de détecter une anomalie dans la forme de l'échantillon.
+%
+En retirant à la segmentation de la matière blanche son intersection avec les segmentations des yeux,
+mesurer la surface de matière blanche dans le plan définis par le grand demi axe de l'ellipsoïde englobant le cerveau et passant par le barycentre des deux cristallins, mesurant ainsi la surface de télencéphale au sein de ce plan.
+%
+
+%
+Ces mesures ne nécessite pas la mise en place de procédure radicalement nouvelle au sein de ce projet.
+%
+Mais il est possible d'imaginer des méthodes plus complexes pour obtenir plus de métriques.
+%
+nous allons maintenant décrire une de ces méthodes.
+
+    \subsection{Recalage, champ de déformation et atlasing}
+    
+Grâce à la méthode d'imagerie mise en place au cours de cette thèse,
+il est maintenant possible d'obtenir un grand nombre d'échantillons en peu de temps.
+%
+Au prix de l'annotation d'un certains nombres d'échantillons, il devient alors possible de créer rapidement un modèle statistique de cerveau de poisson-zèbre pour le stade de développement désiré.
+%
+Pour ce faire, il suffit de recaler des échantillons d'individus sauvages entre eux.
+%
+La variabilité existante entre les échantillons sera alors gommé au profit de la mise en place d'un modèle statistiquement représentatife de \pz.
+%
+En effet, plus le nombre d'échantillons constituant le modèle est important, plus le modèle statistique se rapprochera de la réalité biologique d'un échantillon "idéal".
+%
+Ce modèle statistique peut ensuite servir de modèle afin de recaler n'importe quel échantillon.
+%
+La mesure du champ de déformation ayant permis de recaler ce nouvelle échantillon sur le modèle statistique est ensuite conservé comme métriques pour analyse ultérieure.
+
+%
+Mais cette méthode peut être amélioré par l'emploi d'une stratégie d'atlasing.
+%
+La première étape de cette stratégie consiste à demander à un ou plusieurs spécialistes d'effectuer la segmentation d'une liste définie de régions au sein du modèle statistique.
+%
+Dans la suite, l'atlas obtenu par la comparaison des segmentations manuelles sera nommé atlas statistiques.
+
+%%
+Une fois cet atlas statistique obtenu, on recale les échantillons que l'on veut étudier sur le modèle statistique.
+%
+On obtient ainsi une carte de déformation nécessaire pour recaler cet échantillon sur le modèle statistique.
+%
+Connaissant les déformations ayant permis de placer chaque voxel de l'échantillon à traiter sur le modèle statistique,
+il est possible d'effectuer la transformation inverse pour transformer l'atlas statistique en segmentation des sous-régions de l'échantillon à traiter.
+%
+On obtient donc pour chaque échantillon une segmentation de chaque sous-région ainsi qu'une carte des déformations nécessaires pour faire correspondre cet échantillon à un modèle statistique.
+
+%
+Cette stratégie présente ainsi plusieurs avantages.
+%
+Une fois l'atlas statistique obtenue, celui permet d'obtenir des segmentations pour chaque sous région d'intérêt.
+%
+Il est donc possible de savoir quelles sont les sous-régions affectées par un polluant ou par une mutation.
+%
+La carte des déformations permet de savoir précisément de quelle manière la sous région a été affecté.
+%
+Il est ainsi possible de mesurer précisément l'effet d'un polluant ou d'une mutation sur chaque sous-région.
+
+%
+En revanche, la mise en place d'une tel stratégie est coûteuse.
+%
+En premier lieu, la création du modèle statistique demande l'imagerie d'un nombre conséquent d'échantillon sauvage.
+%
+Ensuite, la création de l'atlas statistique demande l'effort de plusieurs spécialistes pour s'assurer d'avoir un modèle le plus correct possible.
+%
+La segmentation manuelle des sous régions étant une tâche chronophage,
+il risque d'être compliqué d'obtenir les segmentations nécessaires.
+%
+Enfin, le calcul de recalage sont coûteux.
+%
+Dans le cadre de la mise en place d'une procédure d'\hta, cet stratégie n'est donc pas additionable aux travaux déjà réalisés.
+
+Mais la mise en place de cette stratégie représente une manière robuste d'obtenir un grand nombre de descripteurs pour l'analyse.
+
+%% transition
+En multipliant ainsi les descripteurs, il devient possible d'améliorer l'automatisation de la détection d'anomalies au sein des échantillons.
+%
+Il devient en particulier possible de détecter des défauts plus subtiles au sein des échantillons.
+%
+Nous allons donc maintenant voir comment utiliser ces descripteurs afin d'effectuer l'analyse automatique des échantillons.
+
+\end{document}

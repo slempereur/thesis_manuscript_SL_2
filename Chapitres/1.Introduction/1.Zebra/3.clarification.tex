@@ -1,0 +1,120 @@
+\providecommand{\main}{../../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+
+\section{La clarification de tissu}
+
+\subsection{Rationnel}
+
+%%
+%
+Deux propriétés physiques peuvent limiter la pénétration de la lumière au sein des tissus\cite{sandell_2011}. La première est l'absorption lumineuse, due à la capacité de certaines molécules à capter les photons qu'elle rencontre.
+%
+L'absorption induit ainsi une diminution de l'intensité lumineuse proportionnelle à la quantité de milieu traversé, ce qui entraîne la perte partielle ou totale de l'information dans les images 3D.
+%
+Bien entendu, le pigments en particulier absorbent énormément de lumière. Ainsi, trois molécules sont les principales cibles de la dépigmentation de tissus animaux\cite{sandell_2011,antinucci_2016,pende_2020}. En particulier, pour les longueurs d'ondes inférieures à 600 nm, la mélanine et l'hème de l'hémoglobine. Les fluorophores sont excités par des longueurs d'ondes principalement comprises entre 480 nm et 650 nm, et ré-émettent des photons ayant une longueur d'onde comprise entre 500 nm et 670 nm.
+Pour les lignées transgéniques, le développement de méthodes de clarification optique doit donc nécessairement comporter une étape permettant en priorité de limiter la présence de ces molécules.
+%%
+%
+La seconde propriété qui perturbe l'imagerie est la réfraction de la lumière: en passant d'un milieu ayant un indice de réfraction à un autre, un faisceau lumineux va être dévié en fonction de son angle d'incidence. En modifiant le trajet des photons, il est possible que deux photons arrivant au même endroit n'aient pas la même source. Ainsi,la réfraction rend les images floues.
+%
+De plus, la passage d'un photon d'un milieu à un autre peut être impossible si le milieu d'arrivée dispose d'un indice de réfraction plus bas que le milieu de départ. En particulier, certains photons ne traverseront pas un tissu efficacement.
+
+%%
+%
+Au sein de tissu biologique, la réfraction est due à des hétérogénéités à deux échelles. Au niveau cellulaire, les lipides contenus dans les membranes de la cellule ou du noyau entraînent des changements d'indice de réfraction au sein d'une cellule. Au niveau d'un organe, un type cellulaire peut avoir un indice de réfraction très différent d'un autre, et donc être plus ou moins différent du milieu d'imagerie.
+%%
+%
+Les méthodes de clarification de tissu ont donc en partie pour objectif de diminuer l'importance de ces hétérogénités.
+
+\subsection{Principe des méthodes de clarification}
+
+Quatre étapes sont généralement mises en oeuvre\cite{tainaka_2016,ueda_2020}: la fixation, la dépigmentation, la délipidification et l'appariement de l'indice de réfraction.
+%
+
+%%Fixation
+%
+Au sein des tissus, la plupart des protéines n'induisent pas de modifications du trajet de la lumière. En liant les protéines entre elles, il est alors possible de solubiliser les lipides sans risquer de modifier la morphologie des structures. Avant clarifcation, plusieurs molécules peuvent être utlisées, comme le méthanol et le paraformaldéhyde. Le méthanol dénature les protéines et les précipite, ce qui crée un maillage à partir des protéines se trouvant dans les tissus. Le paraformaldéhyde va former des liaisons covalentes avec les atomes d'azote se trouvant dans les protéines, ce qui permet une fois encore de créer des liens entre les protéines.
+
+%% Dépigmentation
+%
+La dépigmentation consiste à détruire chimiquement les pigments par l'utilisation de peroxyde d'hydrogène, qui va entraîner une oxydation des protéines, avec deux effets principaux. Le premier est bien sûr de détruire les pigments mélaniques. De plus, en dénaturant les protéines, le peroxyde d'hydrogène va diminuer les interactions entre les protéines et les photons.
+%
+Les réactions utilisant le peroxyde d'hydrogène sont catalysées par la lumière. Il peut donc être compliqué d'obtenir un traitement adapté car il n'est pas simple de parfaitement maîtriser la lumière environnante. De plus, les protéines sont dénaturées sans sélectivité, et les protéines fluorescentes perdent leur activité. On doit balors à nouveau mlarqyuer ces protéines à l'aide d'anticoros ce qui rallonge considérablement le protocole.
+%
+Pour imager de telles lignées, il est ainsi préférable d'utiliser des lignées de  mutants ne présentant pas de pigmentations sur le corps\cite{white_2008,antinucci_2016}.
+
+%% Délipidification
+Comme vu précédemment, les lipides constituent une des sources principales de réfraction. %
+%
+La délipidification fait appel à des détergents, comme le dodécylsulfate de sodium (SDS), le triton-X100 ou le tween-20.
+
+%% RI matching
+%
+Enfin, pour supprimer la réfraction due à l'hétérogénéité des indices de réfraction entre l'objet à étudier et le milieu d'imagerie, des solutions d'appariement de l'indice de réfraction ont été développées.
+%
+Cette étape consiste donc simplement à effectuer des bains de solutions pour changer l'indice de réfraction de l'ensemble des tissus, afin d'imposer le même indice de réfraction pour les tissus et pour le milieu d'imagerie.
+%
+Deux types de solutions sont utilisés pour réaliser l'appariement d'indice de réfraction.
+
+%
+On peut utiliser des solvant organiques comme l'éther dibenzylique ou le tetrahydrofurane.solutions, qui possèdent une indice de réfraction (1.56) proche de l'indice du verre (1.54).
+%
+Elles sont très efficaces mais déshydratent les échantillons, ce qui eqs fragilise et complexifie l'acquisition micrscopique. En effet, ces solutions présentent des risques importants pour la santé humaine et pour l'environnement.
+%
+Ces solutions sont donc à privilégier seulemnt pour l'imagerie d'échantillons de très grandes tailles quand les autres méthodes ne sont pas assez efficaces. En utilisant alors des macroscopes, il est plus facile de construire des cuves étanches pour l'imagerie, la distance de travai et la taille des champs étant très grandes. 
+
+%%
+%
+Afin d'apparier l'indice de réfraction, il est aussi possible de préparer de grands volumes de solutions aqueuses sans risque pour la santé, et d'utiliser des objectifs plongeants. Ce sont par exemple des solutions très concentrées en sucres (fructose ou sorbitol). Leur coût est très faible. D'autres produits moins visqueux sont maintenant privilégiés.
+%
+L'indice de réfraction de la solution étant proportionnel à la concentration, il est possible d'adapter l'indice de réfraction en fonction du tissu à étudier  sans toutefois pouvoir dépasser 1.49. Cet indice inférieur au verre conduit à utiliser des objectifs plongeants dédiés. La présence d'eau dans le milieu rend l'imagerie d'échantillons en profondeur moins performante typiquement pour des échantillons de plus de 1mm.
+
+\subsection{Exemple de procédure de clarification}
+
+%
+Au fil du temps, de très nombreux protocoles de clarification de tissus ont été publiés. Je présente ici les plus emblématiques, certains été adaptés par TPS au poisson zèbre, et étant couramment utilisés.
+%
+
+%% Simple immersion (Z-Fact)
+
+Sans clarification, le signal obtenu avec un microscope confocal est très dégradé si la lumière a parcouru quelques centaines de microns dans une larve ou un cerveau de poisson zèbre.
+Pour des échantillons présentant une épaisseur maximale jusqu'à 800microns, tel qu'un eleuthéroembryon de 4Jours post-fécondation, il est possible d'utiliser une procédure de clarification relativement simple et rapide n'impliquant que deux étapes : la dépigmentation et l'appariement de l'indice de réfraction\cite{affaticati_2018}.
+%%
+% iDisco
+iDISCO\cite{renier_2014} est une méthode de clarification commençant par la déshydratation des tissus par méthanolisation avec les avantages décrits précédemment. 
+%%
+%
+L'appariement de l'indice de réfraction est ensuite réalisé en plaçant les échantillons dans une solution d'éther dibenzylique.
+%
+Cette solution permet une clarification optique optimale, en éliminant l'ensemble des éléments pouvant opacifier les échantillons.
+%
+Il est ainsi possible d'imager des échantillons de grandes tailles, comme des souris entières.
+%s
+Mais comme indiqué précédemment, l'utilisation de solvants organiques et en particulier de solvants aromatiques présente des risques importants pour la santé et pour l'environnement.
+%
+De plus, en retirant l'eau des échantillons, ces approches réduisent la taille des échantillons\cite{frtaud_2017}.
+%
+Cette réduction permet d'imager des échantillons plus gros, car en perdant en épaisseur, il sera plus facile d'imager l'ensemble de l'objet.
+%
+Mais la déformation induite sur les tissus peut être suffisamment importante pour déformer une structure et empêcher toute analyse volumétrique.
+
+
+%% CUBIC
+La génération de protocoles les plus récemment publiés ont pris le nom de CUBIC\cite{susaki_2014,susaki_2015}.
+%
+Il impliquent plusieurs solutions de délipidification et d'appariement d'indice de réfraction, une d'elle étant formulée pour obtenir de l'hyperhydratation grâce à la présence d'urée. Bien que cet ajout d'eau puisse sembler contre intuitif, ces solutions permettent d'homogénéiser l'indice de réfraction en augmentant la proportion d'eau dans les tissus.
+L'emploi d'urée va de plus entraîner un éclatement des membranes, ce qui va permettre de faciliter la délipidification. Ceci peut détruire certains types cellulaires complexes. Aussi, l'hyperhydration génère une augmentation de la taille des tissus\cite{frtaud_2017} avec le risque de les déformer.
+%
+Pour la clarification d'échantillons de grandes tailles, il est pertinent de réaliser une surfixation des tissus par hydrogel\cite{chung_2013,richardson_2020}.
+%
+La matrice d'hydrogel va remplacer le milieu intersticiel, limitant ainsi la modification de taille des tissus\cite{frtaud_2017}.
+
+%%
+%
+CUBIC présente l'avantage de pouvoir être utilisé avec une grande variété de solutions de clarification, adaptées à une grande diversité de tissus la clarification de tissus.
+%
+
+\end{document}

@@ -1,0 +1,169 @@
+\providecommand{\main}{../../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+            
+\section{Le \hcs{}}
+
+    \subsection{Principes du \hcs{}}
+    
+%%
+%
+A l'origine, le \hcs{} est un ensemble de méthodes développé pour étudier rapidement les effets d'un grand nombre de molécules chimiques.
+%
+Ces méthodes sont particulièrement utilisés en toxicologie\cite{zhu_2016} ou dans la recherche de médicaments candidats\cite{macarron_2011}.
+
+%%
+%
+Afin d'expliquer le fonctionnement d'une procédure de \hcs{}, je prends l'exemple de l'analyse toxicologique.
+%
+Pour commencer, des échantillons biologiques vont être placés individuellement dans des plaques multi-puits.
+%
+Les échantillons biologiques peuvent être de différentes natures, comme des protéines, des cellules, ou des individus entiers.
+Chaque échantillon va ensuite recevoir une solution ayant une concentration connue de la molécule à étudier.
+%
+L'effet de la molécule à chaque concentration sera alors enregistré par une procédure de mesure, selon l'étape dite de phénotypage.
+%
+Il peut s'agir de mesure physico-chimiques ou des mesures par imageries.
+%
+Ces mesures vont alors être automatiquement analysées pour déterminer si la molécule utilisée est toxique.
+
+%
+Pour gérer le très haut-débit bdes expériences, il est souvent nécessaire de développer des méthodes de robotisations soit pour charger les échantillons en plaque, soit pour permettre d'effectuer automatiquement les traitements, ou encore pour effectuer automatiquement les mesures.
+%
+De la même manière, il est nécessaire de réaliser l'automatisation du traitement des mesures effectuées.
+%
+En effet, la quantité souvent colossale de données générées par ce type d'approches nécessitent de lourds pipelines informatiques.
+%
+Le développement d'une approche de \hcs{} repose donc sur une association de biologie, de robotique et d'informatique.
+%%
+%
+Ces méthodes ont deux avantages:
+%
+elles permettent tout d'abord de tester rapidement une grande quantité de molécules et de concentrations.
+%
+Certaines plateformes de \hcs{} sont ainsi capable d'étudier jusqu'à cent milles molécules par jour en routine,
+comme le \href{https://www.mssr.ucla.edu/}{Molecular Screening Shared Resources de UCLA}.
+%
+De plus, par la multiplication du nombre d'échantillons pour chaque condition, ces méthodes possèdent une forte représentativité statistique.
+%
+Enfin, en permettant de standardiser l'ensemble des étapes de traitements, les procédures de \hcs{} offrent une reproductibilité inégalée.
+
+%%
+%
+Cependant, ces méthodes ne se généralisent pas pour tous à cause de trois défauts majeurs.
+%
+Ces dispositifs impliquent l'achat de systèmes de robotisation et d'informatique au coût souvent prohibitif. Elles nécessitent des compétences multi-disciplinaires pour assurer qu'aucun goulet d'étranglement n'affecte l'efficcité des pipelines, mais aussi des spécialistes très pointus et expérimentés dans chaque domaine par exemple pour assurer la maintenance des outils.
+%
+Ceci est tout particulièrement vrai pour les cribles impliquant des étapes d'imagerie.
+%%
+%
+En effet, un grand nombre d'étapes complexifient l'utilisation de l'imagerie. Ce sont par exemple des méthodes fines de montage d'échantillon nécessitant des impressions en 3D d'objets dédiés, ou des pipelines informatiques originaux pour piloter les microscopes automatiques. Il faut ensuite développer une grande variété de programmes informatiques dont des algorithmes de détection automatique permettant d'extraire les informations souhaitées des images.
+%%
+%
+Les solutions de \hcs{} utilisant l'imagerie de \pz{} sont actuellement peu nombreuses , encore un plus faible nombre sont commercialisées et elles n'impliquent quasiment jamais l'acquisition d'images 3D.
+%
+    \subsection{Approches utilisant le \pz{}}
+
+Nous avons vu dans la section \ref{sec:easy_acq} que différentes méthodes permettant de faciliter l'acquisition d'images de \pz{}
+ont été mises au point.
+%
+Pour pouvoir utiliser ces méthodes dans le cadre de \hcs{}, il est nécessaire de mettre au point des procédures de traitement d'images automatiques.
+%
+Nous allons donc voir différents exemples de méthodes ayant automatisé l'acquisition et le traitement des échantillons afin de permettre le développement de \hcs{}.
+
+%% Diane
+
+%% vast
+%
+Comme décrit en section~\ref{sec:vast}, le VAST permet d'effectuer rapidement des acquisitions très standardisées de \pz{}.
+%
+Suite à la commercialisation de cet outil, différentes équipes ont utilisé les images produites pour mettre au point des procédures de segmentation semi-automatiques ou automatiques des acquisitions réalisées.
+%
+
+%%
+%Teixido
+FishInspector\cite{teixid_2019} est un logiciel réalisant automatiquement la détection de plusieurs caractéristiques des échantillons imagés.
+%
+Il s'agit de l'étude la plus avancée dans le développement d'une méthode de crible utilisant le VAST.
+%
+Le VAST est utilisé pour acquérir 4 images: une vue dorsale, une vue ventrale et une vue de chaque coté.
+%
+Ces images sont utilisés pour détecter automatiquement les caractéristiques suivantes:
+%
+la forme générale de la larve,
+l'oeil,
+la notochorde,
+les pigments,
+le sac vitellin,
+l'otolithe,
+la position de l'extrémité de la mâchoire inférieure,
+la vessie et le péricarde.
+%
+Afin d'améliorer la précision des segmentations automatiques,
+le logiciel offre à l'utilisateur des outils permettant de les modifier.
+%
+Une fois les segmentations validées, un workflow Knime est utilisé pour réaliser l'analyse des résultats.
+%
+Cette étude propose donc une méthode permettant d'automatiser le positionnement des échantillons sous le microscope, l'imagerie des échantillons, la détection des régions d'intérêt et l'analyse de ces régions.
+%
+En couplant cette procédure à un robot de traitement des échantillons, il est ainsi possible de réaliser un \hcs{} complet permettant d'étudier des défauts morphologiques chez le \pz{}.
+%
+Cependant, cette méthode ne semble pas être en mesure d'effectuer des analyses de signaux fluorescents que le VAST implique des microscopes à fluorescence. Les images ont aussi des abérrations dues à l'acquisition en capillaire.
+
+%% Aquifer
+%
+L'équipement d'imagerie ACQUIFER permet d'automatiser l'acquisition d'échantillons placés dans des plaques de 96 puits.
+%
+Sans développement particulier, il s'agit simplement d'une plateforme d'\hti{} optimisée pour l'imagerie du \pz{}.
+%
+En utilisant des moules de montage\cite{wittbrodt_2014} (voir Section~\ref{sec:moule_montage}), il est possible d'assurer un montage identique pour tous les échantillons.
+%
+Le dispositif va alors être en mesure de réaliser des images présentant toujours les mêmes caractéristiques.
+%
+Différentes routines d'analyses des images obtenues ont été proposées pour étudier plusieurs organes comme les reins ou le coeur\cite{westhoff_2020, steenbergen_2020, pandey_2019}. Des images 2D et 3D à faible résolution sont obtenues en raison d'objectifs à faibe grossissements.
+
+%
+Les méthodes de cribles employant le \pz{} utilise des méthodes d'imagerie 2D ou des méthodes ayant une faible résolution en profondeur.
+%
+Comme vu en section \ref{sec:imagerie}, les limitations imposés par les capillaires du VAST impose l'emploi d'image 2D, et les microscopes à épifluorescence ont une profondeur de champ importante, ce qui implique un manque de précision dans l'acquisition.
+
+%%
+%
+L'utilisation d'une unique image 2D est un frein pour deux raisons.
+%
+Considérons pour la suite que le système d'imagerie utilisé dispose d'une faible profondeur de champs.
+%
+Considérons de plus l'imagerie d'une structure plane, comme une toile d'araignée.
+%
+Si la toile se trouve dans le plan d'acquisition, il sera possible de réaliser une acquisition de celle-ci sans problème.
+%
+Cependant, la moindre déviation du plan d'acquisition entraîne une impossibilité d'imager la structure.
+%
+L'utilisation d'une simple image 2D avec un système à faible profondeur de champ implique donc d'être en mesure d'assurer un parallélisme parfait entre l'objet et la lentille de l'objectif.
+%
+En prenant l'exemple de la toile d'araignée, il est possible de faire une estimation du parallélisme nécessaire.
+%
+Imaginons que l'on essaie d'imager une toile d'araignée parfaitement plane
+faisant 1 millimètre de diamètre et une épaisseur négligeable
+avec un dispositif d'acquisition ayant une profondeur de champs de 1 microns.
+%
+Afin de s'assurer que l'ensemble de la toile soit nette, il serait nécessaire que l'angle formé par la lentille de l'objectif et le support d'acquisition est un angle inférieur à $0.06^{\circ}$.
+
+%%
+Deux situations peuvent alors se produire.
+%
+Si on utilise un système d'imagerie ne filtrant pas les photons qui proviennent de la couoe optique désirée, tout élément de la toile sortant de la zone couverte par la profondeur de champs sera flou.
+%
+A l'inverse, si on utilise un système ne permettant de capter que les photons provenant de l'épaisseur décrite par la profondeur de champ, comme un microscope confocal, alors tout élément sortant de cette zone ne sera pas visible.
+%
+Il est donc quasi impossible d'imager correctement des structures planes en utilisant des images 2D.
+%
+De plus, la plupart des structures biologiques ne  pas planes mais au contraire très complexes en 3D.
+%
+Ainsi, le développement de cribles pour l'étude de structures cérébrales par imagerie 2D est souvent insuffisante pour donner des informations ne risquant pas de comporter des artefacts, sauf si l'objet peut être réorienté automatiquement et précisément, comme dans le cas de la plateforme ZeBraInspector que nous avons développé, qui implique des images 3D permettant de capturer des images 2D dans n'importe quelle orientation.
+%
+
+
+\end{document}

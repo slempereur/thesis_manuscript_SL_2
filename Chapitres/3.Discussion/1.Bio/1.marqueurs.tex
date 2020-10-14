@@ -1,0 +1,157 @@
+\providecommand{\main}{../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+\section{Discussion sur les Perspectives offertes par le pipeline ZBI développé au cours de ma thèse}
+%%
+%
+Introduction}
+   
+%%
+%
+Les résultats obtenus avec le dye lyphophilique pour l'analyse des mutants fibrillarine et wdr12 démontrent clairement tout l'intérêt de ce marqueur pour pointer vers des problèmes morphologiques dans le cerveau du poisson zèbre à 5dpf.
+%
+Toutefois, ce marqueur qui a la propriété de révéler essentiellement les fibres des neurones ne permet pas de comprendre la nature et l'origine des défauts observés extrêmement variables qui peuvent perturber la mise en place du système nerveux.
+%
+Problème de différenciation neuronale? Neurogenèse retardée? Problèmes développementaux plus globaux et précoces? 
+
+%%
+%
+Dans la section \ref{sec:label}, je propose une liste d'un certain nombre de marqueurs à développer et valoriser grâce au pipeline ZBI.
+
+%%
+%
+Plusieurs autres directions de travail pour optimiser ZBI et le rendre flexible, hormis l'application à d'autres modèles animaux (section \ref{sec:modeles}) , sont aussi envisageables à court terme. En introduction je donne ci dessous l'exemple, de quelques projets en cours en particulier avec la contribution de Matthieu Simion, Fabrice Licata et Payel Chatterjee. 
+
+%%
+%
+Un résultat intéressant des expériences 5-Fu est l'influence de la date de début de traitement.
+%
+Seul le traitement précoce qui permet l'entrée massive du produit conduit à un effet d'hypomorphie claire et reproductible. Il pourrait être en lien avec les  effets du produit sur les clivages précoces, la gastrulation et la neurulation.
+
+%%
+%
+Un important paramètre dans ce type de test toxicologique  est donc la capacité du produit à traverser le chorion. En ce qui concerne par exemple les perturbateurs endocriniens (EE2 ref brion feats f1000) traversent le chorion sans problème d'ou la possibilités d'effectuer des traitements quotidiens avec un temps d'initiation des traitements  plus simple à déterminer.
+
+En premier lieu, le pipeline ZBI et son logiciel semblent dans ce cadre  bien  adaptés pour améliorer le test OCDE EASZY\cite{brion_2019} (Banerjee, Lempereur, travail en cours) , car le marquage DiI permettra pour une part de réaligner les larves in silico (gain de temps) et permettra une extraction de photos parfaitement orientées des patrons aromatase (cyp 19b) à 5 jours. Cela pourrait être une nouvelle application publiable à court terme de ZBI dans le cadre du projet ANR FEATS obtenu par TPS et coordonné par Francois Brion de l'INERIS. Par ailleurs, j'espère que la publication du pipeline ZBI engendrera de nombreuses autres applications.
+
+Une autre application pourrait être d'appliquer ZBI à  d'autres stades du poisson zèbre.  En post-éclosion, l'épithélium très cohésif ne laisse pas passer les molécules chimiques. L'eleutheroembryon, alevin vésiculé dont le vitellus n'est pas encore résorbé, ne mange pas non plus (ref leonard). et utilise sans doute encore beaucoup de respiration cutanée et peu de respiration branchiale. Un second type de test toxicologique à des stades plus tardifs de \pz{} pourrait être testé avec la plateforme ZBI.
+
+L'élevage de \pz{} dans des eaux polluées ou nourris avec des  aliments contenant des composés toxiques pourrait être de 5 a 21 jours ce qui diversifierait beaucoup les modes d'administration et les phénotypes possibles à observer (par exemple la différenciation sexuelle). On ,pourrait alors aussi utiliser ZBI à 21 jours. Payel Banerjee pourrait à l'avenir proches débuter de telles expériences, sur la base de l'optimisation qu'elle réalise de l'utilisation de ZBI pour l'étude de la régéneration chez le poisson zèbre entre 21dpf et 28dpf . ZBI devrait se révéler très adapté pour extraire des données concernant le toit optique. En effet, après redressement des larves, il devrait être possible de les faire tourner autour de leur axe principal pour placer dans une orientation optimale afin observer le toit optique, un objet privilégié d'étude au TPS, et de régler l'épaisseur des coupes optiques sur lesquelles on souhaite appliquer une projection maximale, afin de visualiser tout le tectum sur une seule image 2D. Ainsi, en utilisant le marqueur lipophile, on pourra déterminer l'emplacement de l eensmble du toit optique et d'une potentielle blessure réalisée préalablement. Avec le pipeline ZBI, j'espère avecf Payel Banerjee que le toit optique permettra d'analyser en 2D la migration de cellules gfp+ vers cette blessure, et que le toit optique du poisson zèbredevienne un tissu privilégié pour étudier les mécanismes de la régénération du système nerveux centtral des vertébrés avec de potentielles ,applications chez l'homme.
+
+\section{Marquages additionnelles}
+\label{sec:label}
+
+    \subsection{Marquages cérébraux complémentaires}
+   
+%%
+%
+Dans le cadre de cette thèse, deux marqueurs du système nerveux ont été employés.
+%
+Le DiI a été utilisé car il permettait de marquer la matière blanche.
+%
+Le marquage par anticorps anti-HuC a été ajouté pour permettre de détecter la matière grise.
+%
+Ces deux marqueurs permettent d'avoir une première approximation du volume cérébral.
+%
+Cependant, l'utilisation de certains marqueurs spécifiques pourrait apporter des informations supplémentaires pour étudier le cerveau du \pz{}.
+
+%%
+%
+Zonula occludens-1 (ZO-1) est une protéine membranaire impliquée dans la formation de jonctions serrées.
+%
+Cette protéine est produite par le gène tjp1a.
+%
+Ce gène possède des orthologues chez l'humain, la souris et le \pz{}.
+%
+Chez le \pz{}, cette protéine se retrouve en particulier dans la couche de cellules bordant les ventricules cérébraux.
+%
+Le marquage de cette protéine peut ainsi servir de marqueur de la surface des ventricules.
+%
+La segmentation de ce marquage pourrait alors permettre de déterminer le volume du ventricule.
+%
+Chez l'humain, l'augmentation du volumes des ventricules cérébraux est associé à l'hydrocéphalie, par exemple une complication possible de la tuberculose, en particulier chez les patients atteints par le VIH.
+%
+Par analogie, l'analyse du volume des ventricules peut donc être intéressante dans le cadre de l'étude des infections cérébrales chez le \pz{}.
+%
+De plus, l'étude de ZO-1 permet la detection chez le \pz{} d'une augmentation du volume des ventricules en cas de scolioses\cite{vesque_2019}.
+
+PCNA (proliferating cell nuclear antigen) est une protéine impliquée dans le réplication du génome, la réparation et la recombinaison de l'ADN.
+%
+On retrouva ainsi cette protéine dans l'ensemble des zones de prolifération cellulaires
+%
+Au sein du cerveau de \pz{}, les zones de prolifération se trouvent principalement autour des ventricules.
+%
+Couplés à un marquage anti-HuC et DiI, le marquage de PCNA pourrait ainsi permettre d'étudier l'ensemble des cellules formant le cerveau, à l'exclusion de populations cellulaires marginales commes les méninges ou les cellules souhes..
+
+    \subsection{\label{chap:bio:marqueurs:vasc} Marquages vasculaires}
+
+%%
+%
+En adaptant les algorithmes de segmentation automatique de ZBI,
+il sera possible de créer une plateforme de HTA pour d'autres tissus.
+%\textbf{}
+Parmi les types cellulaires demandant le plus d'adaptation des algorithmes se trouvent certainement au sein du système vasculaire, les systèmes lymphatiques, veineux et artériels.
+%
+En effet,
+la segmentation automatique de structures curvilignes pose de nombreux problèmes,
+et la mise au point d'algorithmes permettant une détection robuste de ce type de
+structures est encore en cours\cite{merveille_2019,mosinska_2020,mou_2019}.
+%
+Cependant, la mise en place d'une procédure d'analyse automatique du système vasculaire est importante car il existe de nombreuses causes de modifications du système vasculaire qui impactent fortement le système nerveux.
+%
+Prenons deux exemples.
+
+%%
+%
+Les tissus cancéreux présentent souvent une vascularisation importante.
+%
+Il est alors important d'étudier la formation de la vascularisation des tumeurs malignes, ce que l'on appelle angiogénèse tumorale.
+%
+La compréhension de l'angiogénèse tumorale peut ainsi permettre de prédire
+l'apparition de cancers et aussi permettre de trouver de nouveaux traitements
+thérapeutiques.
+%
+Le \pz{} est employé depuis de nombreuses années comme modèle pour l'étude de l'angiogénèse tumorale\cite{nicoli_2007,guerra_2020,letrado_2018}.
+%
+Il est pertinent d'étudier l'angiogénèse tumorale du \pz{} car les mécanismes moléculaires de l'angiogénèse sont similaires à ceux que l'on observe chez l'humain\cite{tobia_2011}.
+
+%%
+%
+De nombreuses molécules ont un effet sur le développement du système vasculaire des foetus humains\cite{knudsen_2011}.
+%
+La consommation de tabac par inhalation de fumée chez les femmes enceintes
+entraîne des modifications de l'angiogénèse du foetus.
+%
+On note ainsi que ces foetus présente une diminution du diamètre des vaisseaux
+et des défauts de l'arborescence vasculaire.
+%
+L'étude de l'exposition de \pz{} à 5 dpf à des concentrés de fumée de cigarette
+montre des effets variés\cite{ellis_2014,massarsky_2018}.
+%
+On peut en particulier noté l'apparition d'hémorragies cérébrales ou une diminution de la fréquence cardiaque.
+%
+L'étude du réseau vasculaire de \pz{} pourrait ainsi permettre de mieux prédire la toxicité de telles molécules qui affectent au premier chef le système vasculaire.%
+
+%
+Afin de marquer le système vasculaire, nous avons utilisé trois marqueurs très utilisés par la communauté pz travaillant sur le système vasculaire..
+%
+
+% candidats : pdgfr$_{\beta}$, kdr, fli
+Les facteurs de croissance de l'endothélium vasculaire (VEGF) et leurs récepteurs paraissent être une cible de choix dans l'étude du système vasculaire,
+ces protéines étant nécessaire à  l'angiogénèse et la vasculogénèse\cite{bahari_2007}.
+%
+Leur étude permet ainsi d'étudier la néoangiogénèse induite par l'apparition de tumeur\cite{nicoli_2007}.
+%
+KDR est un récepteur des VEGF présentant un gène orthologue chez le \pz{} et chez l'humain.
+%
+Son marquage par \ihcie{} ou l'emploi de lignées rapportrices permet donc d'étudier le système vasculaire du \pz{}\cite{savage_2019}.
+
+Une autre possibilité est l'étude du facteur de transcription FLI1 (Friend leukemia integration 1).
+%
+Cette protéine est impliquée dans l'angiogénèse, et se retrouve donc le système cardiovasculaire.
+%
+Il s'agit ainsi d'une cible de choix dans l'étude du système vasculaire du \pz{}\cite{letrado_2018}.
+
+\end{document}

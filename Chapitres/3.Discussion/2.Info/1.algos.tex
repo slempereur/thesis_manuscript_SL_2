@@ -1,0 +1,294 @@
+\providecommand{\main}{../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+                    
+\section{Amélioration des algorithmes de recalage et de segmentation}
+
+%
+Dans leurs états actuels, les algorithmes de segmentation développés permettent d'obtenir des résultats robustes.
+%
+Mais ces calculs sont encore relativement lent.
+%
+De leur coté,
+les algorithmes de segmentation présentent des failles prévisibles qu'il serait bon
+de corriger.
+%
+Dans la suite,
+nous allons présenter des solutions permettant d'améliorer les segmentations et le recalage,
+ainsi que des solutions permettant de réduire les temps de calculs nécessaires.
+
+    \subsection{Amélioration du recalage}
+ 
+%   
+La méthode de recalage actuellement développé est basé sur la segmentation automatique des cristallins ainsi que sur une segmentation grossière de la matière blanche.
+%
+Cet algorithme possède un certain nombre de défaut, que nous allons maintenant étudier.
+
+%
+Le défaut le plus évident est l'utilisation des cristallins.
+%
+Considérer leur présence est un a priori fort concernant les échantillons, car il est nécessaire que les yeux soient présents et que les cristallins soient visibles.
+%
+Ces limites sont un frein fort contre cet algorithme.
+
+%
+Issu de deux souches ayant des défauts de pigmentation (nacre et roy orbison),la souche de \pz{} casper présente une forte dépigmentation\cite{white_2008}.
+%
+La seule région présentant encore des pigments se trouve être la rétine.
+%
+Grâce à son manque de pigment, la souche casper est devenu un outil préférentiel pour l'imagerie du \pz\cite{hecker_2020,camiolo_2020, wertman_2020}.
+%
+Dans le cadre d'échantillons obtenus par \ihcie{}, l'étape de dépigmentation est responsable d'une dénaturation des fluorescences endogènes.
+%
+De ce fait, l'utilisation de lignées rapportrices sur fond AB nécessite une révélation de la fluorescence endogène par anticorps.
+%
+En évitant la dépigmentation, la souche casper permet donc d'étudier rapidement des lignées rapportrices.
+
+%%
+Cependant, cette lignée présente une pigmentation de la rétine
+ce qui entraine l'impossibilité d'imager en même temps le cerveau et l'intérieur de l'oeil.
+%
+La segmentation du cristallin devient alors impossible, empêchant d'effectuer un recalage correct.
+
+%%
+Afin de pallier à ce problème, deux solutions sont envisagées.
+%
+Les échantillons capser possèdent un marquage au dye de la couche extérieur de l'oeil.
+%
+Il est donc possible de détecter la partie supérieur de l'oeil dans la segmentation de la larve entière.
+%
+L'oeil détecté correspond alors à une demi sphère ayant des valeurs de gris nulles.
+%
+Ainsi, il est possible d'adapter l'algorithme de segmentation du cristallin en diminuant le coefficient de sphéricité utilisé comme seuil.
+%
+De cette manière, l'algorithme conservera le plus grand ellipsoïde obscur au sein de la larve.
+%
+Cette solution permet donc de conserver l'utilisation d'un axe entre les yeux comme axe de référence.
+%
+Ce choix est préférable, car le montage peut induire une courbure au sein de la matière blanche.
+%
+En revanche, en utilisant un repère plus large, les échantillons présentent un risque plus important de mauvais alignement.
+%
+De plus, cet algorithme ne permet pas de traiter d'échantillons n'ayant pas d'yeux.
+
+%%
+Une seconde solution envisagée serait la recherche d'un plan de symétrie.
+%
+La présence de deux hémisphères cérébraux chez le \pz implique que ce cervau possède un plan de symétrie.
+%
+De cette manière, le vecteur normal au plan de symétrie de le segmentation de la matière blanche permet de remplacer l'axe entre les deux cristallins.
+%
+Il devient ainsi possible de recaller les échantillons en ne se basant que sur la segmentation de la matière blanche.
+%
+La détection automatique du plan de symétrie du cerveau dans des images acquises par imagerie par résonance magnétique ou scanner étant largement étudié\cite{tan_2019,noori_2020,rehman_2018},
+il suffirait d'adapter une des approches précédement publié à nos données de \pz{}.
+%
+Cet approche permettrait alors d'apporter une plus grande robustesse à l'algorithme de recalage.
+
+%
+Cependant, la segmentation de la matière blanche est actuellement effectué de manière grossière afin de réduire les temps de calcul.
+%
+Les axes obtenues par la détection de l'ellipsoïde englobant cette segmentation approximative induise ainsi une erreur d'alignement.
+%
+Afin de corriger cela, nous pourrions utilisé la procédure de segmentation plus précise.
+%
+Mais le temps nécessaire au calcul de la segmentation précise de la matière blanche est actuellement incompatible avec un traitement des échantillons dans un laps de temps compatible avec le \hcs{}.
+%
+Il est donc nécessaire de modifier l'approche des segmentations afin de réduire cet incertitude.
+
+    \subsection{Segmentation par apprentissage profond}
+
+%    
+Dans le cadre de ce projet,
+trois segmentations ont été validées, la segmentation de l'échantillon dans son ensemble,
+la segmentation de la matière blanche par marquage Dye et la segmentation de la matière grise par marquage anti-HuC/D.
+%
+Une quatrième segmentation a été mise au point afin de détecter les crystallin.
+%
+Cependant, ces segmentations sont actuellement lentes, prenant entre deux et six minutes.
+
+%%
+Nous allons donc voir une solution permettant théoriquement d'accelérer les calculs tout en obtenant des résultats tout aussi précis.
+
+%%
+%
+Durant la dernière décennie, les algortihmes d'apprentissage profond ont permis la développement d'outils permettant la segmentation automatique\cite{long_2015,ronneberger_2015,Milletari_2016}.
+%
+Ces méthodes ont été utilisés pour la segmentation de tous types d'organes acquis par tous types de système d'imagerie\cite{gottapu_2018,oztel_2017,zhang_2020,hossain_2019}.
+%
+Ces méthodologies ont été développé car elles sont robustes et rapides une fois entraînées, et peuvent être couplé à des annotations humaines. 
+%
+L'utilisation de plusieurs annotations sur le même jeu d'entraînement permet de générer une segmentation par région d'intérêt\cite{zhao_2019,tong_2018,feng_2019}.
+
+%
+Cette stratégie présente cependant deux défauts.
+%
+La multiplication des calculs nécessaires pour obtenir les résultats de segmentation rende nécessaire l'utilisation de carte graphique dédié, ce qui peut entraîner un coût élevé pour l'utilisation de ces méthodes.
+%
+Le second point est la nécessité d'une étape d'entraînement.
+%
+Ce point implique deux défauts.
+%
+Il est tout d'abord nécessaire d'entraîner le réseau de neurones grâce au set d'entraînement\cite{ghafoorian_2017,jiang_2018,xu_2018}.
+%
+Cette étape nécessitant de recalculer un grand nombre de fois les différents poids du réseau de neurones, l'entraînement initial du réseau de neurones peut être fastidieux.
+%
+Ensuite, cet étape d'entraînement nécessite des jeux d'images ayant été annotées manuellement pour indiquer les régions à segmenter. 
+%
+Les nombres d'images nécessaires étant proportionnel à la profondeur du réseau de neurones, ce point peut rendre l'utilisation de réseaux de neurones  inutilisables pour la segmentation automatique de certains objets car il est difficile d'obtenir suffisamment d'images de référence.
+%
+Cette difficulté peut provenir de la rareté de l'objet à étudier, ou bien de la complexité de la structure d'intérêt.
+
+%
+Cependant, des solutions existent soit pour simplifier l'annotation soit pour réduire le nombre d'images pour l'entraînement.
+%
+concernant la simplification de l'annotation, des procédures utilisant des segmentations grossières ont été développé\cite{rajchl_2017}.
+%
+Il devient donc possible de rapidement produire des segmentations précises des régions d'intérêt qui serviront alors d'images de référence pour de futurs segmentations.
+%
+Une autre solution est l'apprentissage par transfert.
+%
+Ce méthode consiste à utiliser des réseaux de neurones pré-entraînés à réaliser des segmentations automatiques différentes des segmentations désirées.
+%
+Il est alors possible de réduire la quantité de données de référence nécessaire.
+
+%
+La segmentation manuelle de larves de \pz{} est une tâche fastidieuse.
+%
+L'emploi d'une méthode d'apprentissage par réseau de neurones profonds couplés à un apprentissage par transfert pourrait ainsi permettre d'améliorer la précision de la segmentation tout en réduisant le temps de calcul nécessaire à sa réalisation.
+
+    \subsection{Mise en place de nouvelles segmentations}
+ 
+%   
+Les segmentations actuellement développés ont pour objectif de permettre d'automatiser la mesure du cerveau.
+%
+Cependant, comme le montre l'exemple de la segmentation du cristallin,
+il est possible de détecter d'autres organes grâce aux signaux employés.
+%
+De plus, comme vu en section\ref{sec:marqueurs}, le développement de nouveaux marqueurs nécessitera la mise en place de nouveaux algorithmes adaptés aux objets à détecter.
+%
+Nous allons maintenant proposé des segmentations pouvant être réalisé, ainsi que les algorithmes pouvant être utilisés ou mis en place pour permettre d'automatiser ses segmentations.
+
+%
+Le marquage par Dye permet de mettre en évidence les lipides.
+%
+De cette manière, il marque positivement l'ensemble des membranes cellulaires, la myéline se trouvant autour des neurones ainsi que les réserves de lipides présentes dans le sac vitellin.
+%
+Cependant, comme le montre le développement d'un algorithme permettant la segmentation du cristallin, l'absence de marquage au sein des échantillons peut permettre de détecter des régions d'intérêt.
+%
+En utilisant cette propriété, deux autres types de tissus paraissent isolables en utilisant l'absence de marquage.
+%
+
+%
+Le premier est la notochorde.
+%
+Il s'agit d'une structure de forme tubulaire présent en dessous de tube neurale chez les larve de \pz{}.
+%
+Elle sert par exemple de squelette pour les embryons et modèle les structures environnantes.
+\color{magenta}
+Placer figure représentant la notochord au sein du cerveau(coupe confocale + représentation 3D)
+\color{black}
+
+%
+Sur une acquisition du canal Dye, la notochord est reconnaissable car il s'agit d'une région de très faible intensité lumineuse.
+%
+Ainsi, une fois la larve entière segmentée,
+la détection de la notochord pourrait être réalisé en cherchant une région cylindrique de très faible intensité.
+%
+Au vue de la simplicité de la forme à détecter, cette détection pourrait être effectué en suivant les étapes suivants:
+%
+Tout d'abord, effectuer la segmentation de la larve entière.
+%
+Il s'agit ensuite d'effectuer un seuillage manuel en prenant une valeur très basse de gris.
+%
+Une fois ce seuillage effectué, on effectue une fermeture par segment.
+%
+De cette manière, seule les éléments linéaire seront conservés.
+%
+il suffirait ensuite de conserver les plus grand object détécté pour obtenir une segmentation de la notochord.
+
+%
+Une seconde structure d'intérêt présentant ne présentant pas de marquage sont les deux vésicules otiques.
+%
+Ce compartiment compose une partie de l'oreille interne des vertébrés.
+%
+Chez le poisson-zèbre, ces structures se trouvent entre la peau et le médula oblongata,
+et sont symétrique par rapport à l'axe de symétrie du cerveau.
+\color{magenta}
+Placer figure représentant les vésicules otiques au sein du cerveau(coupe confocale + représentation 3D)
+\color{black}
+%
+Une modification de la taille de la vésicule otiques pouvant signifier une modification de la taille de l'oreille interne,
+l'analyse de ces structures pourraient permettre de prédire des défauts comportementaux\cite{Whitfield_1996}.
+
+%
+Au sein d'une image représentant l'acquisition d'un signal Dye,
+les otolithes constituent deux régions de forme quelconque et ayant des faibles valeurs de gris.
+%
+Voici une proposition pour permettre la segmentation de la vésicule otiques.
+%
+Une fois les segmentation de la larve entière et de la matière blanche obtenues, on recherche l'axe de symétrie de la matière blanche au sein de la larve.
+%
+On effectue ensuite un seuillage au sein de la larve afin de détecter les régions ayant des valeurs de gris nulles au sein de celle-ci.
+%
+En utilisant la position de la matière blanche, on recherche alors deux éléments placées symétriquement par rapport au cerveau et se trouvant proche de la limite interne de la segmentation.
+%
+Ainsi, cette information de position permet de faire la distinction avec l'oeil.
+%
+Ces segmentations peuvent être obtenu grâce à notre signal de référence, le Dye.
+%
+Mais la détection d'autres tissus peut être réalisé à partir d'autres marquages.
+
+%
+Comme dernier exemple, nous allons présenter la segmentation du réseau vasculaire.
+%
+Comme vu au chapitre~\ref{chap:bio:marqueurs:vasc}, un marquage anti-Kdrl permet de marquer le système vasculaire du \pz{}.
+%
+La segmentation automatique de structures curvilignes comme les vaisseaux est un sujet de recherche à part entière.
+%
+Nous allons donc maintenant trois stratégies différentes permettant de réaliser ses segmentations.
+
+%%
+%
+Afin d'obtenir rapidement un résultat de segmentation, il est possible d'employer un seuillage automatisé\cite{kugler_2019}.
+%
+Cette approches a l'avantage d'être simple à mettre en place, car les outils de traitement d'images biologiques possèdent tous des algorithmes de seuillages.
+%
+Cependant, comme nous avons pu le voir précedement, ces procédures sont particulièrement sensible au bruit et à l'homogénéité de l'histogramme des valeurs de gris de l'image.
+%
+Il est donc préférable de posséder d'autres approches plus robustes.
+
+%%
+%
+Une fermeture morphologique peut être effectué en utilisant toute sorte d'éléments structurants.
+%
+En utilisant comme élément un ensemble de lignes présentant différentes orientations, 
+la fermeture obtenue est en mesure de détecter des structures linéaires\cite{Soille_2001}.
+%
+Cependant, ces approches ne sont pas efficaces pour la détection de structures sinueuses, ce qui les rends inefficace pour la détection du système vasculaire.
+%
+Afin de compenser ce défaut, des méthodes de fermetures par chemins ont été développés\cite{talbot_2007,merveille_2018}.
+%
+Ces chemins permettent ainsi de suivre les sinuosités de structures curvilignes, ce qui permet de réaliser la segmentation de vaisseaux sanguins.
+%
+Cette stratégie présente une forte robustesse face au bruit ou à des inhomogénéité dans l'intensité de l'image.
+
+%
+La dernière stratégie est l'emploi d'un réseau de neurones profonds.
+%
+L'utilisation de réseau de neurones pour la segmentation automatique de vaisseau de poissons-zèbres a déjà été effectué sur d'autres modalités d'imagerie\cite{zhang_2019a, deaetwyler_2019}.
+%
+Comme vu précédemment, il est possible de simplement utiliser un transfert de réseau de neurones afin de permettre de diminuer le quantité de données nécessaire à l'entraînement du réseau de neurones.
+
+%
+Ces segmentations vont servir de base au développement de méthode de classifications automatiques d'échantillons.
+%
+La classification automatique nécessite d'avoir une certains nombres de mesures.
+%
+Dans l'état actuelle du projet, seules quelques mesures morphologiques sont disponibles.
+%
+Nous allons donc maintenant voir comment il serait possible d'enrichir le catalogue de mesure afin d'améliorer la qualité de la classification des échantillons.
+
+\end{document}

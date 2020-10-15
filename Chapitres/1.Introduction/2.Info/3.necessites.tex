@@ -1,0 +1,118 @@
+\providecommand{\main}{../../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+            
+\section{Quels sont les besoins d'un algorithme de segmentation pour le \hcs{}?}
+
+%
+Le développement d'une procédure de \hcs{} nécessite le développement de segmentations et d'analyses automatiques, rendues nécessaires à cause de la quantité de données générées, qui serait impossible à traiter pour un opérateur humain.
+%
+De plus, l'automatisation des analyses permet de limiter les biais d'interprétation en assurant une meilleur reproductibilité des analyses.
+%
+Nous allons donc maintenant étudier les deux points les plus essentiels,
+la rapidité d'exécution des algorithmes et la robustesse des approches proposées.
+
+    \subsection{Rapidité}
+    
+%% Le temps de traitement informatique doit être équivalent au temps d'acquisition
+%
+Le développement de procédure de \hcs{} nécessite le traitement d'un grand nombre d'échantillons en un temps limité.
+%
+Il est ainsi courant de traiter une centaine d'échantillons voir plus en une unique session.
+%
+Si le temps nécessaire à l'application des algorithmes de segmentation et d'analyse est supérieur au temps nécessaire à l'acquisition,
+le goulet d'étranglement se situe au niveau du traitement informatique des échantillons.
+%
+Ce point doit à tout prix être évité. En effet, une fois les échantillons analysés, il est possible de les retirer des systèmes de stockage afin de libérer de l'espace disque pour les futurs acquisitions. Mais si le temps de traitement se révèle supérieur à celui de l'acquisition, le système d'acquisition sera alors bloqué par l'accumulation de données non traitées.
+%
+Les systèmes d'imagerie modernes créant des images de grandes tailles, la saturation pourrait ainsi rapidement survenir.
+%
+Or, le temps de traitement étant souvent fonction du nombre de voxels, l'augmentation des tailles des images induit une augmentation du temps de calcul.
+%
+Une différence trop importante entre le temps de traitement et le temps d'acquisition rend ainsi impossible la mise en place d'une plate-forme de \hcs{}.
+
+%%
+%
+Le développement d'algorithmes de segmentation automatiques devient alors un compromis entre vitesse d'exécution et exactitude des segmentations obtenus.
+%
+Dans la plupart des cas, les méthodes développés depuis plusieurs décennies disposent d'implémentations optimisées\cite{vandroogenbroeck_1996,perreault_2007,trieu_2007}.
+%
+L'emploi de méthodes établis permet ainsi souvent de créer des algorithmes rapides.
+
+%%
+%
+De plus, une autre solution est l'utilisation de système d'imagerie simples.
+%
+Plus le nombre d'acquisition nécessaire pour la création d'une image est élevé, plus le temps nécessaire à l'enregistrement est long.
+%
+Ce point est souvent pris compris dans le temps d'acquisition, car les systèmes d'imageries réalisent cette étape automatiquement en routine après l'acquisition.
+%
+Cependant, pour des montages plus originaux comme OPTiSPIM ou la tomographie par VAST,
+la reconstruction de l'image est à réaliser par l'utilisateur, ralentissant ainsi les processus informatiques.
+%
+Enfin, l'utilisation d'un système d'imagerie adapté aux objets à étudier peut permettre de reduire le temps de calcul.
+%
+Prenons par exemple le cas de l'imagerie confocale d'échantillons transparisés par simple immersion.
+%
+Au delà de quelques centaines de micromètres d'épaisseur, et malgré la transparisation, l'acquisition va présenté une atténuation proportionnelle à la quantité de tissus à traverser.
+%
+Dans ces conditions, l'application d'une procédure d'amélioration de contraste sera obligatoire avant la segmentation, augmentant d'autant le temps nécessaire au traitement informatique.
+%
+L'utilisation d'un système d'imagerie plus adapté, comme la microscopie multi-photon, ou une meilleur préparation des tissus à étudier, comme l'emploi de CUBIC, permet ainsi de réduire le temps de traitement informatique par anticipation de défauts d'acquisition qu'il serait nécessaire de corriger.
+
+    \subsection{Reproductibilité}
+
+%
+La mise au point d'algorithme de segmentation automatique est nécessaire pour le développement d'une plateforme de \hcs{}.
+%
+Assurer la meilleur précision possible pour cette segmentation est évidemment un point essentiel, mais il peut être plus important de réduire la précision pour assurer une meilleur reproductibilité.
+%
+En effet, le \hcs{} étant basé sur l'analyse de plusieurs dizaines voir centaines d'échantillons,
+il est préférable d'assurer une plus grande reproductibilité dans l'erreur obtenue, plutôt qu'avoir une précision élevée mais une forte variabilité dans cette précision.
+%
+En se focalisant sur la reproductibilité de l'erreur, le système possède alors un biais constant entre les échantillons.
+%
+Si la segmentation n'est pas parfaite, il sera malgré tout possible de comparer les volumes car l'erreur sera identique pour tous les échantillons traités.
+
+%% Nécessité de corriger le contraste
+%
+Une première approche pour améliorer cette reproductibilité est d'assurer une qualité équivalente pour toutes les images.
+%
+Le moyen le plus évident permettant d'éviter des écarts de qualité est de fixer des règles précises pour l'imagerie.
+%
+Cependant, il n'est parfois pas possible d'assurer une qualité d'imagerie constante, que ce soit du aux aléas des marquages \ihc{} ou à cause de considération physique comme une inhomogénéité locale de l'indice de réfraction de la solution d'imagerie.
+%
+Ainsi, bien que présenté comme délétère dans le chapitre suivant, l'utilisation de méthode d'amélioration de contraste peut être préférable.
+%
+En effet, cette amélioration de contraste peut permettre de compenser les aléas précédemment cités.
+%
+Il peut donc être judicieux de développer une méthode d'amélioration de contraste la plus rapide possible, permettant ainsi de s'assurer d'une meilleur reproductibilité entre les expériences.
+
+%% Mise en place de
+Une seconde approche est la création d'algorithmes les plus robustes possibles aux bruits et aux défauts d'imagerie.
+%
+Comme vu en section~\ref{sec:crible:brion}, une solution simple peut être le développement de méthodes de segmentation basées uniquement sur un seuillage.
+%
+Aucune approche ne pourrait être plus rapide que celle là, car elle ne nécessite qu'une seule étape.
+%
+Dans le cadre d'images très contrôlées présentant une forte différence de contraste entre le fond et l'objet d'étude, cette approche peut être suffisante.
+%
+Mais il est rare que des images de microscopies par fluorescence présentent de telles distinction de contraste.
+%
+Le développement de méthode de segmentation robuste doit bien souvent intégrer de nombreuses étapes de préparation de l'image,
+puis une procédure de segmentation adaptée.
+%
+Ces approches sont nécessaires pour permettre d'avoir des segmentations robustes, mais sont souvent chronophage.
+
+% %
+%
+Le développement d'algorithmes de segmentations automatiques est ainsi une jeu de vase communiquant visé à réduire au maximum le temps de calcul tout en assurant la plus grande reproductibilité possible.
+%
+Il est ainsi souvent nécessaire de développer des approches de segmentations spécifiques,
+dépendantes des échantillons et de la procédure d'imagerie choisie.
+%
+Dans la suite de ce manuscrit, nous allons donc voir comment une plate-forme d'imagerie à moyen débit a été développé, et les algorithmes de traitement d'images ayant été mis en place pour permettre d'automatiser la détection du cerveau du poisson-zèbre.
+
+\end{document}

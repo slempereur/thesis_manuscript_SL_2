@@ -1,0 +1,287 @@
+\providecommand{\main}{../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+
+\section[Développement d'une plateforme d'HTA]{
+    \label{sec:lempereur_bio}
+    Développement d'une plateforme d'\hta{} par imagerie confocale
+    }
+Au cours de ma thèse, j'ai établi une plateforme pour effectuer une imagerie à haut contenu (HCI) et une analyse à haut contenu (HCA) d'images 3D de lignées transgéniques fluorescentes dans le contexte du neurodéveloppement du poisson zèbre, dont le principe est décrit dans cette publication. Sur la base de l'observation que les traceurs lipophiles produisent un marquage intense dans le cerveau, une procédure simple et standardisée pour colorer, monter, imager et analyser les alevins entiers de 5dpf a été mise au point pour permettre à la fois de redresser les échantillons et d'observer et estimer leur taille et le volume de la matière blanche de leur cerveau. Toutes les étapes minimisent le temps et les efforts de l'expérience et favorisent sa portabilité. En considérant un lot de 48 échantillons, il ne faut qu'environ huit jours pour effectuer l'expérience, de la fixation initiale à la quantification du cerveau et des volumes d'alevins entiers (Fig 1 du manuscrit).
+%La clarification optique
+
+%
+Concernant le pz{}, deux types de protocoles ont été développés.
+Le premier est très rapide et s'effectue sur des poissons possédant des mutations de pigmentation (comme casper ou nacre) ce qui évite de procéder à une étape de dépigmentation qui efface les fluorescences natives des protéines vertes ou rouges. Ainsi le protocole se résume à une courte fixation, et au protocole de marquage par le marqueur lipophile, avec une très légère perméabilisation par un détergent doux et l'imagerie dans un tampon dont l'indice de réfraction est proche de l'échantillon.
+Dans le second protocole (Z-Fact), une première étape consiste en la destruction des pigments se trouvant sur la peau
+et dans la rétine, ainsi que la destruction de l'hémoglobine.
+%
+Une seconde étape pour mieux clarifier l'échantillon implique une  délipidification pouvant détruire les membranes cellulaires. Il est souvent nécessaire d'apporter des étapes de fixation longues des tissus pour limiter l'impact de la disparition des membranes.
+%
+Enfin, la dernière étape consiste en une expérience d'immunohistochimie pour reconnaitre avec des anticorps primaire la GFP ou la RFP.
+
+% Optimistion de Z-FaCT
+%
+Pour accélérer le protocole, Matthieu Simion et Elodie Machado ont développé une méthode de clarification optique simple, rapide et moins dangereuse que nous avons appelée zFaCT.
+%
+Cette méthode est composée de quatre étapes.
+%
+La première étape est la dépigmentation des échantillons
+par l'emploi de peroxyde d'hydrogène.
+%
+Cette étape permet de réduire l'absorption de la lumière par les tissus.
+%
+La seconde étape est le blocage.
+%
+Cette étape permet de saturer l'échantillon avec des fragments d'anticorps non spécifiques.
+%
+De cette manière, le marquage de l'anticorps utilisé sera plus spécifique
+ car l'anticorps se fixera uniquement sur l'antigène ciblé.
+%
+De plus, cette étape contient des détergents permettant de perméabiliser l'échantillon
+afin de favoriser la pénétration des anticorps au sein des tissus
+%
+Les détergents vont aussi produire une délipidifcation partielle de l'échantillon
+ce qui permet de réduire la diffusion de la lumière dans les tissus
+tout en conservant l'intégrité des tissus.
+%
+La troisième étape est la marquage des tissus.
+%
+Nous employons le DiI comme marqueur de référence.
+%
+Mais il est possible d'effectuer des marquages immunohistochimiques en complément, afin d'étudier d'autres tissus ou d'autres zones d'intérêt.
+%
+Enfin, la dernière étape consiste en un appariement de l'indice de réfraction.
+%
+L'appariement de l'indice de réfraction du tissus est apparié
+par l'emploi d'un milieu d'imagerie dédié.
+%
+L'ensemble de ces étapes est réalisé en cinq jours pour une marquage au DiI, et peut prendre jusqu'à 15 jours pour un triple marquage consistant en un marquage DiI auquel s'additionne deux marquages par anticorps.
+%
+Cette méthode permet ainsi d'obtenir rapidement un grand nombre d'échantillons.
+%
+Elle permet ainsi le développement du \hta par imagerie d'échantillons complets.
+
+% Microscopie Confocale rapide
+%
+Afin de pouvoir traiter une grande quantité d'échantillons,
+il a été nécessaire d'automatiser au maximum l'acquisition par imagerie confocale.
+%
+Le choix de l'imagerie confocale a été fait car ce type d'imagerie permet
+d'effectuer une acquisition tridimensionnelle des échantillons à une échelle cellulaire avec des outils distribués commercialement et très fiables et simmples à utiliser.
+%
+En effet, nous avons choisi de développer notre plateforme d'imagerie
+en utilisant un microscope confocal commercial plutôt que de développer une
+plateforme dédiée afin de garder la plus grande versatilité possible.
+
+% Choix de l'impression 3D.
+%
+Dans le cadre d'une procédure d'HTI, il a été nécessaire de mettre au point une stratégie de montage des échantillons permettant d'automatiser leur acquisition.
+%
+Pour ce faire, nous avons développé des tampons imprimables par impression 3D.
+%
+Cette technologie a plusieurs avantages.
+%
+Le premier est le faible coût des matières premières, permettant de limiter le coût de production des prototypes.
+%
+Le deuxième avantage est la rapidité de production des prototypes, permettant ainsi de créer rapidement de nouvelles  par exemple pour d 'autres stades ou d 'autres espèces.
+%
+Le troisième avantage est la flexibilité que permet cette technologie.
+%
+Il devient ainsi possible de facilement modifier une partie du modèle pour l'améliorer, sans risquer de perdre l'ensemble du travail effectué.
+%
+La quatrième qualité de l'impression 3D est la précision.
+%
+Une imprimante Ultimaker $2^+$ est en mesure de réaliser des 
+impressions avec des précisions horizontale et verticale de respectivement $40$ et $60$ $\mu{}m$.
+%
+En couplant cette machine à une buse d'impression d'un diamètre de $0,25$ mm, il devient possible de réaliser des pièces ayant des parties de quelques centaines de $\mu{}m$.
+%
+Le dernier avantage est la fiabilité des impressions générées.
+%
+A condition de conserver les paramètres d'impression inchangés, deux impressions sont identiques, ce qui permet d'assurer la reproductibilité des impressions.
+
+\label{chapter:bio:montage}
+% Tampons et montage
+%
+Les tampons que nous avons développé ont pour objectif de permettre
+de faciliter le montage en position dorsale et d'assurer un espacement
+précis et connu entre les échantillons.
+%
+Pour cela,
+le tampon est utilisé pour imprimer des encoches dans de l'agarose solubilisé dans un milieu de culture pour embryons de poisson-zèbre.
+%
+La précision permise par l'impression 3D assure ainsi un espacement exact entre les échantillons.
+%
+Il suffit ensuite de placer un échantillon par chaque encoche au moyen d'un pinceau,
+puis de fixer cette échantillon au moyen de phytagel, un gel aux qualités optiques exceptionnelles, supérieures à l'agarose.
+%
+Des éléments supplémentaires concernant les méthodes de montages sont disponibles en section~\ref{sec:montage}
+
+%Imagerie
+%
+Une fois les échantillons montés avec un espacement connu,
+nous avons mis au point une procédure d'imagerie standardisée.
+%
+Le but de cette standardisation est de diminuer le temps nécessaire à l'acquisition
+en diminuant les risques d'acquisitions incompatibles avec le traitement informatique.
+%
+Pour standardiser l'imagerie, deux procédures ont été mises en place.
+%
+Premièrement, un guide d'imagerie a été édicté afin d'uniformiser les acquisitions.
+%
+Ensuite, une macro d'imagerie a été developpée, permettant de réduire le temps
+de paramétrage nécessaire.
+
+% Traitement informatique
+%
+Une fois les données imagées, la mise en place de notre plateforme d'HTA
+nécessite le développement d'algorithmes informatiques permettant de traiter
+la grande quantité de données générées.
+%
+Dans le cadre de nos travaux, nous avons créé deux traitements distincts.
+
+% Recalage
+\label{sec:lempereur_bio:recalage}
+%
+La plus grande originalité et le gain le plus important et versatile du pipeline ZeBraInspector est la mise au point d'une méthode de recalage
+permettant à des spécialistes de comparer un grand nombre d'échantillons dans un logiciel dédié qui permet de naviguer dans tous les échantillons simultannément
+%
+Ainsi , lors du montage, il y a moins de contraintes, et il n'est pas utile d'rienter arfaitement les échantillons, il suffit qu'ils soient dans une orientation permettant une acquisition en vue dorsale.  
+%
+On calcule un recalage affine de l'image en utilisant différents marqueurs.
+%
+On calcule une segmentation approximative de la matière blanche.
+%
+Cette segmentation consiste en un seuillage conservant les vingt pourcent de voxels ayant les plus hautes valeurs de gris.
+%
+Afin de réduire cette segmentation au cerveau, on conserve la plus grand objet de ce seuillage.
+%
+
+%
+On mesure ensuite l'ellipsoïde englobant cette segmentation.
+%
+Le plus grand demi axe de cet ellipsoïde est conservé comme représentant la direction principale de la larve.
+%
+Le centroïde de la segmentation de la matière blanche permet la définition d'un vecteur de translation.
+
+%
+Ensuite, la détection des cristallins est effectuée (poissons pigmentés) ou de l'oeil en entier (poissons avec des mutations de pigmentation transparents permettant les acquisitions fluorescentes directes).
+%
+Les cristallins ont la particularité d'être deux des seules régions sphériques et non marquées de l'échantillon.
+De façon similaire, dans les mutants dépigmentés, des pigments subsistent néanmoins dans l'épithélium très pigmlentés de la rétine, ce qui mène à des yeux non marqués, totalement noirs en microscopie confocale.
+%
+Les cristallins ou les yeux permettent ainsi de trouver un second axe d'alignement.
+%
+Afin de calculer la matrice de rotation, il est nécessaire d'orienter les axes de manière à former une base orthonormale.
+%
+Dans le cas de l'axe formé par les deux cristallins, on l'oriente arbitrairement de l'oeil se trouvant à la gauche de l'image vers l'oeil se trouvant à la droite de l'image.
+%
+Afin d'assurer l'orthogonalité de la base de rotation, on projette le vecteur principal de la matière blanche dans le plan défini par le vecteur allant d'un cristallin à l'autre.
+%
+Le vecteur principal de la matière blanche est ensuite orienté de manière à aller du centre de la matière blanche vers le centre de la larve.
+%
+De cette manière, l'échantillon est orienté de manière à toujours placer la tête de l'échantillon vers la gauche de l'image.
+%
+Enfin, un dernier axe est calculé comme le produit vectoriel entre les deux axes précédents.
+%
+Ce dernier axe correspond à l'axe dorso-ventral de l'échantillon.
+%
+La définition de l'orientation de cet axe va permettre de différencier réellement la gauche et la droite du poisson.
+%
+Notre marquage présente des valeurs moyennes de gris  plus fortes du coté dorsal
+de l'échantillon.
+%
+L'orientation du dernier axe est choisi de manière analogue
+au choix de la direction de l'axe principal de la larve.
+%
+De cette manière, la base orthonormale obtenue place toujours de la même manière la droite et la gauche des échantillons.
+%
+La base ainsi générée permet de calculer la matrice de rotation servant à aligner l'image translatée sur le système de coordonnées de l'image.
+%
+La définition de cette matrice de rotation sur notre marquage de référence permet ainsi d'appliquer la même transformation à toutes les images acquises simultanément à notre signal de référence. Cet algorithme a été intégré au sein du logiciel ZeBraInspector.
+
+% Segmentation
+Le second traitement est la mise au point d'une méthode permettant de segmenter automatiquement
+l'ensemble de l'échantillon ainsi que sa matière blanche. C'est une méthode importante comme nous le démontrons avec deux applications en neurobiologie  et en toxicologie. 
+% 
+La méthode employée est présentée dans le chapitre~\ref{sec:lempereur_info}.
+%
+La segmentation automatique permet de mesurer le volume de la matière blanche cérébrale
+ainsi que du l'ensemble de l'échantillon, permettant de comparer les variations de ces
+volumes.
+
+% Applications du pipeline ZeBraInspector
+%
+J'ai d'abord utilisé ZBI pour l'analyse de l'effet d'une mutation du gène Wdr12,
+connue pour générer des microcéphalies et ensuite, pour l'analyse de l'exposition à un traitement anti-cancer,
+le 5-Fluorouracyl (5-FU).
+%
+L'analyse des mutants Wdr12 nous a permis d'observer la présence
+d'un nanisme général des individus homozygotes, mais pas de microcéphalie relative.
+%
+En effet, bien que la taille absolue du cerveau soit inférieure chez le mutant homozygote, 
+le ratio du volume de la matière blanche sur le volume de l'ensemble de l'échantillon ne montre pas de différence significative entre les mutants homozygotes et leur fratrie.
+%
+En revanche, l'exposition d'embryons de \pz{} au 5-FU (doses similaires au traitement médicalà) mène à un nanisme des larves,
+contrairement à ce qui est rapporté dans la littérature. De plus ZBI a révélé que les larves présentent une sévère microcéphalie, les larves traitées présentant un ratio du volume de la matière blanche sur le volume de l'ensemble de l'échantillon significativement inférieur aux contrôles. Ainsi ZBI nous a permis de pointer des effets discrets de la molécule, ce qui est crucial pour indiquer un potentiel effet tératogène de la molécule chez l'homme.
+
+% Résumé
+%
+Pour résumer, les résultats de l'article soumis à \emph{Developmental Biology} sont les suivants: 
+\begin{itemize}
+    \item 
+    une nouvelle méthode de transparisation a été développée.
+    
+    \item
+    Cette méthode permet d'obtenir rapidement et sans danger des échantillons clarifiés.
+    
+    \item
+    Ces échantillons clarifiés sont montés dans des encoches imprimées dans l'agarose.
+    
+    \item
+    Ces encoches ont pu être imprimées par l'emploi d'un tampon créé par impression 3D.
+    
+    \item
+    L'impression 3D a été choisie afin d'assurer la reproductibilité de tampons créés.
+    
+    \item 
+    Ce tampon permet de faciliter le montage des échantillons tout en permettant de connaître
+    la distance entre les échantillons.
+    
+    \item
+    Le montage au sein de ces encoches permet la mise en place de macro d'imagerie confocale afin d'accélérer le processus d'acquisition.
+    
+    \item
+    Afin de faciliter la comparaison des échantillons dont l'orientation et le positionnement ne sont jamais parfaits, nous avons développé un algorithme de recalage des images obtenues.
+    
+    \item
+    Ce recalage est effectué en alignant des marqueurs de référence avec le système de coordonnée de l'image.
+    
+    \item
+    Ces marqueurs sont les suivants: l'axe entre le centre des deux cristallins, le plus grand demi axe de l'ellipsoïde englobant la matière blanche, et le produit vectoriel entre les deux axes précédents.
+    
+    \item
+    D'autre part, un algorithme de segmentation a été mis en place afin de permettre la mesure du volume de l'échantillon ainsi que le volume de sa matière blanche.
+    
+    \item
+    En utilisant cet algorithme de segmentation, nous avons été en mesure de mesurer
+    l'ampleur de la diminution de taille induite par la mutation d'un gène wdr12, suspecté d'induire de la microcéphalie.
+    
+    \item
+    L'utilisation de l'algorithme de segmentation sur des échantillons exposés au 5-FU
+    a permis de mettre en évidence le nanisme induit par cet antimétabolite. 
+    
+    \item
+    De plus, il est apparu que le 5-Fu induisait une diminution relative du volume de la matière blanche.
+    
+\end{itemize}
+
+Afin de raffiner les mesures obtenues, l'emploi d'un second marqueur permettant la détection de la matière grise a été mis au point, ce qui permettrait d'observer un défaut dans la myélinisation du cerveau. Cette amélioration est présentée en section~\ref{sec:HuC}.
+%
+De plus, la mise en place de différentes automatisations pourrait permettre d'accélérer l'ensemble du processus, comme nous le discuterons en section~\ref{sec:automatisation}.
+%
+Il serait aussi possible d'adapter cette plateforme à d'autres espèces, comme nous le discuterons en section~\ref{sec:modeles}.
+
+\end{document}

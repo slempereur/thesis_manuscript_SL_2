@@ -34,11 +34,11 @@ Considérer leur présence est un a priori fort concernant les échantillons, ca
 Ces limites sont un frein fort contre cet algorithme.
 
 %
-Issu de deux souches ayant des défauts de pigmentation (nacre et roy orbison),la souche de \pz{} casper présente une forte dépigmentation\cite{white_2008}.
+Issu de deux souches ayant des défauts de pigmentation (nacre et roy orbison),la souche de \pz{} casper présente une forte dépigmentation~\cite{white_2008}.
 %
 La seule région présentant encore des pigments se trouve être la rétine.
 %
-Grâce à son manque de pigment, la souche casper est devenu un outil préférentiel pour l'imagerie du \pz\cite{hecker_2020,camiolo_2020, wertman_2020}.
+Grâce à son manque de pigment, la souche casper est devenu un outil préférentiel pour l'imagerie du \pz~\cite{hecker_2020,camiolo_2020, wertman_2020}.
 %
 Dans le cadre d'échantillons obtenus par \ihcie{}, l'étape de dépigmentation est responsable d'une dénaturation des fluorescences endogènes.
 %
@@ -82,7 +82,7 @@ De cette manière, le vecteur normal au plan de symétrie de le segmentation de 
 %
 Il devient ainsi possible de recaller les échantillons en ne se basant que sur la segmentation de la matière blanche.
 %
-La détection automatique du plan de symétrie du cerveau dans des images acquises par imagerie par résonance magnétique ou scanner étant largement étudié\cite{tan_2019,noori_2020,rehman_2018},
+La détection automatique du plan de symétrie du cerveau dans des images acquises par imagerie par résonance magnétique ou scanner étant largement étudié~\cite{tan_2019,noori_2020,rehman_2018},
 il suffirait d'adapter une des approches précédement publié à nos données de \pz{}.
 %
 Cet approche permettrait alors d'apporter une plus grande robustesse à l'algorithme de recalage.
@@ -114,13 +114,13 @@ Nous allons donc voir une solution permettant théoriquement d'accelérer les ca
 
 %%
 %
-Durant la dernière décennie, les algortihmes d'apprentissage profond ont permis la développement d'outils permettant la segmentation automatique\cite{long_2015,ronneberger_2015,Milletari_2016}.
+Durant la dernière décennie, les algortihmes d'apprentissage profond ont permis la développement d'outils permettant la segmentation automatique~\cite{long_2015,ronneberger_2015,Milletari_2016}.
 %
-Ces méthodes ont été utilisés pour la segmentation de tous types d'organes acquis par tous types de système d'imagerie\cite{gottapu_2018,oztel_2017,zhang_2020,hossain_2019}.
+Ces méthodes ont été utilisés pour la segmentation de tous types d'organes acquis par tous types de système d'imagerie~\cite{gottapu_2018,oztel_2017,zhang_2020,hossain_2019}.
 %
 Ces méthodologies ont été développé car elles sont robustes et rapides une fois entraînées, et peuvent être couplé à des annotations humaines. 
 %
-L'utilisation de plusieurs annotations sur le même jeu d'entraînement permet de générer une segmentation par région d'intérêt\cite{zhao_2019,tong_2018,feng_2019}.
+L'utilisation de plusieurs annotations sur le même jeu d'entraînement permet de générer une segmentation par région d'intérêt~\cite{zhao_2019,tong_2018,feng_2019}.
 
 %
 Cette stratégie présente cependant deux défauts.
@@ -131,7 +131,7 @@ Le second point est la nécessité d'une étape d'entraînement.
 %
 Ce point implique deux défauts.
 %
-Il est tout d'abord nécessaire d'entraîner le réseau de neurones grâce au set d'entraînement\cite{ghafoorian_2017,jiang_2018,xu_2018}.
+Il est tout d'abord nécessaire d'entraîner le réseau de neurones grâce au set d'entraînement~\cite{ghafoorian_2017,jiang_2018,xu_2018}.
 %
 Cette étape nécessitant de recalculer un grand nombre de fois les différents poids du réseau de neurones, l'entraînement initial du réseau de neurones peut être fastidieux.
 %
@@ -144,7 +144,7 @@ Cette difficulté peut provenir de la rareté de l'objet à étudier, ou bien de
 %
 Cependant, des solutions existent soit pour simplifier l'annotation soit pour réduire le nombre d'images pour l'entraînement.
 %
-concernant la simplification de l'annotation, des procédures utilisant des segmentations grossières ont été développé\cite{rajchl_2017}.
+concernant la simplification de l'annotation, des procédures utilisant des segmentations grossières ont été développé~\cite{rajchl_2017}.
 %
 Il devient donc possible de rapidement produire des segmentations précises des régions d'intérêt qui serviront alors d'images de référence pour de futurs segmentations.
 %
@@ -167,7 +167,7 @@ Les segmentations actuellement développés ont pour objectif de permettre d'aut
 Cependant, comme le montre l'exemple de la segmentation du cristallin,
 il est possible de détecter d'autres organes grâce aux signaux employés.
 %
-De plus, comme vu en section\ref{sec:marqueurs}, le développement de nouveaux marqueurs nécessitera la mise en place de nouveaux algorithmes adaptés aux objets à détecter.
+De plus, comme vu en section~\ref{sec:marqueurs}, le développement de nouveaux marqueurs nécessitera la mise en place de nouveaux algorithmes adaptés aux objets à détecter.
 %
 Nous allons maintenant proposé des segmentations pouvant être réalisé, ainsi que les algorithmes pouvant être utilisés ou mis en place pour permettre d'automatiser ses segmentations.
 
@@ -221,7 +221,7 @@ Placer figure représentant les vésicules otiques au sein du cerveau(coupe conf
 \color{black}
 %
 Une modification de la taille de la vésicule otiques pouvant signifier une modification de la taille de l'oreille interne,
-l'analyse de ces structures pourraient permettre de prédire des défauts comportementaux\cite{Whitfield_1996}.
+l'analyse de ces structures pourraient permettre de prédire des défauts comportementaux~\cite{Whitfield_1996}.
 
 %
 Au sein d'une image représentant l'acquisition d'un signal Dye,
@@ -252,7 +252,7 @@ Nous allons donc maintenant trois stratégies différentes permettant de réalis
 
 %%
 %
-Afin d'obtenir rapidement un résultat de segmentation, il est possible d'employer un seuillage automatisé\cite{kugler_2019}.
+Afin d'obtenir rapidement un résultat de segmentation, il est possible d'employer un seuillage automatisé~\cite{kugler_2019}.
 %
 Cette approches a l'avantage d'être simple à mettre en place, car les outils de traitement d'images biologiques possèdent tous des algorithmes de seuillages.
 %
@@ -265,11 +265,11 @@ Il est donc préférable de posséder d'autres approches plus robustes.
 Une fermeture morphologique peut être effectué en utilisant toute sorte d'éléments structurants.
 %
 En utilisant comme élément un ensemble de lignes présentant différentes orientations, 
-la fermeture obtenue est en mesure de détecter des structures linéaires\cite{Soille_2001}.
+la fermeture obtenue est en mesure de détecter des structures linéaires~\cite{Soille_2001}.
 %
 Cependant, ces approches ne sont pas efficaces pour la détection de structures sinueuses, ce qui les rends inefficace pour la détection du système vasculaire.
 %
-Afin de compenser ce défaut, des méthodes de fermetures par chemins ont été développés\cite{talbot_2007,merveille_2018}.
+Afin de compenser ce défaut, des méthodes de fermetures par chemins ont été développés~\cite{talbot_2007,merveille_2018}.
 %
 Ces chemins permettent ainsi de suivre les sinuosités de structures curvilignes, ce qui permet de réaliser la segmentation de vaisseaux sanguins.
 %
@@ -278,7 +278,7 @@ Cette stratégie présente une forte robustesse face au bruit ou à des inhomog�
 %
 La dernière stratégie est l'emploi d'un réseau de neurones profonds.
 %
-L'utilisation de réseau de neurones pour la segmentation automatique de vaisseau de poissons-zèbres a déjà été effectué sur d'autres modalités d'imagerie\cite{zhang_2019a, deaetwyler_2019}.
+L'utilisation de réseau de neurones pour la segmentation automatique de vaisseau de poissons-zèbres a déjà été effectué sur d'autres modalités d'imagerie~\cite{zhang_2019a, deaetwyler_2019}.
 %
 Comme vu précédemment, il est possible de simplement utiliser un transfert de réseau de neurones afin de permettre de diminuer le quantité de données nécessaire à l'entraînement du réseau de neurones.
 

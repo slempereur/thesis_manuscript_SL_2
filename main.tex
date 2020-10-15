@@ -59,6 +59,8 @@
 \cleardoublepage\include{FrontBackMatter/Colophon} % Colophon
 }
 
+\usepackage{subfiles}
+
 \begin{document}
 
 \frenchspacing % Reduces space after periods to make text more compact
@@ -96,8 +98,6 @@
 
 \cleardoublepage\include{FrontBackMatter/Contents} % Contents, list of figures/tables/listings and acronyms
 
-\listoffigures
-
 \cleardoublepage
 
 \pagenumbering{arabic} % Arabic page numbering for thesis content (1, 2, 3, etc)
@@ -109,11 +109,11 @@
 %	THESIS CONTENT - CHAPTERS
 %----------------------------------------------------------------------------------------
 
-\input{Chapitres/1.introduction}
+\subfile{Chapitres/1.introduction}
 
-\input{Chapitres/2.resultats}
+\subfile{Chapitres/2.resultats}
 
-\input{Chapitres/3.discussion}
+\subfile{Chapitres/3.discussion}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES

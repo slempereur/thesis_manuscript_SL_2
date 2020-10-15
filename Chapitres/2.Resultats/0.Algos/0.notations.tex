@@ -1,0 +1,139 @@
+\providecommand{\main}{../../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+
+\begin{table}
+
+\scriptsize
+
+    \begin{center}
+      %%% HT FAIRE DES MACROS !!
+        \begin{tabular}{p{0.2\textwidth}p{0.35\textwidth}p{0.35\textwidth}}
+                %Description de chaque ligne (mise en place de la tête de table)
+                Notations & % Notation employee
+                Noms &      % Nom de l'opération ou de l'élement décrit
+                Definitions % Definition mathématique
+                \\
+                \midrule
+                %Image
+                $I$ &
+                une image de $N \times M \times O$ voxels encodée en 12-bit image &
+                $\forall p\in[1,N]\times[1,M]\times[1,O],\newline I(p)\in[0;4095] \cap \mathbb{Z} $ %
+                \\
+                %Maximum
+                $ \max(I) $ &
+                Valeur maximale de I &
+                $ $ % Pour garder la cohérence de l'écriture
+                \\
+                % element wise maxima
+                $ \localmax(I) $ &
+                Maxima locaux de I &
+                $ $
+                % % element wise maxima
+                % $ I_1 \bar{\bigvee} I_2 $ &
+                % Element wise maximum between two images &
+                % $\forall p\in I, I(p) = I_1(p)$ if $I_1(p) > I_2(p); I_2(p)$ otherwise
+                \\
+                %Threshold
+                $(I)_{\ge \theta} $ &
+                Seuillage &
+                $\forall p \in I,\newline I(p)=\left\{
+                    \begin{array}{ll}
+                    1 & \mbox{si } I(p) \ge \theta \\
+                    0 & \mbox{sinon.}
+                    \end{array}
+                    \right.
+                \\
+                %Otsu threshold
+                $T_{\textnormal{Otsu}} $ &
+                Seuillage d'\textsc{Otsu} &
+                $ $
+                \\
+                %Multi class otsu threshold
+                $T^n_{\textnormal{Otsu}} $ &
+                Seuillage d'\textsc{Otsu} à n classes &
+                $ $
+                \\
+                %Inversion
+                $ \inv(I)$ &
+                Inverse de l'image $I$ &
+                $ \forall p, \inv(I(p))=4095-I(p)$
+                \\
+                %Pointwise maximum
+                $\bigvee$ &
+                Pointwise maximum &
+                $ $ % Pour garder la cohérence de l'écriture
+                \\
+                %Pointwise menimum
+                $\bigwedge$ &
+                Pointwise minimum&
+                $ $ % Pour garder la cohérence de l'écriture
+                \\
+                %cube
+                $c_{i}$ &
+                cube de taille $i^{3}$ &
+                $ $ % Pour garder la cohérence de l'écriture
+                \\
+                %Dilation
+                $\delta_{se}(I)$ &
+                Dilatation\newline par un élement structurant se &
+                $ \bigvee_{v \in se}I_{-v} $
+                \\
+                %Dilation
+                $\delta_{I^{2}}(I)$ &
+                Dilatation géodésique de $I$\newline utilisant $I^{2}$ comme masque &
+                $ \bigvee_{v \in I^2}I_{-v} $
+                \\
+                %Erosion
+                $\varepsilon_{se}(I)$ &
+                Erosion\newline par un élement structurant se &
+                $ \bigwedge_{v \in se}I_{v} $
+                \\
+                %Closing
+                $\varphi_{se}(I)$ &
+                Fermeture\newline par un élement structurant se &
+                $\delta_{se}(\varepsilon_{se}(I))$
+                \\
+                %Opening
+                $\gamma_{se}(I)$ &
+                Ouverture\newline par un élement structurant se &
+                $\varepsilon_{se}(\delta_{se}(I))$
+                \\
+                %moprhological gradient
+                $\grad_M(I)$ &
+                Gradient morphologique de $I$ &
+                $\grad_M(I) = \delta_{s_1}(I) - \varepsilon_{s_1}(I)$
+                \\
+                % Volume opening
+                $\gamma^{\alpha}_{\lambda}(I)$ &
+                Ouverture par volume  &
+                $ \bigvee_{se,volume(se)=\lambda}\gamma_{se}(I)$
+                \\
+                % UltimeVolume opening
+                $\gamma^{\alpha}_{u}(I)$ &
+                Ouverture ultime par volume  &
+                \\% Median filter
+                $ \median_{se}(I) $ &
+                Filtre médian\newline utilisant un element structurant se &
+                $ $ 
+                \\
+                % Median of array
+                $ \mu = \median(I) $ &
+                Médian scalaire d'une matrice I &
+                $ \forall p, M(p) = \median(I)$
+                \\
+                $\percentile_q(I)$ &
+                Qième pourcentil de l'image I &
+                $ $
+                \\
+            \end{tabular}
+
+        \caption{\label{tab:notations} Notations mathématiques employées.} 
+
+    \end{center}
+
+\end{table}
+
+\end{document}

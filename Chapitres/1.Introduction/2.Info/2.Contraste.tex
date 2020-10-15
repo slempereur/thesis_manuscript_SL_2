@@ -1,4 +1,5 @@
 \providecommand{\main}{../../..}
+\providecommand{\Figures}{\main/Figures/Contraste}
 
 \documentclass[\main/main.tex]{subfiles}
 
@@ -22,22 +23,102 @@ Une des premières approches d'amélioration de contraste d'une image se basant 
 Cette méthode vise à "aplanir" l'histogramme des valeurs de gris de l'image.
 %
 En considérant la probabilité qu'un pixel ait une valeur inférieure ou égale à une certaine valeur de gris,
-il est possible de calculer une fonction de répartition, qui attribuera à chaque valeur de gris une nouvelle valeur. De cette manière, le nouvelle histogramme aura une répartition plus homogène des valeurs de gris, ce qui permet en principe d'améliorer le contraste de l'image.
+il est possible de calculer une fonction de répartition, qui attribuera à chaque valeur de gris une nouvelle valeur. De cette manière, le nouvelle histogramme aura une répartition plus homogène des valeurs de gris, ce qui permet en principe d'améliorer le contraste de l'image (voir Figure~\ref{fig:he}).
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       Image d'origine
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/moon.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       Après \he{}
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/moon_he.png}
+    \end{subfigure}
+    \caption{
+        \label{fig:he}
+        Exemple d'application d'une \he{}.
+    }
+\end{figure}
+
+
 %%
 %
-Cependant, parceque cette approchecalcule le nouvel histogramme uniquement sur la base de l'histogramme des valeurs de gris, cette approche ne tient pas compte du voisinage de chaque pixel. Cette approche ne sera ar exemple pas en mesure de détecter un gradient de contraste au sein de l'image, ou une modification locale d'illumination.
+Cependant, cette approche calculant les nouvelles valeurs de gris sur la base de l'histogramme des valeurs de gris de l'ensemble de l'image, cette approche ne tient pas compte du voisinage de chaque pixel. Cette approche ne sera par exemple pas en mesure de détecter un gradient de contraste au sein de l'image, ou une modification locale d'illumination.
 %
-Une correction de ce défaut a été apporté par le développement de l'\ahe{}\cite{hummel_1977}. Cette méthode consiste à calculer pour chaque pixel une fonction de répartition.
+Une correction de ce défaut a été apporté par le développement de l'\ahe{}\cite{hummel_1977}. Cette méthode consiste à calculer pour chaque pixel une fonction de répartition (voir Figure~\ref{fig:ahe}).
 %
 On choisit pour cela une forme représentant le voisinage de chaque pixel. L'\ahe{} calcule  la valeur de gris de chaque pixel en effectuant une \he{} au sein du voisinage. Cette approche locale permet ainsi de compenser des défauts liés à l'égalisation d'histogramme simple.
 Cependant, cette approche est très sensible au bruit. En effet, le calcul de la fonction de répartition d'un pixel de bruit présent dans une région à intensité quasi-constante entraîne l'amplification du bruit.
 %
 La première solution proposé pour corriger ce défaut fut l'application d'un filtre Laplacien avant de calculer l'\ahe{}\cite{hummel_1977}. Malheureusement , cela peut altérer certaines structures de l'image d'origine, et ainsi faire perdre de l'information.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       Image d'origine
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/moon.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       Après \ahe{}
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/moon_ahe.png}
+    \end{subfigure}
+    \caption{
+        \label{fig:ahe}
+        Exemple d'application d'une \ahe{}. Un noyau de 16 pixels a été choisi.
+    }
+\end{figure}
+%%s
 %
-Une solution ultérieure fut le développement de l'\clahe{}\cite{pizer_1987}. Avant le calcul de l'\clahe{}, on définit une valeur seuil. L'histogramme des valeurs de gris pour chaque pixel est calculé et le nombre de pixels pour chaque valeur de gris est comparé à la valeur seuil choisie. Si une image comporte un nombre de valeur de gris supérieure à la valeur seuil, on redistribue cet excédant aux autres valeurs de gris. La fonction de répartition est alors calculée sur cet histogramme tronqué plutôt que sur l'histogramme d'origine.
+Une solution ultérieure fut le développement de l'\clahe{}\cite{pizer_1987}. Avant le calcul de l'\clahe{}, on définit une valeur seuil. L'histogramme des valeurs de gris pour chaque pixel est calculé et le nombre de pixels pour chaque valeur de gris est comparé à la valeur seuil choisie. Si une valeur de gris a un nombre de pixels supérieure à la valeur seuil, on redistribue cet excédant aux autres valeurs de gris. La fonction de répartition est alors calculée sur cet histogramme tronqué plutôt que sur l'histogramme d'origine (voir Figure~\ref{fig:clahe}).
 %%
 %
 Pour une région quasi-constante, la redistribution des valeurs trop présentes transforme un histogramme présentant une région de pics en un histogramme plat. Ce changement de forme de l'histogramme permet de réduire l'amplification du bruit, car un pixel de bruit dans une zone constante ne sera plus détectable sur l'histogramme de répartition obtenue, et ne sera donc que peu modifié par l'application de la fonction de répartition.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       Image d'origine
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/moon_reveal.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       Après l'\clahe
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/moon_clahe.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       Histogramme local
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/hist_avant.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+       \caption{
+       \centering
+       Histogramme local \\après limitation du contraste
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/hist_après.png}
+    \end{subfigure}
+    \caption{
+        \label{fig:clahe}
+        Exemple d'application de l'\clahe{}.
+        Le cadre magenta représente la région utilisée pour calculer l'histogramme des valeurs de gris.
+        Un noyau de 16 pixels et une valeur seuil de 0.03 ont été choisis.
+        Pour les histogrammes, les ligne verte et  magenta représentent respectivement la valeur seuil et l'histogramme cumulé. 
+    }
+\end{figure}
+
 
 \color{magenta}Ajouter figures explicative et d'illustration\color{black}
 
@@ -48,17 +129,19 @@ l'\clahe{} est encore largement utilisée\cite{dabass_2019,sonali_2018,lv_2019}.
 %
 En effet, il s'agit d'une méthode dont les principes sont simples à comprendre, ce qui la rend plus accessible et ce qui a mené à des développements supplémentaires très nombreux. Il est facile d'utiliser cet algorithme sans posséder de connaissances techniques pointues en analyse d'images.
 %
-Cette méthode a été largement implémentée dans différents logiciels de traitement d'images, comme \href{https://imagej.net/Enhance_Local_Contrast_(CLAHE)}{ImageJ},  \href{https://imagemagick.org/script/clahe.php}{imagemagik} et
-\href{http://icy.bioimageanalysis.org/plugin/adaptive-histogram-equalization/}{icy}.
+Cette méthode a été largement implémentée dans différents logiciels de traitement d'images, comme \href{https://imagej.net/Enhance_Local_Contrast_(CLAHE)}{ImageJ},
+\href{http://icy.bioimageanalysis.org/plugin/adaptive-histogram-equalization/}{icy} et \href{https://imagemagick.org/script/clahe.php}{imagemagik}.
 %
 Cependant, même si le grand nombre  de publications a rendu cette technique très populaire, elle possède néanmoins deux défauts majeurs.
 %
-Le premier est que '\clahe{} demande un temps de calcul important.
+Le premier est que l'\clahe{} demande un temps de calcul important.
 %
 En effet, le calcul de l'histogramme du voisinage de chaque pixel est une tâche lourde; et même si des algorithmes permettant de réduire les temps de calculs ont été proposés\cite{sund_2006}, l'utilisation de \clahe{} pour des images de grande taille n'a longtemps pas pu être réalisé dans un temps raisonnable sur des ordinateurs de bureau. De plus, la lourdeur des calculs ne permettait pas de traiter des imaes 3D jusqu'à récemment\cite{amorim_2018, stimper_2019}.
 %%
 %
-Le second défaut est inhérent à la méthode employée. En ne considérant que l'information fournie par l'image, ces algorithmes ne prennent pas en compte de potentiels défauts provenant de considérations physiques.
+Le second défaut est inhérent à la méthode employée.
+%
+En ne considérant que l'information fournie par l'image, ces algorithmes ne prennent pas en compte de potentiels défauts provenant de considérations physiques.
 %
 Cependant, d'autres méthodes ont été développés pour permettre de tenir compte de défauts provenant du système d'imagerie lui-même.
 

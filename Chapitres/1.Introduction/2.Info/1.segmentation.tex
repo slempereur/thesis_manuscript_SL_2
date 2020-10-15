@@ -1,8 +1,10 @@
 \providecommand{\main}{../../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
 \providecommand{\Images}{\main/Figures/intro_seg}
 \providecommand{\Figures}{\main/Figures}
 
-\documentclass[\main/main.tex]{subfiles}
 
 \begin{document}
             
@@ -31,7 +33,7 @@ Pour accélérer la segmentation et le rendre plus précise, il est possible de 
 %
 Nous allons donc maintenant faire un état de l'art de différentes approches de la segmentations automatiques, et aussi exposer les limites inhérentes à ces algorithmes.
 
-    \subsection[Segmentations par seuillage]{Segmentation par seuillage des valeurs de gris}
+    \subsection{Une approche simple, le seuillage}
     
 %
 Le seuillage est une procédure d'étiquetage des pixels en deux classes en fonction des valeurs de gris des pixels. Elle consiste à conserver tous les pixels supérieurs à une valeur définie. De par sa simplicité, elle a été une des premières stratégie de segmentation automatique\cite{sakai_1969,otsu_1979}.
@@ -79,7 +81,7 @@ Il faut donc mettre en place un ensemble de filtre permettant de corriger les im
 %
 Nous allons donc maintenant voir comment la morphologie mathématique peut permettre d'améliorer la segmentation automatique d'images.
 
-    \subsection{Utilisation de la morphologie mathématique}
+    \subsection{La morphologie mathématique permet d'introduire l'analyse du voisinage de chaque voxel}
     
 %
 La morphologie mathématique est un théorie mathématique principalement développée afin de mettre au point des procédures d'analyse d'image.
@@ -161,7 +163,7 @@ L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace ch
 %
 En combinant l'érosion et la dilatation, deux opérateurs se rajoutent.
 %
-La succession d'une érosion puis d'une dilatation utilisant le même élement structurant
+La succession d'une érosion puis d'une dilatation utilisant le même élément structurant
 est appelé une ouverture
 (voir Figure~\ref{fig:ouverture}).
 %
@@ -336,7 +338,7 @@ En plus d'une forte sensibilité aux paramètres fournis, ces algorithmes sont p
 %
 Ils ont ainsi été remplacés au cours de la dernière décennie par des algorithmes utilisant les réseaux de neurones profonds.
 
-    \subsection{Segmentation par réseaux de neurones profonds}
+    \subsection{L'approche émergente, La segmentations par réseaux de neurones profonds}
 
 % % Principe théorique
 %
@@ -365,10 +367,9 @@ Les première utilisation de l'apprentissage de réseaux de neurones profonds po
 L'évolution des systèmes informatiques durant la dernière décennies ayant permis d'effectuer des réseaux de neurones de plus en plus profonds et de plus en plus peuplés, il a été possible de transformer ces classifications d'images en classification de pixels permettant ainsi de mettre au point les premières méthodes de segmentation par réseau de neurones profonds.\cite{ronneberger_2015,milletari_2016}.
 %
 Les méthodes de segmentations par réseaux de neurones profonds ont alors été employés pour réaliser des segmentations de tout type d'objets et sur un large panel de systèmes d'imageries\cite{zhao_2019,xie_2020,xu_2020,zhang_2020,khan_2020,zhang_2019a}.
-
 %
 Ces méthodes consistent principalement à utiliser un réseau de neurones existant
-en l'entraîn aantvec un jeu de données développés pour permettre de réaliser la segmentation désirée.
+en l'entraînant avec un jeu de données développés pour permettre de réaliser la segmentation désirée.
 %
 Cependant, il est parfois impossible d'acquérir un jeux d'entraînement ayant une taille suffisante.
 %

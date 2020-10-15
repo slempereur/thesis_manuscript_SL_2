@@ -14,18 +14,18 @@
 La segmentation d'image consiste à grouper des pixels afin d'extraire une information de l'image, par exemple identifier une ou plusieurs régions d'intérêt.
 %
 Dans le cadre d'imageries de tissus biologiques,
-ces régions d'intérêt peuvent être un organe entier ou une sous\hyp{}région de cet organe\cite{early_2018,liu_2020,gupta_2018},
-une anomalie dans une structure\cite{wadhwa_2019,huang_2019,ruikar_2019}
-ou un caractère particulier \cite{teixid_2019,hinfray_2018} .
+ces régions d'intérêt peuvent être un organe entier ou une sous\hyp{}région de cet organe~\cite{early_2018,liu_2020,gupta_2018},
+une anomalie dans une structure~\cite{wadhwa_2019,huang_2019,ruikar_2019}
+ou un caractère particulier~\cite{teixid_2019,hinfray_2018} .
 %
 L'approche la plus simple de segmentation consiste à manuellement annoter l'image que l'on souhaite étudier pixel par pixel.
 %
 Cette approche permet en principe d'avoir le résultat le plus précis,
 mais c'est une procédure extrêmement longue, ce qui rend son emploi incompatible avec le traitement d'un grand nombre d'image.
 %
-Il est interminale de définir de façon précise manuellement les limites d'une région, et la segmentation manuelle présente de fort risque de biais inter et intra\hyp{}individuels\cite{heye_2013}.
+Il est interminale de définir de façon précise manuellement les limites d'une région, et la segmentation manuelle présente de fort risque de biais inter et intra\hyp{}individuels~\cite{heye_2013}.
 %
-Les biais intra\hyp{}individuels peuvent être limité par l'utilisation d'outil de segmentation semi\hyp{}manuels\cite{berg_2019,benenson_2019} qui permettent à l'utilisateur de définir un ensemble de paramètres qui seront ensuite appliqués à toutes les segmentations manuelles effectués par cet utilisateur.
+Les biais intra\hyp{}individuels peuvent être limité par l'utilisation d'outil de segmentation semi\hyp{}manuels~\cite{berg_2019,benenson_2019} qui permettent à l'utilisateur de définir un ensemble de paramètres qui seront ensuite appliqués à toutes les segmentations manuelles effectués par cet utilisateur.
 %
 La segmentation manuelle reste malgré tout une procédure de choix dans l'évaluation d'algorithmes de segmentation.
 %
@@ -36,7 +36,7 @@ Nous allons donc maintenant faire un état de l'art de différentes approches de
     \subsection{Une approche simple, le seuillage}
     
 %
-Le seuillage est une procédure d'étiquetage des pixels en deux classes en fonction des valeurs de gris des pixels. Elle consiste à conserver tous les pixels supérieurs à une valeur définie. De par sa simplicité, elle a été une des premières stratégie de segmentation automatique\cite{sakai_1969,otsu_1979}.
+Le seuillage est une procédure d'étiquetage des pixels en deux classes en fonction des valeurs de gris des pixels. Elle consiste à conserver tous les pixels supérieurs à une valeur définie. De par sa simplicité, elle a été une des premières stratégie de segmentation automatique~\cite{sakai_1969,otsu_1979}.
 %
 De plus, il s'agit d'une procédure régulièrement utilisé dans l'initiation de segmentations manuelles.
 %
@@ -46,7 +46,7 @@ Au fur et à mesure du développement des méthodes de segmentations automatique
 Nous allons donc maintenant présenter diverses approches de seuillages présentes dans la littérature.
 
 % Seuil choisi à priori
-L'approche la plus simple est l'emploi d'une valeur de seuil définie à priori\cite{hinfray_2018}.
+L'approche la plus simple est l'emploi d'une valeur de seuil définie à priori~\cite{hinfray_2018}.
 %
 De nombreux outils de visualisation d'images permettent d'effectuer rapidement ce type ces procédures et de les automatiser, par exemple avec des macros ImageJ.
 %
@@ -60,11 +60,11 @@ La solution la plus simple consiste à ne conserver qu'une proportion de pixels 
 %
 Cette méthode présente toutefois le défaut de devoir prédéfinir la surface totale de la segmentation ce qui peut induire des défauts importants de segmentations si la taille ou la forme des objets varient.
 %
-Il est donc souhaitable de tenter de définir automatiquement la valeur seuil, une des premières approches de ce type ayant été proposé par \textsc{Nobuyuki Otsu}\cite{otsu_1979}.
+Il est donc souhaitable de tenter de définir automatiquement la valeur seuil, une des premières approches de ce type ayant été proposé par \textsc{Nobuyuki Otsu}~\cite{otsu_1979}.
 %
 Considérons une image, scindée en deux classes de valeurs de gris, avec une variance de valeurs de gris inter\hyp{}groupe différente. En utilisant l'histogramme des valeurs de gris, il est possible de définir une valeur de gris qui permet de maximiser la variance inter\hyp{}groupe.
 %
-Cette approche est facilement généralisable à la segmentation de plusieurs classes de pixels. Pour une segmentation en $n$ classes, il suffit alors de chercher les $n-1$ critères permettant de maximiser les variances entre chaque groupes \cite{kugler_2019,ibrahim_2020,huang_2020}.
+Cette approche est facilement généralisable à la segmentation de plusieurs classes de pixels. Pour une segmentation en $n$ classes, il suffit alors de chercher les $n-1$ critères permettant de maximiser les variances entre chaque groupes~\cite{kugler_2019,ibrahim_2020,huang_2020}.
 
 %% Défauts
 %
@@ -270,7 +270,7 @@ L'algorithme va alors attribuer à chaque pixel un label définissant à quel ba
 %
 Les lignes de partages des eaux seront alors l'ensemble des pixels pour lesquels deux bassins versants se sont rencontrés.
 %
-Cette approche permet ainsi de relier entre eux des régions présentant des valeurs de gris cohérentes afin de segmenter les régions par proximité topographiques des pixels\cite{liang_2019,eschweiler_2019}.
+Cette approche permet ainsi de relier entre eux des régions présentant des valeurs de gris cohérentes afin de segmenter les régions par proximité topographiques des pixels~\cite{liang_2019,eschweiler_2019}.
 %
 
 \begin{figure}[h]
@@ -362,11 +362,11 @@ Une fois entraînés, ces réseaux de neurones permettent d'obtenir rapidement u
 \color{magenta}Ajouter figure explicative\color{black}
 %%
 %
-Les première utilisation de l'apprentissage de réseaux de neurones profonds pour l'analyse d'images a été la classification d'image en différentes classes\cite{lecun_1989,krizhevsky_2017,Simonyan_2014}.
+Les première utilisation de l'apprentissage de réseaux de neurones profonds pour l'analyse d'images a été la classification d'image en différentes classes~\cite{lecun_1989,krizhevsky_2017,Simonyan_2014}.
 %
-L'évolution des systèmes informatiques durant la dernière décennies ayant permis d'effectuer des réseaux de neurones de plus en plus profonds et de plus en plus peuplés, il a été possible de transformer ces classifications d'images en classification de pixels permettant ainsi de mettre au point les premières méthodes de segmentation par réseau de neurones profonds.\cite{ronneberger_2015,milletari_2016}.
+L'évolution des systèmes informatiques durant la dernière décennies ayant permis d'effectuer des réseaux de neurones de plus en plus profonds et de plus en plus peuplés, il a été possible de transformer ces classifications d'images en classification de pixels permettant ainsi de mettre au point les premières méthodes de segmentation par réseau de neurones profonds.~\cite{ronneberger_2015,milletari_2016}.
 %
-Les méthodes de segmentations par réseaux de neurones profonds ont alors été employés pour réaliser des segmentations de tout type d'objets et sur un large panel de systèmes d'imageries\cite{zhao_2019,xie_2020,xu_2020,zhang_2020,khan_2020,zhang_2019a}.
+Les méthodes de segmentations par réseaux de neurones profonds ont alors été employés pour réaliser des segmentations de tout type d'objets et sur un large panel de systèmes d'imageries~\cite{zhao_2019,xie_2020,xu_2020,zhang_2020,khan_2020,zhang_2019a}.
 %
 Ces méthodes consistent principalement à utiliser un réseau de neurones existant
 en l'entraînant avec un jeu de données développés pour permettre de réaliser la segmentation désirée.
@@ -380,20 +380,20 @@ Ce dernier point est particulièrement prégnant pour la segmentation de structu
 Nous allons maintenant présenter trois solutions pour compenser ce défaut.
 
 %
-La première solution est l'enrichissement artificiel du jeu d'entraînement\cite{milletari_2016,zhao_2019b,majurski_2019}.
+La première solution est l'enrichissement artificiel du jeu d'entraînement~\cite{milletari_2016,zhao_2019b,majurski_2019}.
 %
 Cette solution consiste à appliquer aléatoirement des déformations aux images du jeu d'entraînement,
 afin d'augmenter la variabilité des images utilisées pour l'entraînement tout en connaissant une segmentation manuelle.
 
 %
-La seconde solution est le recours à la science participative\cite{willi_2019,keshavan_2019}.
+La seconde solution est le recours à la science participative~\cite{willi_2019,keshavan_2019}.
 %
 La science participative consiste à demander à un grand nombre de volontaires d'annoter manuellement des données.
 %
 Les annotations fournies par l'ensemble des utilisateurs est alors combinée pour créer un jeu d'entraînement.
 %
 Par la fusion des segmentations manuelles d'un grand nombre de volontaires,
-il est alors possible d'égaler en qualité des segmentations manuelles faites par un expert\cite{meakin_2019}.
+il est alors possible d'égaler en qualité des segmentations manuelles faites par un expert~\cite{meakin_2019}.
 %
 Cet approche présente comme avantages le fait d'être peu coûteuse et simple à mettre en place grâce à des plate\hyp{}forme comme \href{https://www.zooniverse.org/}{zooniverse}.
 %
@@ -403,7 +403,7 @@ en fonction de l'intérêt des volontaires pour la tâche demandée.
 %
 La dernière solution est le transfert de réseau de neurones.
 %
-Cette procédure consiste à utiliser un réseau de neurones préalablement entraîné pour réaliser une autre segmentation, que ce soit pour d'autres objets\cite{wahab_2019} ou pour d'autres modalités d'imagerie\cite{guo_2019}.
+Cette procédure consiste à utiliser un réseau de neurones préalablement entraîné pour réaliser une autre segmentation, que ce soit pour d'autres objets~\cite{wahab_2019} ou pour d'autres modalités d'imagerie~\cite{guo_2019}.
 %
 Le réseau est alors ré\hyp{}entraîné avec un jeu d'entraînement contenant un faible nombre d'images tout en obtenant des résultats appropriés.
 

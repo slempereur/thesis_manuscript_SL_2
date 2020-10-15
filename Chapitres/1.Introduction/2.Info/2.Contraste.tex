@@ -55,7 +55,7 @@ Une correction de ce défaut a été apporté par le développement de l'\ahe{}\
 On choisit pour cela une forme représentant le voisinage de chaque pixel. L'\ahe{} calcule  la valeur de gris de chaque pixel en effectuant une \he{} au sein du voisinage. Cette approche locale permet ainsi de compenser des défauts liés à l'égalisation d'histogramme simple.
 Cependant, cette approche est très sensible au bruit. En effet, le calcul de la fonction de répartition d'un pixel de bruit présent dans une région à intensité quasi-constante entraîne l'amplification du bruit.
 %
-La première solution proposé pour corriger ce défaut fut l'application d'un filtre Laplacien avant de calculer l'\ahe{}\cite{hummel_1977}. Malheureusement , cela peut altérer certaines structures de l'image d'origine, et ainsi faire perdre de l'information.
+La première solution proposé pour corriger ce défaut fut l'application d'un filtre Laplacien avant de calculer l'\ahe{}~\cite{hummel_1977}. Malheureusement , cela peut altérer certaines structures de l'image d'origine, et ainsi faire perdre de l'information.
 
 \begin{figure}[h]
     \centering
@@ -78,7 +78,7 @@ La première solution proposé pour corriger ce défaut fut l'application d'un f
 \end{figure}
 %%s
 %
-Une solution ultérieure fut le développement de l'\clahe{}\cite{pizer_1987}. Avant le calcul de l'\clahe{}, on définit une valeur seuil. L'histogramme des valeurs de gris pour chaque pixel est calculé et le nombre de pixels pour chaque valeur de gris est comparé à la valeur seuil choisie. Si une valeur de gris a un nombre de pixels supérieure à la valeur seuil, on redistribue cet excédant aux autres valeurs de gris. La fonction de répartition est alors calculée sur cet histogramme tronqué plutôt que sur l'histogramme d'origine (voir Figure~\ref{fig:clahe}).
+Une solution ultérieure fut le développement de l'\clahe{}~\cite{pizer_1987}. Avant le calcul de l'\clahe{}, on définit une valeur seuil. L'histogramme des valeurs de gris pour chaque pixel est calculé et le nombre de pixels pour chaque valeur de gris est comparé à la valeur seuil choisie. Si une valeur de gris a un nombre de pixels supérieure à la valeur seuil, on redistribue cet excédant aux autres valeurs de gris. La fonction de répartition est alors calculée sur cet histogramme tronqué plutôt que sur l'histogramme d'origine (voir Figure~\ref{fig:clahe}).
 %%
 %
 Pour une région quasi-constante, la redistribution des valeurs trop présentes transforme un histogramme présentant une région de pics en un histogramme plat. Ce changement de forme de l'histogramme permet de réduire l'amplification du bruit, car un pixel de bruit dans une zone constante ne sera plus détectable sur l'histogramme de répartition obtenue, et ne sera donc que peu modifié par l'application de la fonction de répartition.
@@ -124,8 +124,8 @@ Pour une région quasi-constante, la redistribution des valeurs trop présentes 
 
 %%
 %
-Bien que publiée pour la première fois en 1987\cite{pizer_1987},
-l'\clahe{} est encore largement utilisée\cite{dabass_2019,sonali_2018,lv_2019}.
+Bien que publiée pour la première fois en 1987~\cite{pizer_1987},
+l'\clahe{} est encore largement utilisée~\cite{dabass_2019,sonali_2018,lv_2019}.
 %
 En effet, il s'agit d'une méthode dont les principes sont simples à comprendre, ce qui la rend plus accessible et ce qui a mené à des développements supplémentaires très nombreux. Il est facile d'utiliser cet algorithme sans posséder de connaissances techniques pointues en analyse d'images.
 %
@@ -136,7 +136,7 @@ Cependant, même si le grand nombre  de publications a rendu cette technique tr�
 %
 Le premier est que l'\clahe{} demande un temps de calcul important.
 %
-En effet, le calcul de l'histogramme du voisinage de chaque pixel est une tâche lourde; et même si des algorithmes permettant de réduire les temps de calculs ont été proposés\cite{sund_2006}, l'utilisation de \clahe{} pour des images de grande taille n'a longtemps pas pu être réalisé dans un temps raisonnable sur des ordinateurs de bureau. De plus, la lourdeur des calculs ne permettait pas de traiter des imaes 3D jusqu'à récemment\cite{amorim_2018, stimper_2019}.
+En effet, le calcul de l'histogramme du voisinage de chaque pixel est une tâche lourde; et même si des algorithmes permettant de réduire les temps de calculs ont été proposés~\cite{sund_2006}, l'utilisation de \clahe{} pour des images de grande taille n'a longtemps pas pu être réalisé dans un temps raisonnable sur des ordinateurs de bureau. De plus, la lourdeur des calculs ne permettait pas de traiter des images 3D jusqu'à récemment~\cite{amorim_2018, stimper_2019}.
 %%
 %
 Le second défaut est inhérent à la méthode employée.
@@ -160,7 +160,7 @@ avec d la distance parcourue $L_{0}$ L'intensité lumineuse initiale, et $\kappa
 %
 Cette loi est fréquemment utilisée en spectrophotomètrie. En fixant l'intensité lumineuse et la distance à parcourir, l'absorbance ne devient ainsi plus que fonction de la concentration.
 %
-Mais cette loi a aussi été utlisée des cadres très variées, comme l'évolution de l'état de santé des canopées\cite{demattos_2020, liu_2020a}, ou la mesure de la radiation stellaire.
+Mais cette loi a aussi été utlisée des cadres très variées, comme l'évolution de l'état de santé des canopées~\cite{demattos_2020, liu_2020a}, ou la mesure de la radiation stellaire.
 % %
 %
 En traitement d'image, la compensation de la loi de Beer-Lambert permet d'améliorer le contraste d'une image en compensant la perte d'intensité lumineuse induite par le milieu. L'hypothèse de départ est alors que seul l'absorption est responsable de l'atténuation de la lumière dans le milieu,
@@ -168,10 +168,10 @@ négligeant ainsi l'importance de la diffusion ou de la diffraction.
 %
 Cependant, la loi de Beer-Lambert étant proportionnelle aux concentrations de molécules absorbantes, le coefficient d'atténuation est fonction de toutes les concentrations dans le milieu.
 %
-Utiliser la loi de Beer-Lambert est facile à réaliser dans un milieu contrôlé ne contenant qu'une molécule absorbante\cite{mikulewitsch_2018}. La modélisation de l'absorption devient cependant plus complexe dans des solutions contenant plus d'espèces de molécules, le coefficient d'absorption de la solution devenant la somme des coefficients d'absorption pour chaque espèce présente dans le milieu.
+Utiliser la loi de Beer-Lambert est facile à réaliser dans un milieu contrôlé ne contenant qu'une molécule absorbante~\cite{mikulewitsch_2018}. La modélisation de l'absorption devient cependant plus complexe dans des solutions contenant plus d'espèces de molécules, le coefficient d'absorption de la solution devenant la somme des coefficients d'absorption pour chaque espèce présente dans le milieu.
 % %
 %
-Ansi, pour l'imagerie d'échantillons biologiques, tous les tissus ne vont pas contenir les mêmes concentrations d'espèces absorbantes. L'absorption ne peut donc pas être calculée pour une profondeur donnée, mais doit être calculée pour chaque colonne de voxels\cite{ohser_2020,nylk_2018,parker_2020}.
+Ansi, pour l'imagerie d'échantillons biologiques, tous les tissus ne vont pas contenir les mêmes concentrations d'espèces absorbantes. L'absorption ne peut donc pas être calculée pour une profondeur donnée, mais doit être calculée pour chaque colonne de voxels~\cite{ohser_2020,nylk_2018,parker_2020}.
 %
 Ces approches demandent cependant une grande quantité de calcul,
 car il est nécessaire d'effectuer une modélisation pour chaque colonne. Pour des images de grandes taille, le temps nécessaire à de tels calculs peut être trop long.
@@ -223,7 +223,7 @@ La fusion de plusieurs acquisitions pour la formation d'une image finale est la 
 %
 La tomographie consiste à calculer pour chaque voxel de l'image finale une valeur basée sur une série d'acquisitions 2D.
 %
-L'exemple le plus connu de tomographie est la tomodensitométrie\cite{hounsfield_1973}.
+L'exemple le plus connu de tomographie est la tomodensitométrie~\cite{hounsfield_1973}.
 %
 Au cours d'un examen tomodensitométrique, plusieurs acquisitions radiologiques sont effectués pour chaque plan de coupe de l'objet à analyser en effectuant une rotation autour de l'objet.
 %
@@ -238,7 +238,7 @@ Cette méthode a ainsi été employée sur d'autres systèmes d'acquisitions.
 
 %% rappel VAST
 %
-Comme présenté en section~\ref{sec:vast}, le VAST\cite{pardomartin_2010} est un système d'imagerie développé pour permettre l'\hti{} de \pz{}.
+Comme présenté en section~\ref{sec:vast}, le VAST~\cite{pardomartin_2010} est un système d'imagerie développé pour permettre l'\hti{} de \pz{}.
 %
 L'acquisition étant éffectuée par le biais de capillaire en verre, il n'est pas possible de réaliser d'imagerie 3D sans développer d'algorithme pour corriger les effets de lentilles induits par le capillaire.
 %
@@ -248,16 +248,16 @@ Cependant, ce système a été mis au point pour permettre d'effectuer des rotat
 
 %% tomographie VAST
 %
-De cette manière, il est possible d'utiliser le VAST comme un système d'acquisition permettant de faire de la tomographie optique\cite{pardomartin_2013}, en effectuant plusieurs acquisition du même échantillon selon des angles différents.
+De cette manière, il est possible d'utiliser le VAST comme un système d'acquisition permettant de faire de la tomographie optique~\cite{pardomartin_2013}, en effectuant plusieurs acquisition du même échantillon selon des angles différents.
 %
 En microscopie en champ clair,
-cette approche a d'ailleurs été employée pour réaliser la volumétrie de la larve entière de \pz\cite{guo_2017}.
+cette approche a d'ailleurs été employée pour réaliser la volumétrie de la larve entière de \pz~\cite{guo_2017}.
 %
 Mais son utilisation couplée à un système de microscopie confocale peut permettre une réalisation relativement simplem d'images 3D corriées par tomographie optique.
 
 % % rappel SPIM
 %
-La microscope par nappe de lumière est une méthode de microscopie par fluorescence\cite{huisken_2004} (voir Section~\ref{sec:spim}).
+La microscope par nappe de lumière est une méthode de microscopie par fluorescence~\cite{huisken_2004} (voir Section~\ref{sec:spim}).
 %
 L'illumination de la région à imager est effectuée par la création d'une nappe de lumière.
 %
@@ -269,7 +269,7 @@ Tout objet se trouvant ainsi sur le passage de la feuille de lumière peut indui
 
 %  % OPTISPIM
 %
-Une solution proposé est le développement d'un système permettant de réaliser une tomographie optique à partir de différentes acquisitions\cite{Mayer_2018}.
+Une solution proposé est le développement d'un système permettant de réaliser une tomographie optique à partir de différentes acquisitions~\cite{Mayer_2018}.
 %
 L'échantillon est alors placé sur une platine motorisée permettant de réaliser des rotations.
 %

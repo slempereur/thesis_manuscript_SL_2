@@ -32,14 +32,14 @@
 %----------------------------------------------------------------------------------------
 
 % Remove drafting to get rid of the '[ Date - classicthesis version 4.0 ]' text at the bottom of every page
-\PassOptionsToPackage{eulerchapternumbers,listings,drafting, pdfspacing, subfig,beramono,eulermath,parts}{classicthesis}
+\PassOptionsToPackage{eulerchapternumbers,listings, pdfspacing, subfig,beramono,eulermath,parts}{classicthesis}
 % Available options: drafting parts nochapters linedheaders eulerchapternumbers beramono eulermath pdfspacing minionprospacing tocaligned dottedtoc manychapters listings floatperchapter subfig
 
 \newcommand{\myTitle}{
-    Analyse morphométrique du cerveau du poisson-zèbre
+    Analyse morphométrique du cerveau du poisson-zèbre:
     }
 \newcommand{\mySubtitle}{
-    Mise en place de procédures d'imagerie et de segmentations rapides\xspace
+    \textsc{Mise en place de procédures d'imagerie et de segmentations rapides}\xspace
     }
 \newcommand{\myDegree}{Docteur de l'Université Paris-Est \\ spécialité Informatique\xspace}
 \newcommand{\myName}{Sylvain Lempereur\xspace}
@@ -50,7 +50,7 @@
 \newcommand{\myDepartment}{Ecole doctorale Mathématiques et Sciences et Technologies de
 l’Information et de la Communication\xspace}
 \newcommand{\myUni}{Université Paris Est\xspace}
-\newcommand{\myLocation}{Tefor ou LIGM?\xspace}
+\newcommand{\myLocation}{Laboratoire d'informatique Gaspard Monge\xspace}
 \newcommand{\myTime}{soutenue publiquement le 17 décembre 2020 devant le jury composé de:\xspace}
 %\newcommand{\myVersion}{version 0.1\xspace}
 
@@ -75,7 +75,7 @@ l’Information et de la Communication\xspace}
 
 %------------------------------------------------
 
-%\PassOptionsToPackage{ngerman,american}{babel}  % Change this to your language(s)
+\PassOptionsToPackage{american}{babel}  % Change this to your language(s)
 % Spanish languages need extra options in order to work with this template
 %\PassOptionsToPackage{spanish,es-lcroman}{babel}
 \usepackage{babel}
@@ -93,11 +93,12 @@ style=numeric-comp,%
 sorting=nyt, % name, year, title
 maxbibnames=10, % default: 3, et al.
 %backref=true,%
-natbib=true % natbib compatibility mode (\citep and \citet still work)
+%natbib=true % natbib compatibility mode (\citep and \citet still work)
 }{biblatex}
 \usepackage{biblatex}
 \addbibresource{Bibliographie.bib}
  
+\usepackage{pdfpages}
  %------------------------------------------------
 
 \PassOptionsToPackage{fleqn}{amsmath} % Math environments and more by the AMS 
@@ -229,6 +230,8 @@ urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, %pagecolor=RoyalBlue
 \renewcommand*{\sectionautorefname}{Section}
 \renewcommand*{\subsectionautorefname}{Section}
 \renewcommand*{\subsubsectionautorefname}{Section}
+\renewcommand{\contentsname}{Table des matières}
+\renewcommand{\bibname}{Bibliographie}
 }
 \addto\extrasngerman{
 \renewcommand*{\paragraphautorefname}{Absatz}

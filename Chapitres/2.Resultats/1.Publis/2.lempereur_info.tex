@@ -5,8 +5,12 @@
 
 \begin{document}
 
-\section[Lempereur et al, MMTA, 2020]{\label{sec:lempereur_info}Mise au point de méthodes de segmentations automatiques}
+\chaptermark{Lempereur et al, MMTA 2020}
+\chapter{\label{sec:lempereur_info}
+Article 2 : Segmentations automatiques d'images 3D acquises par microscopie confocale pour la mesure de la matière blanche de cerveaux de \pz{}
+}
 
+\section{Présentation de l'article 2}
 % Introduction marquage
 %
 Comme vu dans la section~\ref{sec:bouffard}, l'emploi d'un marqueur fluorescent lipophile, par exemple l'indocarbocyanine cationique (DiI), permet de marquer les lipides se trouvant au sein d'un tissu.
@@ -145,32 +149,32 @@ En résumé, les résultats principaux de la publication au sein de
 Enfin, l'algorithme de segmentation de la matière blanche cérébrale a servi de base au
 développement de la segmentation de la matière grise présentée en section~\ref{sec:HuC},
 et le SBDDCC a servi de base pour le développement d'un algorithme de compensation
-d'un défaut de marquage histochimique présenté en section~\ref{sec:sblc}.
+d'un défaut de marquage \ihc{} présenté en section~\ref{sec:sblc}.
 
-\begin{figure}[htbp]
+\begin{figure}[!h]
     \centering
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
        \caption{
             \label{fig:lempereur_info:brut}
-            Données brutes
+            Données brutes obtenues par marquage liphohile
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Segmentations/original.png}
     \end{subfigure}
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
        \caption{
         \label{fig:lempereur_info:whole}
         Segmentation de l'échantillon
         }
        \centering \includegraphics[width=\textwidth]{\Figures/Segmentations/whole.png}
     \end{subfigure}
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
        \caption{
            \label{fig:lempereur_info:correction}
            Données après SBDDCC
         }
        \centering \includegraphics[width=\textwidth]{\Figures/Segmentations/contrast_corrected.png}
     \end{subfigure}
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
        \caption{
            \label{fig:lempereur_info:white}
             Segmentation de la matière blanche superposé aux données après SBDDCC
@@ -179,9 +183,23 @@ d'un défaut de marquage histochimique présenté en section~\ref{sec:sblc}.
     \end{subfigure}
     \caption{
         \label{fig:lempereur_info}
-        Représentation 3D de l'application des algorithmes présentés sur alevin de \pz{} à 5 dpf. Les segmentations sont représentées par des rendus surfaciques quand les données en valeurs de gris sont représentées par des rendus volumiques.
+        Représentation 3D des résultats de l'application des algorithmes sur des alevins de \pz{}.
+        \newline
+        (a) On aperçoit le signal faible permettant de segmenter la larve entière, ainsi que de fort marquage dans diverses régions dont la matière blanche du cerveau. L'encart met en évidence le défaut de pénétration de la lumière dans les régions profondes. Les têtes de flèche indique en particulier  perte de signal dans la partie ventrale de la rétine et dans l'hypothalamus.
+        (b) L'algorithme de segmentation de l'alevin entier permet d'obtenir une segmentation précise de l'échantillon malgré la présence de la déperdition lumineuse au sein de l'échantillon.
+        (c)
+        En revanche, il est nécessaire de compenser cette déperdition lumineuse pour obtenir une segmentation correcte de la matière blanche. L'algorithme nommé SBDDCC nécessite la segmentation  montré en b de façon à connaître la forme de l'échantillon et ainsi mesurer la quantité de tissu traversé.
+        Cet algorithme permet de compenser efficacement les défauts de pénétration de la lumière, comme on peut le voir dans l'encart (Têtes de flèche).
+        (d) L'application du SBDDCC permet d'effectuer une segmentation précise de la matière blanche. L'algorithme développé est en mesure de supprimer les régions fortement marquées mais extérieur au système nerveux central, comme les rétines ou le sac vitellin.
+        \newline
+        Les segmentations sont représentées par des rendus surfaciques quand les données en valeurs de gris sont représentées par des rendus volumiques.
     }
     
 \end{figure}
+
+\sectionmark{Article 2 publié dans MMTA 2019}
+\section{Article 2 publié dans Mathematical Morphology\hyp{}Theory and Applications}
+
+\includepdf[pages=-]{./mmta2020.pdf}
 
 \end{document}

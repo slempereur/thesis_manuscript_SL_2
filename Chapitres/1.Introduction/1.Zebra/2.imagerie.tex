@@ -1,9 +1,11 @@
 \providecommand{\main}{../../..}
+\providecommand{\Figures}{\main/Figures/Micros}
 
 \documentclass[\main/main.tex]{subfiles}
 
 \begin{document}
             
+\sectionmark{Le \pz{}, un modèle idéal pour l'imagerie}
 \section{La transparence du \pz{} en fait un modèle idéal pour l'imagerie en fluorescence}
 
 \label{sec:imagerie}
@@ -33,7 +35,7 @@ Quelque soit la position du plan focal, le détecteur recevra des photons d'autr
 %
 La microscopie confocale par balayage laser est une des premières méthodes d'imagerie ayant été mise au point pour compenser ce défaut. 
 %
-Brevetée en 1957, la microscopie confocale repose sur l'utilisation d'une source lumineuse laser et d'un iris.
+Brevetée en 1957 (voir \autoref{fig:confocal}), la microscopie confocale repose sur l'utilisation d'une source lumineuse laser et d'un iris.
 %
 Placé dans le plan focal conjugué de l'objectif utilisé, ce sténopé va empêcher les photons ne se trouvant pas dans le plan focal de l'objectif d'atteindre le détecteur.
 %
@@ -45,10 +47,26 @@ En déplaçant l'objet avec une platine motorisée, il devient alors possible de
 %
 La grande précision de cette méthode et la versatilité permise par les méthodes de marquages en ont ainsi fait un outil de choix pour l'étude de phénomènes cellulaires et sub-cellulaires.
 
+\begin{figure}[h!]{\textwidth} 
+    \centering
+       \centering \includegraphics[width=\textwidth]{\Figures/minsky.png}
+       \caption{
+            \label{fig:confocal}
+            Principe de fonctionnement d'un microscope confocale
+            \newline
+            Le point principal de cette approche consiste à placer le capteur (28) après un iris (26).
+            Cet iris va empêcher la captation de photons ne se trouvant pas dans le plan focal de la lentille (11), ce qui permet d'obtenir une très faible profondeur de champ.
+            \newline
+            Schéma issu du brevet de \textsc{Marvin Minksy} déposé en 1957.
+            }
+\end{figure}
+
 %
-Cependant, cette méthode présente trois défauts majeurs.
+Cependant, cette méthode présente deux défauts majeurs.
 %
-Premièrement, l'énergie nécessaire pour l'illumination de l'objet est importante, ce qui produit un risque de photo-toxicité et de photo\hyp{}blanchiment. Deuxièmement, l'atténuation lumineuse des faisceaux lasers utilisés ne permet pas d'étudier des échantillons épais sans clarification préalable.
+Premièrement, l'énergie nécessaire pour l'illumination de l'objet est importante, ce qui produit un risque de photo\hyp{}toxicité et de photo\hyp{}blanchiment. Deuxièmement, l'atténuation lumineuse des faisceaux lasers utilisés ne permet pas d'étudier des échantillons épais sans clarification préalable.
+
+%%
 %
 La microscopie par excitation biphotons améliore la pénétration au sein de l'échantillon.
 %
@@ -60,15 +78,28 @@ L'utilisation de l'excitation bi-photons présentent plusieurs avantages. Tout d
 La lumière infra-rouge pénètre mieux et diffuse moins dans les tissus, ce qui permet d'imager des tissus plus épais.
 %
 Cependant, l'utilisation de laser femto\hyp{}secondes implique une forte augmentation des coûts d'achat et de maintenance relativement à l'emploi d'un microscope confocal à balayage laser.
-
 %% SPIM
 \label{sec:spim}
-Une autre stratégie permettant l'imagerie en fluorescence est l'imagerie par nappe de lumière~\cite{huisken_2004}. Cette dernière consiste principalement à rajouter une lentille sphérique dans le trajet du faisceau laser émis, pour générer une fine nappe lumineuse qui va se former autour du point focal de cette lentille.
+Une autre stratégie permettant l'imagerie en fluorescence est l'imagerie par nappe de lumière~\cite{voie_1993}. Cette dernière consiste principalement à rajouter une lentille sphérique dans le trajet du faisceau laser émis, pour générer une fine nappe lumineuse qui va se former autour du point focal de cette lentille.
 %
 En plaçant l'échantillon à imager dans le plan focal de la lentille,
 il est alors possible d'exciter les fluorophores sur une très faible épaisseur.
 %
 Il suffit alors de placer l'objectif perpendiculairement aux faisceaux émis pour récupérer le résultat de l'excitation des fluorophores au sein de la nappe de lumière.
+
+\begin{figure}[h!]{\textwidth} 
+    \centering
+       \centering \includegraphics[width=\textwidth]{\Figures/light_sheet.png}
+       \caption{
+            \label{fig:confocal}
+            Principe de fonctionnement d'un microscope à feuille de lumière.
+            \newline
+            Une lentille circulaire permet de créer une feuille de lumière au niveau de la zone focale.
+            En plaçant l'échantillon au sein de cette feuille de lumière, il est alors possible de diminuant la quantité de lumière traversant l'échantillon, ce qui réduit la photo\hyp{}toxicité. 
+            \newline
+            Traduction d'une figure provenant de Voie et al, 1993~\cite{voie_1993}.
+            }
+\end{figure}
 
 %%
 Cette approche présente plusieurs avantages. En illuminant l'ensemble du plan en une seule fois, il est possible d'acquérir le signal avec une caméra avec une rapidité supérieure aux scanners qui captent la lumière point par point.
@@ -76,7 +107,7 @@ Cela réduit considérablement la photo-toxicité et le photo\hyp{}blanchiment, 
 %
 De nombreuses améliorations sont apparues au fil du temps, comme par exemple des feuilles de lumière plus homogènes obtenues grâce à l'emploi de deux sources opposées~\cite{huisken_2007}, ou bien l'emploi de deux objectifs.
 %
-Cependant, l'utilisation de la nappe de lumière limite la pénétration en profondeur dans l'échantillon, ainsi que la taille du champ d'acquisition, ce qui conduit oblige à des acquisitions chevauchantes et des opérations de stitching des images très lourdes). Enfin, cette méthode génère des images de taille considérable (typiquement 1Téra-octet par image) pour une image, ce qui entraîne donc des opérations informatiques très lourdes, pour le transfert, l'archivage et le traitement des images.
+Cependant, l'utilisation de la nappe de lumière limite la pénétration en profondeur dans l'échantillon, ainsi que la taille du champ d'acquisition, ce qui oblige à des acquisitions chevauchantes et des opérations de stitching des images très lourdes). Enfin, cette méthode génère des images de taille considérable (typiquement 1 To par image), ce qui entraîne donc des opérations informatiques très lourdes, pour le transfert, l'archivage et le traitement des images.
 
     \subsection{La microscopie confocale, la méthodologie la plus adaptée au \hcs{}}
     
@@ -96,7 +127,7 @@ Cependant, cette approche impose d'effectuer des images bien plus grande que l'o
 %%
 %
 \label{sec:moule_montage}
-La seconde approche mpliquei l'utilisation de moules de montage.
+La seconde approche implique l'utilisation de moules de montage.
 %
 On peut soit utiliser des moules permettant de créer des puits dans un moule dans lesquels les échantillons seront insérés~\cite{donoughe_2018,kleinhans_2019}, soit à er des moules pour créer des pièges faisant appel à la microfluidique pour contraindre les échantillons~\cite{khalili_2019}. Dans les deux cas, l'orientation des échantillons peut être déterminée.
 %
@@ -106,7 +137,7 @@ Il est ainsi possible de coupler les avantages des deux approches afin de limite
 
 %% Vast
 \label{sec:vast}
-Le VAST Vertebrate Automated Screening Technology) bioimager~\cite{pardomartin_2010} est la méthode de robotisation d'acquisition d'images de \pz{} par capillaire la plus représentée dans la littérature~\cite{jarque_2018,teixid_2019}. Il permet d'imager des échantillons entre 2 et 4 dpf.
+Le Vertebrate Automated Screening Technology bioimager~\cite{pardomartin_2010} (VAST) est la méthode de robotisation d'acquisition d'images de \pz{} par capillaire la plus représentée dans la littérature~\cite{jarque_2018,teixid_2019}. Il permet d'imager des échantillons entre 2 et 4 dpf.
 %
 Ce système est un accessoire à associer à un microscope droit ou inversé, que ce soiet des microscopes à epifluorescences, des microscopes confocaux ou des microscopes à disque rotatif~\cite{early_2018, guo_2017}.
 %

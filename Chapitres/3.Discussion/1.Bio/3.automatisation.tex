@@ -6,7 +6,7 @@
                     
 \section{
     \label{sec:automatisation}
-    Optimisation des différentes étapes du \hti
+   Plusieurs pistes pour accélérer et rendre plus reproductibles les acquisitions
     }
  
 %   
@@ -19,7 +19,8 @@ permettant ainsi leur implication dans des projets de développement technologiq
 %
 J'envisage donc différentes voies d'amélioration permettant l'optimisation de l'\hti{}.
 
-    \subsection[Par robots pipeteurs]{Utilisation de robot pipeteur pour le protocol \ihc{}}
+\sectionmark{Emploi de robot\hyp{}pipeteurs }
+    \subsection{L'utilisation de robot-pipeteurs permettrait des expériences d'\ihcie{} moins chronophages et plus reproductibles}
     
 %
 Actuellement, le traitement \ihc{} des échantillons est l'étape la plus longue du protocole d'\hti{}.
@@ -95,14 +96,14 @@ ce qui est aussi une tâche longue et fastidieuse.
 %
 Cependant, la mise en place des échantillons dans des plaques 96 puits peut être accélérée par un robot pipeteur d(embryons mis au point par le KIT à Karslruhe (citer leur site). Son acquisition avait été envisagée par TPS dans le cadre du projet d'investissement d'avenir TEFOR mais il n 'a pas été réalisé par manque de temps et de demande des utilisateurs pour des traitements à grande échelle par TPS.
 
-    \subsection{Simplification du montage}
+    \subsection{Le montage, un enjeu important pour réduire le temps du \hcs{}}
 
 %    
 Le montage des échantillons est actuellement réalisé par un opérateur (voir section~\ref{chapter:bio:montage}).
 %
 Pour rappel, il s'agit de placer manuellement chaque échantillon dans une encoche créée dans une semelle d'agarose solubilisée dans du milieu de culture d'embryons de \pzs{}.
 %
-Ainsi, une personne expérimentéea besoin d'une demi-journée de travail pour pouvoir monter cent échantillons.
+Ainsi, une personne expérimentée a besoin d'une demi-journée de travail pour pouvoir monter cent échantillons.
 %
 De plus, la solubilisation de l'agarose dans un milieu principalement aqueux est source de problème.
 %
@@ -137,7 +138,7 @@ Afin de résoudre ce problème, la solubilisation de l'agarose dans du \MD{} a �
 De cette manière, la semelle d'agarose possède déjà l'indice de réfraction voulu.
 %
 Ceci entraîne donc une réduction du nombre de changement de bains.
-Cette solution n'avait pas été envisagé précédemment car la viscosité des premières versions de MD empéchait la solubilisation de l'agarose.
+Cette solution n'avait pas été envisagé précédemment car la viscosité des premières versions de milieu d'appariement de l'indice de réfraction empéchait la solubilisation de l'agarose.
 %
 Cependant, le développement récent du \MD{}, version du MD ayant une viscosité réduire, a permis de résoudre ce problème.
 
@@ -153,7 +154,8 @@ l'échantillon risquerait de sortir de son puit ou d'être mal stabilisé par le
 Pour des échantillons de \pz{} à 5 dpf, les puits ont un volume inférieur à $2 mm^{3}$. 
 %
 Le pipetage d'échantillon de \pz{} nécessite au minimum une dizaine de microlitres, ce qui empêcherait l 'emploi de robot de pipettage de larve qui distribuent les larves dans un volume minimum d'environ 100 microlitres.
-%Afin de permettre le pipetage des échantillons par un robot, il pourrait simplement être nécessaire de créer de nouveaux tampons permettant de former dans l'agarose des pyramides au dessus des puits initiales ne contenant pas d'agarose, afin de ne pas géner l'imagerie par nos très gros objectifs.
+%
+Afin de permettre le pipetage des échantillons par un robot, il pourrait simplement être nécessaire de créer de nouveaux tampons permettant de former dans l'agarose des pyramides au dessus des puits initiales ne contenant pas d'agarose, afin de ne pas géner l'imagerie par nos très gros objectifs.
 %
 Aussi, en augmentant la distance existante entre deux échantillons et l'épaisseur d'agaroe,
 il serait possible de pipeter une plus grande quantité de liquide tout en assurant que les échantillons ne ressortent pas des puits. Mais aussi en séchant légèrement au préalable les moules d'agarose, il est probable que l'agarose ait la capacité d'absorber le liquide déposé. Une autre possibilité, impliquant probablemlnt des imprimantes plus performantes serait d'imprimer une grille sous les puits dans un tampon qui serait placé sous le moule d'agarose. Ainsi on pourrait favoriser l'écoulement du liquide
@@ -184,7 +186,7 @@ il pourrait être possible de les fixer dans leur position en venant placer une 
 La mise en place de tels dispositifs pouvant permettre de monter rapidement un grand nombre d'échantillon,
 la simplification du paramétrage de l'imagerie deviendra une étape cruciale pour permettre d'assurer le meilleur rendement de la procédure d'\hti{} développée.
 
-    \subsection{Paramétrage de l'imagerie}
+    \subsection{Le préscan des plaques permettrait l'optimisation des acquisitions}
 
 Actuellement, le paramétrage est déjà largement automatisé,
 que ce soit par l'emploi du logiciel Matrix Screener pour les microscopes Leica ou bien Jobs pour les microscopes Nikon.

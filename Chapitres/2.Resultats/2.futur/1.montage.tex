@@ -5,12 +5,14 @@
 
 \begin{document}
 
-\section{
+\chapter{
     \label{sec:montage}
-    Le montage au service de l'acquisition
+    Méthode 1 : Uniformiser le montage permet de simplifier et d'accélérer l'acquisition des échantillons
     }
 
-    \subsection{Retour sur les méthodes existantes}
+\chaptermark{Uniformiser le montage pour accélérer l'acquisition}
+
+    \section{L'impression 3D permet de créer rapidement et simplement des solutions de montage peu onéreuses}
     
 %%
 %
@@ -134,7 +136,8 @@ d' \ol{}, ou pour permettre le montage de cerveaux de \pz{} à 21 dpf et 6 wpf
     \end{subfigure}
     \caption{
         \label{fig:tampon}
-        Représentations surfaciques de moules pour le montage de \pzs{} à 5 dpf
+        Représentations surfaciques de moules permettant le montage de 12 ou 48 alevins de \pzs{}.
+        Ces moules permettent d'assurer un espacement régulier entre les échantillons.
     }
     
 \end{figure}
@@ -164,12 +167,12 @@ d' \ol{}, ou pour permettre le montage de cerveaux de \pz{} à 21 dpf et 6 wpf
     \end{subfigure}
     \caption{
         \label{fig:formes}
-        Détail de représentations surfaciques de moules permettant le montage de \pzs. chaque forme permet le montage d'un type d'échantillon particulier.
+        Représentations surfaciques des encoches permettant le montage de \pzs. Ces encoches permettent ainsi de s'adapter à différents stades de développement ou permettent de monter un organe disséqué comme le cerveau.
     }
     
 \end{figure}
     
-    \subsection{Historique des systèmes de montage developpés}
+    \section{Plusieurs approches infructueuses ont été développées avant d'utiliser l'impression 3D}
  
 %%
 %
@@ -225,7 +228,7 @@ Notre dernière approche fut l'emploi de l'impression 3D comme décrit précéde
 %
 Cherchant à imprimer des pièces ayant une précision de l'ordre de la centaine de micromètres, une optimisation des méthodes d'impressions a été nécessaire. 
 
-    \subsection{Optimisation des tampons pour l'impression 3D}
+    \section{L'optimisation des paramètres et des conditions d'impression est nécessaire à des impressions 3D reproductibles}
 
 %%
 %
@@ -235,45 +238,65 @@ Une première limitation était la taille de la buse, qui empêchait la créatio
 %
 En effet, l'emploi d'une buse d'impression ayant un diamètre de 0.25 mm ne permet pas l'impression d'éléments ayant une taille inférieure à 0.30 mm, à cause de l'étalement de la matière autour du lieu de dépôt. Les puits pour des larves à 5 dpf possédant une taille de 0,25mm dans la région caudale risquaient donc d'être insuffisamment précisément imprimés.
 %
-Nous avons résolu ce problème en imprimant les régions d'intérêt non plus à l'horizontale mais à la verticale. Comme l'épaisseur minimale d'une couche est de 60 µm en utilisant la même buse de 0.25 mm, il devenait possible de créer des formes possédant la taille désirée avec une précision suffisante.
+Nous avons résolu ce problème en imprimant les régions d'intérêt non plus à l'horizontale mais à la verticale (voir Figure~\ref{fig:coupe:model:horizontal} et \ref{fig:coupe:model:vertical}). Comme l'épaisseur minimale d'une couche est de 60 µm en utilisant la même buse de 0.25 mm, il devenait possible de créer des formes possédant la taille désirée avec une précision suffisante.
 %
-Une ligne de quelques centaines de micromètres devient alors une surface complexe ayant toujours une épaisseur supérieure à la taille limite de 60 µm  (voir Figure~\ref{fig:coupe:model:horizontal} et \ref{fig:coupe:model:vertical}).
+Une ligne de quelques centaines de micromètres devient alors une surface complexe ayant toujours une épaisseur supérieure à la taille limite de 60 µm  (voir Figure~\ref{fig:coupe:slicing:horizontal} et \ref{fig:coupe:slicing:vertical}).
 %
-Ainsi, j'ai pu imprimer des éléments plus fins (voir Figure~\ref{fig:coupe:slicing:horizontal} et \ref{fig:coupe:model:vertical}).
+Ainsi, j'ai pu imprimer des éléments plus fins (voir Figure~\ref{fig:coupe:comp:horizontal} et \ref{fig:coupe:comp:vertical}).
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
        \centering \caption{
             \label{fig:coupe:model:horizontal}
-            Rendu surfacique \newline d'une coupe horizontale
+            Vue de dessus du modèle théorique
             }
-       \centering \includegraphics[width=\textwidth]{\Figures/Moules/coupe_horizontale_cut.png}
+       \centering \includegraphics[width=\textwidth]{\Figures/Moules/modele_horizontal.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
        \centering \caption{
             \label{fig:coupe:model:vertical}
-            Rendu surfacique \newline  d'une coupe verticale
+            Vue de coté du modèle théorique
             }
-       \centering \includegraphics[width=\textwidth]{\Figures/Moules/coupe_vert_cut.png}
+       \centering \includegraphics[width=\textwidth]{\Figures/Moules/modele_vertical.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
        \centering \caption{
             \label{fig:coupe:slicing:horizontal}
-            Découpe en tranche d'un \newline tampon placé à l'horizontale
+            Vue de dessus des consignes
             }
-       \centering \includegraphics[width=\textwidth]{\Figures/Moules/slicing_horizontal.png}
+       \centering \includegraphics[width=\textwidth]{\Figures/Moules/consigne_horizontal.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
        \centering \caption{
             \label{fig:coupe:slicing:vertical}
-            Découpe en tranche d'un \newline tampon placé à la verticale
+            Vue de coté des consignes
             }
-       \centering \includegraphics[width=\textwidth]{\Figures/Moules/slicing_vertical.png}
+       \centering \includegraphics[width=\textwidth]{\Figures/Moules/consigne_vertical.png}
     \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+       \centering \caption{
+            \label{fig:coupe:comp:horizontal}
+            Comparaison entre les consignes et le modèle théorique pour une vue de dessus
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/Moules/comp_horizontal.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+       \centering \caption{
+            \label{fig:coupe:comp:vertical}
+            Comparaison entre les consignes et le modèle théorique pour une vue de coté
+            }
+       \centering \includegraphics[width=\textwidth]{\Figures/Moules/comp_vertical.png}
+    \end{subfigure}
+    
     \caption{
         \label{fig:coupe}
-        L'impression des tampons à la verticale permet de profiter au mieux de la précision permise par l'impression 3D
+        L'impression des tampons à la verticale permet de profiter au mieux de la précision permise par l'impression 3D (taille minimale d'impression : 250 $\mu$m à l'horizontal contre 60 $\mu$m à la verticale).
+        \newline
+        Le modèle théorique (a;b) est issu du logiciel de conception 3D \href{https://www.openscad.org/}{openscad}.
+        Le logiciel de découpe de modèle 3D \href{https://ultimaker.com/fr/software/ultimaker-cura}{Cura 4} permet de traduire le modèle théorique en consigne pour l'impression (c;d) en découpant le modèle en couche que l'imprimante sera capable de déposer.
+        Le comparaison entre le modèle théorique et la consigne obtenue montre des différences importantes si le tampon est imprimé à l'horizontal, différences qui seront amplifiées lors de l'impression (e;f).
+        En particulier, les parties fines prévues pour accueillir la queue de l'EE (astérisque) ne pourront pas être correctement imprimées.
     }
     
 \end{figure}
@@ -301,27 +324,30 @@ De cette manière, une enceinte va se créer autour de l'objet à imprimer, perm
     \begin{subfigure}[b]{0.30\textwidth}
        \centering \caption{
             \label{fig:print:axe}
-            Découpe en tranche d'un objet placé dans l'axe du plateau d'impression
+            Consignes d'impression pour un objet placé en diagonale de l'axe d'impression
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Moules/coupe_axe_zoom.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.30\textwidth}
        \centering \caption{
             \label{fig:print:diag}
-            Découpe en tranche d'un objet placé en diagonale du plateau d'impression
+            Consignes d'impression pour une objet placé dans l'axe d'impression
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Moules/coupe_diag_zoom.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.30\textwidth}
        \centering \caption{
             \label{fig:print:shield}
-            Exemple d'enceinte pare-brise autour d'un tampon
+            Enceinte pare-brise autour d'un tampon
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Moules/shield.png}
     \end{subfigure}
     \caption{
         \label{fig:print}
-        Exemple de solutions permettant l'amélioration de la qualité d'impression
+        Exemple de solutions permettant l'amélioration de la qualité d'impression.
+        \newline
+        Comme on peut le voir dans les encarts de (a) et (b), positionner le moule dans l'axe d'impression permet d'augmenter la longueurs des d'allers\hyp{}retours, ce qui reduit les stress mécaniques et limite les risques de ruptures de la pièce en impression.
+        L'impression d'une enceinte pare-brise  simultanément à l'impression des tampons(c) empêche les différences thermiques pouvant affecter la qualité d'impression.
     }
 \end{figure}
 

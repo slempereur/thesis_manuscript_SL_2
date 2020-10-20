@@ -16,7 +16,7 @@
     
 %%
 %
-Grâce aux avantages présentés dans la section~\ref{sec:lempereur_bio}, le développement de l'impression 3D a permis l'émergence d'un grand nombre de techniques.
+Grâce aux avantages présentés dans la \autoref{sec:lempereur_bio}, le développement de l'impression 3D a permis l'émergence d'un grand nombre de techniques.
 %
 Pour le grand public, la crise actuelle du coronavirus a démontré l'intérêt de l'impression 3D
 pour des projet simples, comme la production de protections ou de raccord de matériels médicaux~\cite{callahan_2020,ishack_2020,wesemann_2020}, comme pour des projets plus complexes, comme la création de respirateurs artificiels ou de pousse-seringues open-sources~\cite{na_website_nda}.
@@ -103,9 +103,9 @@ En revanche, la présence d'une couche d'agarose entre le fond du support de mon
 
 %%
 % 
-Dans le cadre de la publication présentée en section~\ref{sec:lempereur_bio},
+Dans le cadre de la publication présentée en \autoref{sec:lempereur_bio},
 nous avons proposé des tampons permettant de monter 12 ou 48 \pzs{} à 5 dpf 
-(voir Figure~\ref{fig:tampon} et Figure~\ref{fig:formes:whole_5dpf}).
+(voir \autoref{fig:tampon} et \autoref{fig:formes:whole_5dpf}).
 %
 Au cours de ma thèse, d'autres modèles de tampons ont été développés afin de tester la versatilité de notre approche tout en répondant aux demandes variées des utilisateurs de TPS.
 %
@@ -116,7 +116,7 @@ couvrir l'ensemble des stades entre 3 et 21 dpf.
 %
 De plus, des formes spécifiques ont été développées pour permettre le montage d'échantillons
 d' \ol{}, ou pour permettre le montage de cerveaux de \pz{} à 21 dpf et 6 wpf
-(voir Figure~\ref{fig:formes:brain_21dpf} et \ref{fig:formes:brain_6wpf}).
+(voir \autoref{fig:formes:brain_21dpf} et \autoref{fig:formes:brain_6wpf}).
 
 \begin{figure}[htbp]
     \centering
@@ -238,11 +238,11 @@ Une première limitation était la taille de la buse, qui empêchait la créatio
 %
 En effet, l'emploi d'une buse d'impression ayant un diamètre de 0.25 mm ne permet pas l'impression d'éléments ayant une taille inférieure à 0.30 mm, à cause de l'étalement de la matière autour du lieu de dépôt. Les puits pour des larves à 5 dpf possédant une taille de 0,25mm dans la région caudale risquaient donc d'être insuffisamment précisément imprimés.
 %
-Nous avons résolu ce problème en imprimant les régions d'intérêt non plus à l'horizontale mais à la verticale (voir Figure~\ref{fig:coupe:model:horizontal} et \ref{fig:coupe:model:vertical}). Comme l'épaisseur minimale d'une couche est de 60 µm en utilisant la même buse de 0.25 mm, il devenait possible de créer des formes possédant la taille désirée avec une précision suffisante.
+Nous avons résolu ce problème en imprimant les régions d'intérêt non plus à l'horizontale mais à la verticale (voir \autoref{fig:coupe:model:horizontal} et \autoref{fig:coupe:model:vertical}). Comme l'épaisseur minimale d'une couche est de 60 µm en utilisant la même buse de 0.25 mm, il devenait possible de créer des formes possédant la taille désirée avec une précision suffisante.
 %
-Une ligne de quelques centaines de micromètres devient alors une surface complexe ayant toujours une épaisseur supérieure à la taille limite de 60 µm  (voir Figure~\ref{fig:coupe:slicing:horizontal} et \ref{fig:coupe:slicing:vertical}).
+Une ligne de quelques centaines de micromètres devient alors une surface complexe ayant toujours une épaisseur supérieure à la taille limite de 60 µm  (voir \autoref{fig:coupe:slicing:horizontal} et \autoref{fig:coupe:slicing:vertical}).
 %
-Ainsi, j'ai pu imprimer des éléments plus fins (voir Figure~\ref{fig:coupe:comp:horizontal} et \ref{fig:coupe:comp:vertical}).
+Ainsi, j'ai pu imprimer des éléments plus fins (voir \autoref{fig:coupe:comp:horizontal} et \autoref{fig:coupe:comp:vertical}).
 
 \begin{figure}[h!]
     \centering
@@ -307,13 +307,13 @@ Malheureusement, en position verticale, lorsque l'impression est orientée ortho
 %
 Une première stratégie pour résoudre ce problème a été de réduire la vitesse de déplacement de la buse afin de limiter l'impact des déplacements. Cependant, ce réglage s'est révélé insuffisant.
 %
-Une seconde stratégie a tiré parti du mode d'impression. En effet, Cura produit des fichiers dont l'impression des parties internes de l'objet se fait en diagonale par rapport au plateau de l'imprimante (voir Figure~\ref{fig:print:axe}).
-Ainsi, afin de permettre de réduire par deux les à-coups, les pièces à imprimer ont été placées de manière à ce que leur plus grande longueur se situe dans la diagonale du plateau d'impression (voir Figure~\ref{fig:print:diag}).
+Une seconde stratégie a tiré parti du mode d'impression. En effet, Cura produit des fichiers dont l'impression des parties internes de l'objet se fait en diagonale par rapport au plateau de l'imprimante (voir \autoref{fig:print:axe}).
+Ainsi, afin de permettre de réduire par deux les à-coups, les pièces à imprimer ont été placées de manière à ce que leur plus grande longueur se situe dans la diagonale du plateau d'impression (voir \autoref{fig:print:diag}).
 %%
 %
 Par ailleurs, l'impression 3D est sensible aux conditions de température ou de flux d'air du local où l'impression est effectuée. Les courants d'air induisaient des défauts aléatoire, surtout avec les pièces fines. Afin de pallier ce problème, certaines imprimantes 3D (pas l'Ultimaker 2 disponible au laboratoire), possèdent une enceinte fermée, ce qui permet de mieux contrôler la température au sein de cette enceinte. 
 J'ai pu compenser ce problème par l'impression d'une enceinte pare-brise, option permise par le logiciel de découpe par tranche Cura 4.
-%(voir Figure~\ref{fig:print:shield}.
+%(voir \autoref{fig:print:shield}.
 %
 De cette manière, une enceinte va se créer autour de l'objet à imprimer, permettant de réduire les risques de courants d'air tout en permettant de maintenir plus facilement une température homogène dans cette enceinte. Cette solution ne permet cependant pas de s'abstenir de protéger complètement l'imprimante contre les courants d'airs, mais constitue une solution d'appoint pour limiter leur impact.
 

@@ -13,7 +13,7 @@ Article 2 : Segmentations automatiques d'images 3D acquises par microscopie conf
 \section{Présentation de l'article 2}
 % Introduction marquage
 %
-Comme vu dans la section~\ref{sec:bouffard}, l'emploi d'un marqueur fluorescent lipophile, par exemple l'indocarbocyanine cationique (DiI), permet de marquer les lipides se trouvant au sein d'un tissu.
+Comme vu dans la \autoref{sec:bouffard}, l'emploi d'un marqueur fluorescent lipophile, par exemple l'indocarbocyanine cationique (DiI), permet de marquer les lipides se trouvant au sein d'un tissu.
 %
 Le marquage d'un pz{} au DiI sépare l'échantillon en deux plages d' intensités.
 %
@@ -40,7 +40,7 @@ afin de limiter la segmentation à la matière blanche cérébrale.
 Ces deux algorithmes couplent des méthodes de morphologies mathématiques et de seuillages
 afin d'obtenir les deux segmentations désirées en un minimum de temps.
 %
-Le déroulé de ces algorithmes est visible en annexe~\ref{ann:whole} et \ref{ann:white}
+Le déroulé de ces algorithmes est disponible en \autoref{sec:algo:larva} et \autoref{sec:algo:white}
 pour respectivement la segmentation de l'ensemble de l'échantillon et de la larve entière.
 
 % Pourquoi le SBDDCC?
@@ -84,7 +84,7 @@ En résumé, les résultats principaux de la publication au sein de
     %larve entière
     \item 
     Le marquage d'un \pz{} au DiI permet la mise en place
-    d'un algorithme de segmentation de l'intégralité de l'échantillon (voir Figure~\ref{fig:lempereur_info:whole}).
+    d'un algorithme de segmentation de l'intégralité de l'échantillon (voir \autoref{fig:lempereur_info:whole}).
     
     \item
     Cette algorithme couple des procédures de seuillages et de morphologies mathématiques 
@@ -102,7 +102,7 @@ En résumé, les résultats principaux de la publication au sein de
     \item
     En ce basant sur la segmentation de la larve entière,
     un algorithme de compensation de l'atténuation lumineuse a été développé, nommé \sbddcc 
-    (voir Figure~\ref{fig:lempereur_info:correction}).
+    (voir \autoref{fig:lempereur_info:correction}).
     
     \item
     Le SBDDCC commence par mesurer la profondeur au sein de l'échantillon
@@ -130,7 +130,7 @@ En résumé, les résultats principaux de la publication au sein de
     
     %Matière blanche cérébrale
     \item
-    En utilisant une seconde fois le marqueur lipophile, un algorithme de segmentation de la matière blanche cérébrale a été mis au point en couplant des méthodes de morphologies mathématiques à des seuillages (Voir Figure~\ref{fig:lempereur_info:white}).
+    En utilisant une seconde fois le marqueur lipophile, un algorithme de segmentation de la matière blanche cérébrale a été mis au point en couplant des méthodes de morphologies mathématiques à des seuillages (Voir \autoref{fig:lempereur_info:white}).
     
     \item
     Cet algorithme de segmentation de la matière blanche utilise
@@ -147,9 +147,9 @@ En résumé, les résultats principaux de la publication au sein de
 
 %
 Enfin, l'algorithme de segmentation de la matière blanche cérébrale a servi de base au
-développement de la segmentation de la matière grise présentée en section~\ref{sec:HuC},
+développement de la segmentation de la matière grise présentée en \autoref{sec:HuC},
 et le SBDDCC a servi de base pour le développement d'un algorithme de compensation
-d'un défaut de marquage \ihc{} présenté en section~\ref{sec:sblc}.
+d'un défaut de marquage \ihc{} présenté en \autoref{sec:sblc}.
 
 \begin{figure}[!h]
     \centering

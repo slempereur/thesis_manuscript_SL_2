@@ -23,13 +23,13 @@ Dans la suite, j'expose un algorithme permettant de segmenter automatiquement le
     
     \section{La segmentation de la matière grise est réalisée par \watershed{}}
     
-De manière analogue à la segmentation de la matière blanche(voir \ref{sec:lempereur_info}), la segmentation de la matière grise par la segmentation d'un marquage anti-HuC est réalisée par l'utilisation de lignes de partage des eaux
-(voir \ref{sec:morpho:watershed}). Pour cette stratégie, il est nécessaire d'établir une carte topologique et une liste de marqueurs.
+De manière analogue à la segmentation de la matière blanche (voir \autoref{sec:lempereur_info}), la segmentation de la matière grise par la segmentation d'un marquage anti-HuC est réalisée par l'utilisation de lignes de partage des eaux
+(voir \autoref{sec:morpho:watershed}). Pour cette stratégie, il est nécessaire d'établir une carte topologique et une liste de marqueurs.
 %%
 %
 Afin d'obtenir la carte topologique, on commence par réaliser une ouverture de l'image. Cette étape agit comme un filtre passe-haut,
 qui lisse l'image. De cette manière, on réduit l'impacte du bruit sur la segmentation que l'on souhaite obtenir. Pour obtenir la carte topologique désirée, on calcule un demi-gradient morphologique sur l'image ouverte. Le demi-gradient consiste en la soustraction de l'image à la dilatation de l'image par un élément structurant sphérique de la taille d'un voxel.
-Deuxièmement, on définit des marqueurs afin de différencier l'objet que l'on cherche à segmenter du reste de l'image. Pour obtenir la liste de marqueurs, on commence par calculer un seuillage d'Otsu sur l'image d'origine. Comme vu en \ref{sec:thresh:otsu}, ce seuillage va séparer les voxels en deux groupes ayant la même variance. De cette manière, on peut supposer que ce seuillage fournit une segmentation approximative de la zone d'intérêt. Cependant, ce seuillage va conserver toutes les régions présentant un marquage important.Afin d'éliminer des régions non désirées, comme le tube digestif, on ne conserve que l'objet le plus gros résultant de la segmentation.
+Deuxièmement, on définit des marqueurs afin de différencier l'objet que l'on cherche à segmenter du reste de l'image. Pour obtenir la liste de marqueurs, on commence par calculer un seuillage d'Otsu sur l'image d'origine. Comme vu en \autoref{sec:thresh:otsu}, ce seuillage va séparer les voxels en deux groupes ayant la même variance. De cette manière, on peut supposer que ce seuillage fournit une segmentation approximative de la zone d'intérêt. Cependant, ce seuillage va conserver toutes les régions présentant un marquage important.Afin d'éliminer des régions non désirées, comme le tube digestif, on ne conserve que l'objet le plus gros résultant de la segmentation.
 %
 Cette objet va ensuite servir à attribuer une valeur à chaque maxima local de l'image. Les maxima locaux se trouvant dans l'objet sont considérés comme à l'intérieur, quand les autres maxima sont considérés à l'extérieur de la zone d'intérêt. De cette manière, on obtient la liste des marqueurs permettant de calculer les lignes de partage de eaux. Cette liste consiste en une image ou chaque voxel a une valeur comprises entre 0 et 2. Au sein de cette image, 0, 1 et 2 indique respectivement un voxel neutre, un voxel externe et un voxel interne à la région d'intérêt. 
 
@@ -49,24 +49,24 @@ Une telle valeur est compatible avec la mise en place d'une procédure d'analyse
 
 %
 Cependant, notre algorithmes possèdent plusieurs failles prévisibles. Tout d'abord, l'emploi d'un seuillage initial par Otsu peut poser problème. Ce seuillage crée deux classes de voxels par minimisation de la variance au sein des deux groupes de voxels. C'est bien adapté dans le cas de signaux bien différenciés créant deux régions avec des valeurs de gris bien séparées
-(voir Figure~\ref{fig:huc:defaut:otsu:fantome:fantome},
-\ref{fig:huc:defaut:otsu:fantome:otsu}
-et \ref{fig:huc:defaut:otsu:fantome:histo}).
+(voir \autoref{fig:huc:defaut:otsu:fantome:fantome},
+\autoref{fig:huc:defaut:otsu:fantome:otsu}
+et \autoref{fig:huc:defaut:otsu:fantome:histo}).
 
 %
 Cependant, si une hétérogénéité apparaît au sein d'une des régions, le résultat peut être fortement modifié.
 %
-Prenons pour exemple le cas d'une image présentant un d'intensité lumineuse allant de la surface vers le centre de l'échantillon(voir Figure~\ref{fig:huc:defaut:otsu:decay:fantome}).
+Prenons pour exemple le cas d'une image présentant un d'intensité lumineuse allant de la surface vers le centre de l'échantillon(voir \autoref{fig:huc:defaut:otsu:decay:fantome}).
 %
-Dans cette situation, deux types défauts de segmentations peuvent apparaître (voir Figure~\ref{fig:huc:defaut:otsu:decay:otsu}).
+Dans cette situation, deux types défauts de segmentations peuvent apparaître (voir \autoref{fig:huc:defaut:otsu:decay:otsu}).
 %
-Le premier type est une sous-segmentation de la région d'intéret (Flèche dans la Figure~\ref{fig:huc:defaut:otsu:decay:otsu}).
+Le premier type est une sous-segmentation de la région d'intéret (Flèche dans la \autoref{fig:huc:defaut:otsu:decay:otsu}).
 %
-Le second type est l'apparition de segmentation de l'extérieur de l'échantillon (Tête de flèche dans la Figure~\ref{fig:huc:defaut:otsu:decay:otsu}).
+Le second type est l'apparition de segmentation de l'extérieur de l'échantillon (Tête de flèche dans la \autoref{fig:huc:defaut:otsu:decay:otsu}).
 %
 L'apparition de ces deux défauts de segmentation induit une mauvaise affectation des maximas locaux, ce qui va induire un défaut prévisible de segmentation.
 %
-Il s'agit d'une des raisons ayant amené au developpement du SBLC ( voir \ref{sec:sblc}). 
+Il s'agit d'une des raisons ayant amené au developpement du SBLC (voir \autoref{sec:sblc}). 
 
 \begin{figure}[t]
     \centering
@@ -128,7 +128,7 @@ Imaginons un défaut dans la matière grise qui produirait une séparation entre
 %
 La réduction au plus grand objet supprimerait alors l'un des deux hémisphères cérébraux.
 %
-Dans le cas où le volume de la matière grise serait fortement réduit comme chez les mutants homozygotes Fbl (voir \ref{sec:bouffard}),
+Dans le cas où le volume de la matière grise serait fortement réduit comme chez les mutants homozygotes Fbl (voir \autoref{sec:bouffard}),
 il est possible que le volume de la matière grise deviennent plus petit que le volume du signal autour du tube digestif, par exemple.
 %
 De plus, la segmentation de petits élements isolés au sein du cerveaux est ainsi impossible, comme les corps cellulaires se trouvant au sein du toit optique.

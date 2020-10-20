@@ -69,14 +69,14 @@ Les segmentations que j'ai développé au cours de ma thèse visent à automatis
 Cependant, comme le montre l'exemple de la segmentation du cristallin,
 il est possible de détecter d'autres organes grâce aux marquages employés.
 %
-De plus, comme vu en section~\ref{sec:marqueurs}, le développement de nouveaux marqueurs nécessitera la mise en place de nouveaux algorithmes adaptés aux objets à détecter.
+De plus, comme vu en \autoref{sec:marqueurs}, le développement de nouveaux marqueurs nécessitera la mise en place de nouveaux algorithmes adaptés aux objets à détecter.
 %
 Je vais maintenant donner des exemples segmentations pouvant être réalisées, ainsi que les algorithmes à développer pour automatiser ces segmentations.
 
 %
 Le marqueur lipophile permet de mettre en évidence les lipides, et donc l'ensemble des membranes cellulaires. De plus, l'absence de marquage au sein d'une région peut aussi permettre de les segmenter.
 %
-En utilisant cette propriété, deux autres types de tissus paraissent identifiables en utilisant l'absence de marquage. La notochorde est une structure tubulaire située sous le tube neural\ref{fig:notochord}. Elle joue le rôle de squelette pour les embryons.
+En utilisant cette propriété, deux autres types de tissus paraissent identifiables en utilisant l'absence de marquage. La notochorde est une structure tubulaire située sous le tube neural (voir \autoref{fig:notochord}). Elle joue le rôle de squelette pour les embryons.
 
 \ajout{
 \begin{figure}[!h]
@@ -123,7 +123,7 @@ Une fois les segmentation de la larve entière et de la matière blanche obtenue
 %%
 %
 La détection d'autres tissus peut être réalisée avec d'autres marquages. Comme dernier exemple, je vais présenter la segmentation du réseau vasculaire.
-Au chapitre~\ref{chap:bio:marqueurs:vasc}, j'ai expliqué qu'un marquage présent dans une lignée Kdrl-RFP marque le système vasculaire du \pz{}.
+En \autoref{chap:bio:marqueurs:vasc}, j'ai expliqué qu'un marquage présent dans une lignée Kdrl-RFP marque le système vasculaire du \pz{}.
 %
 La segmentation automatique de structures curvilignes comme les vaisseaux est complexe et constitue un sujet de recherche à part entière. Trois stratégies différentes permettant de réaliser de telles segmentations.
 

@@ -55,7 +55,7 @@ En utilisant une méthode de correction similaire au SBDDCC (voir mansucrit), no
 %
 L'obtention de la segmentation de l'échantillon entier est un pré-requis au calcul de cette algorithme.
 %
-Une manière de réaliser cette segmentation a été présenté en section~\ref{sec:lempereur_info}.
+Une manière de réaliser cette segmentation a été présenté en \autoref{sec:lempereur_info}.
 
 %%
 %
@@ -90,13 +90,13 @@ Afin de visualiser les résultats de cet algorithme, un fantôme théorique a é
 Pour cela, une ellipse comportant des valeurs de gris 
 aléatoirement attribués entre 1 et 4095 a été générée.
 %
-Cette image est appelé $F$ (voir Figure~\ref{fig:sblc:algo:model}).
+Cette image est appelé $F$ (voir \autoref{fig:sblc:algo:model}).
 %
-On conserve les contours de l'ellipse, que l'on considérera par la suite comme la segmentation de l'échantillon (voir Figure~\ref{fig:sblc:algo:ellipse}).
+On conserve les contours de l'ellipse, que l'on considérera par la suite comme la segmentation de l'échantillon (voir \autoref{fig:sblc:algo:ellipse}).
 %
 On calcule la carte des distances au sein de l'ellipse originelle.
 %
-Cette carte est appelé appelé $P$ (voir Figure~\ref{fig:sblc:algo:dist}).
+Cette carte est appelé appelé $P$ (voir \autoref{fig:sblc:algo:dist}).
 %
 On va ensuite calculer pour chaque couche un coefficient de décroissance.
 %
@@ -106,7 +106,7 @@ Ces coefficients sont alors utilisés pour reproduire l'effet d'une déperdition
 %
 De plus, un seuillage est appliqué (Eq.\eqref{eq:sblc:seuillage} pour supprimer les valeurs trop basses dans les zones ayant été dégradées.
 %
-Le résultat de l'application de cette décroissance exponentielle est visible en Figure\ref{fig:sblc:algo:decay}.
+Le résultat de l'application de cette décroissance exponentielle est visible en \autoref{fig:sblc:algo:decay}.
 
 \begin{equation}
     \label{eq:sblc:half}
@@ -135,13 +135,13 @@ Le résultat de l'application de cette décroissance exponentielle est visible e
 
 %%
 %
-L'image ainsi produite est ensuite corrigée en utilisant le \sblc{} (voir Figure~\ref{fig:sblc:algo:correction}).
+L'image ainsi produite est ensuite corrigée en utilisant le \sblc{} (voir \autoref{fig:sblc:algo:correction}).
 %
 En comparant visuellement le résultat au modèle d'origine, il est difficile d'observer une différence à l'oeil nu.
 %
 Afin de confirmer cette impression, on a calculé pour chaque voxel le ratio entre le modèle et le résultat de la correction sur l'image dégradée (Eq.\eqref{eq:sblc:ratio}).
 %
-La visualisation de ce ratio est visible en Figure~\ref{fig:sblc:algo:ratio}.
+La visualisation de ce ratio est visible en \autoref{fig:sblc:algo:ratio}.
 
 \begin{equation}
     \label{eq:sblc:ratio}
@@ -255,7 +255,7 @@ Si le voxel à corriger a une valeur nulle, alors l'emploi d'une multiplication 
 %
 En revanche, si la valeur du voxel est différente de zéro, la normalisation de la valeur de ce voxel lui attribuera une valeur proche des valeurs de gris des régions d'intérêt.
 %
-L'échantillon se verrait ainsi artificiellement "rempli" par un signal n'existant pas (voir Figure~\ref{fig:sblc:defaut:surface}).
+L'échantillon se verrait ainsi artificiellement "rempli" par un signal n'existant pas (voir \autoref{fig:sblc:defaut:surface}).
 
 \begin{figure}
     \centering
@@ -293,7 +293,7 @@ Imaginons le marquage d'un antigène se trouvant dans l'hypothalamus d'un \pz{} 
 %
 Cette région étant une des régions les plus profondes au sein d'un \pz{} à ce stade, un défaut de marquage ne pourrait pas être compensé, car il serait alors impossible de différencier le signal positif du bruit de fond se trouvant au niveau de la peau.
 %
-Ce défaut présente en soit une qualité car il permet de s'assurer qu'aucun signal faux-positif ne sera créé par l'algorithme  (voir Figure~\ref{fig:sblc:defaut:deep}).
+Ce défaut présente en soit une qualité car il permet de s'assurer qu'aucun signal faux-positif ne sera créé par l'algorithme  (voir \autoref{fig:sblc:defaut:deep}).
 
 \begin{figure}
     \centering
@@ -323,7 +323,7 @@ Ce défaut présente en soit une qualité car il permet de s'assurer qu'aucun si
 %%
 %
 Par ailleurs, cet algorithme étant basé sur la multiplication de chaque couche par
-un coefficient, un signal ayant complètement disparu ne pourra pas être récupéré (voir Figure~\ref{fig:sblc:defaut:surface0}). Les méthodes de clarification des larves de poisson zèbre restent donc insipensables. En leur abssence, le centre de la larve possède en effet des sign	aux trop faible pour que cet algorithme puisse compenser la perte trop forte de signal.
+un coefficient, un signal ayant complètement disparu ne pourra pas être récupéré (voir \autoref{fig:sblc:defaut:surface0}). Les méthodes de clarification des larves de poisson zèbre restent donc insipensables. En leur abssence, le centre de la larve possède en effet des sign	aux trop faible pour que cet algorithme puisse compenser la perte trop forte de signal.
 %
 \begin{figure}
     \centering

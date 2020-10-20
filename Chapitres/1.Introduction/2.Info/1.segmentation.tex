@@ -100,7 +100,7 @@ Un troisième opérateur est le filtre de rang, qui consiste à conserver pour c
 %
 L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace chaque pixel par la valeur médiane au sein  de l'élément structurant choisi.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.30\textwidth}
        \caption{
@@ -128,7 +128,7 @@ L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace ch
     
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
        \caption{
@@ -182,7 +182,7 @@ A l'inverse de l'ouverture, cet opérateur permet de remplir des aires et permet
 L'ouverture, la fermeture et le filtre de rang sont ainsi des outils de choix pour le pré\hyp{}traitement d'images, en permettant d'apporter une cohérence topographique à l'image que l'on veut étudier).
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.30\textwidth}
        \caption{
@@ -228,7 +228,7 @@ Enfin, une dernière transformation est le gradient morphologique.
 Calculé comme la soustraction d'une érosion à une dilatation d'une image,
 le gradient morphologique permet de connaître l'évolution des valeurs de gris en chaque point de l'image.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.30\textwidth}
        \caption{
@@ -290,7 +290,7 @@ Les lignes de partages des eaux seront alors l'ensemble des pixels pour lesquels
 Cette approche permet ainsi de relier entre eux des régions présentant des valeurs de gris cohérentes afin de segmenter les régions par proximité topographiques des pixels~\cite{liang_2019,eschweiler_2019}.
 %
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \begin{subfigure}[b]{0.50\textwidth}
        \caption{
            \label{fig:lpe:marqueurs}
@@ -337,7 +337,7 @@ En effet, l'utilisation d'un trop grand nombre de points peut amener à un déco
 %
 De plus, un marqueur absent ou mal positionné induira une mauvaise segmentation de la région d'intérêt (voir \autoref{fig:watershed:errors:position}).
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \begin{subfigure}[b]{\textwidth}
        \caption{
            \label{fig:watershed:errors:quantite}
@@ -469,7 +469,7 @@ Il est aussi possible que l'échantillon imagé présente en son sein des variat
 %
 Il devient alors possible qu'une région d'intérêt présente les mêmes valeurs de gris que le fond, ce qui empêche l'utilisation d'une méthode de segmentation basée sur les différences de valeurs de gris.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \begin{center}
     \begin{subfigure}[b]{0.2245\textwidth}
         \caption{

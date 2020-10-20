@@ -5,24 +5,37 @@
 
 \begin{document}
             
-\section{pz{}, le second modèle le plus utilisé en laboratoire}
+\section{Le \pz{}, le second modèle le plus utilisé en laboratoire}
 
 %%
 %
-Le \pz{} est une espèce de poisson d'eau douce originaire d'Asie et très commune au nord de l'Inde.
+Le \pz{} est une espèce de poisson d'eau douce originaire d'Asie et très commune au nord de l'Inde (voir \ref{fig:model:zebra}).
 %
 Il appartient à la famille de Cyprinidae, comme la carpe commune.
+
+\begin{figure}[h!]{\textwidth} 
+    \centering
+       \centering \includegraphics[width=\textwidth]{\Figures/Modeles/adult.png}
+       \caption{
+            \label{fig:model:zebra}\pz{} adulte. \newline
+            Ce poisson d'eau douce est un organisme modèle important pour la communauté scientifique.
+            }
+\end{figure}
+
+%%
 %
 Il s'agit du second organisme modèle le plus employé.
 %
 Presque quatre milles publications ont utilisé le mot "zebrafish" en 2019
-selon PubMed(voir Figure~\ref{fig:model:pz:stats}).
+selon \href{https://pubmed.ncbi.nlm.nih.gov/?term=zebrafish&sort=pubdate}{PubMed}(voir \autoref{fig:model:pz:stats}).
 
-\begin{figure}[htbp]{\textwidth} 
+\begin{figure}[h!]{\textwidth} 
     \centering
        \centering \includegraphics[width=\textwidth]{\Figures/Modeles/publis_zebra.png}
        \caption{
-            \label{fig:model:pz:stats}Référencement du terme "zebrafish" au sein de PubMed
+            \label{fig:model:pz:stats}Référencement du terme "zebrafish" au sein de \href{https://pubmed.ncbi.nlm.nih.gov/?term=zebrafish&sort=pubdate}{PubMed}.
+            \newline
+            Presque 4000 publications en 2019 sur le \pz{}, le second modèle le plus utilisé en laboratoire.
             }
 \end{figure}
 %
@@ -45,6 +58,12 @@ Un second avantage de cette petite taille est qu'elle permet de faciliter le tra
 Il est en effet possible de transporter facilement un grand nombre d'oeufs mais aussi des juvéniles ou des adultes.
 %
 Cette aspect facilite le partage de lignées mutantes ou transgéniques.
+%
+\ajout{
+La petite taille de cette espèce permet de réduire le coût des expérimentations.
+%
+Elle permet par exemple d'utiliser moins d'anticorps pour effectuer le marquage \ihc{} d'échantillons entiers ou en réduisant le nombre de champs optiques nécessaires pour la réalisation d'imagerie d'individus entiers.
+}
 %%
 %
 La petite taille permet aussi de manipuler facilement un grand nombre d'échantillons en parallèle~\cite{wittbrodt_2014,brion_2012}. Les pipetages à large échelle sont possibles à des stades précoces,
@@ -53,9 +72,15 @@ ce qui rend possible l'automatisation de différents traitements~\cite{mandrell_
 %% Reproduction
 Le \pz{} possède une fertilité adaptée aux expériences impliquant un grand nombre d'échantillons.
 %
-Tout d'abord, la femelle pond les oeufs qui coulent au fond de l'aquarium ce  qui permet de facilement les récupérer aisément. Chaque ponte contient entre 100 et 500 oeufs ce qui permet par exemple facilement d'identifier des combinaisons de mutations dans la descendance d'un animal édité. TPS s'est doté de structures d'élevage qui permettent de caractériser près de 200 poissons en parallèle isolés dans une cage unique dans de bonnes conditions de bien-être (Marie-Elise Schwartz, TPS-AQUA, communication personnelle).  
+Tout d'abord, la femelle pond les oeufs qui coulent au fond de l'aquarium ce  qui permet de les récupérer aisément. Chaque ponte contient entre 100 et 500 oeufs ce qui permet par exemple facilement d'identifier des combinaisons de mutations dans la descendance d'un animal édité. TPS s'est doté de structures d'élevage qui permettent de caractériser près de 200 poissons en parallèle isolés dans une cage unique dans de bonnes conditions de bien-être (Marie-Elise Schwartz, TPS-AQUA, communication personnelle).  
+\ajout{
+%
+En permettant d'utiliser un plus grand nombre d'échantillons,
+la grande quantité d'oeufs obtenus par reproduction permet d'augmenter la significativité statistique des analyses réalisées, ce qui permet de valider des processus biologiques discrets.
+}
 %
 Enfin, dans des conditions optimales d'élevage, le \pz{} devient fertile en environ 3 mois. Cet intervalle entre générations peut être raccourci à 2 mois pour les mâles en utilisant des robots nourrisseurs qui effectuent quatre nourrissages quotidiens, week-end y compris. 
+
 
 %% Statut légal des eleuthéroembryons (EE) avant 5 jours
 Le statut légal du \pz{} aux stades précoces renforce l'intérêt de son utilisation en laboratoire.
@@ -64,8 +89,24 @@ En effet, une espèce aquatique élevée en laboratoire rentre dans le cadre de 
 %
 Cette définition permet donc de ne pas considérer les stades de développement du \pz{} entre la ponte et 5dpf comme animal de laboratoire nécessitant une autorisation d'expérimenter.
 %
-De plus, à ces stades, les larves de poissons-zèbre vivantes présentent une forte transparence,
+\ajout{
+L'alevin vésiculé de \pz{} à 5dpf, aussi appelé eleuthéroembryons (EE), est ainsi largement employé en toxicologie.
+}
+%
+De plus, à ces stades, les larves de poissons-zèbre vivantes présentent une forte transparence (voir \autoref{fig:zebra:transparent}),
 ce qui permet d'imager des structures non périphériques sans réaliser de coupes~\cite{asokan_2020,chen_2020,hamilton_2016,kioka_2020}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{\Figures/Modeles/larve_5dpf_transparent.png}
+    \caption{Vue dorsale d'un EE de \pz{}.\newline
+    À des stades de développement précoces, cet organisme modèle est très transparent.
+    Il présente néanmoins des mélanocytes pigmentés qui doivent être rendus transparents par un traitement de dépigmentation.
+    }
+    \label{fig:zebra:transparent}
+\end{figure}
+
+
 %%
 %
 Malgré tous les avantages présentés ici, l'utilisation du \pz{} en laboratoire serait limité s'il ne possédait pas un grand nombre de ressources dédiées.
@@ -116,33 +157,51 @@ La directive REACH de l'Union Européenne, qui vise à réglementer les études 
 %
 Dans ce cadre, une méthode de mise en évidence de l'activité endocrine d'une substance chimique sur des EEs de \pz{} est reconnue comme méthode de référence~\cite{europeanchemicalagencyechaandeuropeanfoodsafetyauthorityefsawiththetechnicalsupportofthejointresearchcentrejrc_2018}.
 
-Il ne fait pas de doute que le  pertinence du \pz{} pour détecter d'éventuels effets délétères de molécules chimiques sur les poissons des rivières et même les poissons marins. En revanche, du fait de la distance évolutive avec l'homme, les conclusions tirées d'études sur le \pz{} ne peuvent constituer que de premiers éléments  qui doivent être confirmés par des tests sur d'autres espèces , bien évidemment des mammifères, mais aussi des amphibiens. En cas de caractérisation d'effets toxiques d'une molécule sur les stades précoces, on peut considérer le \pz{} comme un lanceur d'alerte concernant le potentiel tértogénique de cette molécule en particulier. En aucun cas, l'absence d'efffet ne peut être une preuve de son inocuité. 
-    
+Il ne fait pas de doute que le  pertinence du \pz{} pour détecter d'éventuels effets délétères de molécules chimiques sur les poissons des rivières et même les poissons marins. En revanche, du fait de la distance évolutive avec l'homme, les conclusions tirées d'études sur le \pz{} ne peuvent constituer que de premiers éléments  qui doivent être confirmés par des tests sur d'autres espèces , bien évidemment des mammifères, mais aussi des amphibiens. En cas de caractérisation d'effets toxiques d'une molécule sur les stades précoces, on peut considérer le \pz{} comme un lanceur d'alerte concernant le potentiel tératogénique de cette molécule en particulier. En aucun cas, l'absence d'effet ne peut être une preuve de son inocuité. 
+%
+
     \subsection{De nombreuses applications en recherche biomédicale}
 
 %
 Le \pz{} possède 80\% de gènes homologues communs avec l'humain~\cite{howe_2013}. 
 Ce taux d'homologie permet d'utiliser le \pz{} pour la modélisation d'un certain nombre de maladies humaines.
 En particulier avec l'apparition des dernières méthodes d'édition du génome permettant d'introduire des mutations ponctuelles par réverse transcription ("base editing", ref), il est possible de modéliser les maladies humaines avec précision chez le \pz{}, en introduisant chez le \pz{} des variations à des positions orthologues chez l'humain où se trouvent des variations génomiques pathogènes.
-Bien entendu, ces modèles, en particulier du fait de leur capacité à effectuer de la microscopie à haut-contenu et haut-débit contribuent à la compréhension des mécanismes physio-pathologiques, du génotype au phénotype, et à éclairer comment une mutation entraîne des effets cellulaires ciblés et parfois discrets sur le long terme , dans le cadre de l'organisme entier.
+Bien entendu, ces modèles, en particulier du fait de leur capacité à effectuer de la microscopie à haut-contenu et haut-débit contribuent à la compréhension des mécanismes physio\hyp{}pathologiques, du génotype au phénotype, et à éclairer comment une mutation entraîne des effets cellulaires ciblés et parfois discrets sur le long terme , dans le cadre de l'organisme entier.
 Ils permettent aussi permettre d'effectuer des études pré-cliniques visant à déterminer des cibles thérapeutiques, voir tester des traitements contre ces maladies~\cite{vaz_2018,pitchai_2019,saleem_2018} en particulier les thérapies innovantes utilisant des cellules souches ou immunitaires, ou des méthodes d'édition du génome. 
 %
 Une grande diversité de maladies sont abordées, car l'EE et les juvéniles possèdent des organes très similaires à l'humain, même s'ils sont de plus petite taille et considérablement simplifiés. On peut par exemple citer les maladies neurodégénératives~\cite{fontana_2018}, les anomalies du développement~\cite{lovely_2016,sarmah_2016} ou les maladies cardiaques~\cite{brown_2016, walcott_2014}.
 
-\section{Autres modèles animaux\label{sec:intro:modele} pouvant tirer profit des résultats de ma thèse}
+\ajout{
+La table~\ref{table:zebra} résume les divers avantages du modèles \pz{}.
+}
 
-Nous allons maintenant présenter trois espèces par ordre croissant de divergence avec le \pz{}: \ol, \xl{} et \mm{}.
+\section{Autres modèles animaux pouvant tirer profit des résultats de ma thèse \label{sec:intro:modele}}
+\sectionmark{Autres modèles animaux}
 
-    \subsection{\label{sec:medaka}le médaka, un modèle complémentaire au \pz{} très utilisé en toxicologie}
+Nous allons maintenant présenter trois espèces par ordre croissant de divergence avec le \pz{}: le médaka, le xénope et la souris.
+
+    \subsection{\label{sec:medaka}Le médaka, un modèle complémentaire au \pz{} très utilisé en toxicologie}
     
 %
-Le médaka est un poisson téléostéen originaire d'Asie du Sud-Est.
+Le médaka est un poisson téléostéen originaire d'Asie du Sud-Est (voir \autoref{fig:medaka}).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = 0.5\textwidth]{\Figures/Modeles/medaka.jpg}
+    \caption{
+    Femelle médaka portant une grappe d'oeufs située sous son ventre.
+    \newline
+    Son développement embryonnaire plus long que le \pz{} et sa capacité à résister au froid permet de faciliter l'envoi d'échantillons.
+    }
+    \label{fig:medaka}
+\end{figure}
+
 %
 Il est de taille comparable au \pz{} et présente une gestation courte et prolifique.
 %
 Sa capacité à résister au froid, et son développement embryonnaire, non pas de 48h comme chez le \pz{} mais de l'ordre de dix jours,  facilite son transport, permettant ainsi par exemple pour une plateforme de facilement distribuer des oeufs à d'autres laboratoires.
 %
-Plusieurs outils de modification du génome ont été mis en place chez \ol{}\cite{kirchmaier_2015, ansai_2017}, 
+Plusieurs outils de modification du génome ont été mis en place chez \ol{}\cite{kirchmaier_2015, ansai_2017},
 ce qui permet la création de lignées rapportrices, de lignées knock-out et de lignées knock-in~\cite{abdelmoneim_2018,jin_2020,Watakabe_2018,qiu_2014,gay_2018}.
 %
 Enfin, à l'instar du \pz{} avant 120 heures post fertilisation,
@@ -153,22 +212,23 @@ Les embryons et eleutheroembryons ne sont donc pas dans le périmètre de la dir
 Ainsi, ces stades ne font pas l'objet de demande d'expérimentation animale avant tout projet étant susceptible d 'induire une douleur.
 
 %
-C'est aussi un poisson très résistant, qui possède un génome plus compact que le \pz{} , est très distant évolutivement de ce dernier (plus de distance qu'entre le poulet et l'homme), de très bons taux en édition du génome du fait de la possibilité de refroidir l'oeuf. Il possède aussi de nombreuses sous espèces ou espèces soeurs , dont certaines sont maarines, ce qui permet de très intéressantes études comparées.
+C'est aussi un poisson très résistant, qui possède un génome plus compact que le \pz{} , est très distant évolutivement de ce dernier (plus de distance qu'entre le poulet et l'homme), de très bons taux en édition du génome du fait de la possibilité de refroidir l'oeuf. Il possède aussi de nombreuses sous espèces ou espèces soeurs , dont certaines sont maaines, ce qui permet de très intéressantes études comparées.
 %
 On retrouve ainsi les premières publications utilisant \ol{} dès 1921~\cite{aida_1921}.
 %
-Son utilisation dans le cadre de publications scientifiques reste assez faible, avec en moyenne deux cents publications annuelles référencées par PubMed(voir Figure~\ref{fig:model:oz:stats}).
+Son utilisation dans le cadre de publications scientifiques reste assez faible, avec en moyenne deux cents publications annuelles référencées par PubMed(voir \autoref{fig:model:oz:stats}).
 %
 Mais il est par exemple utilisé dans l'étude du système reproducteur~\cite{gay_2018,herberg_2018} ou
 en toxicologie~\cite{carvan_2007,bertotto_2019,cleary_2019,powe_2018}.
 %
 En particulier, son utilisation dans l'étude des perturbateurs endocriniens a été l'objet d'un protocole de l'OCDE~\cite{oecd_2009}, en faisant un organisme de choix dans l'étude de l'activité endocrine d'une molécule~\cite{chen_2018,dang_2019,spirhanzlova_2016}.
 
-\begin{figure}[htbp]{\textwidth} 
+\begin{figure}[h!]{\textwidth} 
     \centering
        \centering \includegraphics[width=\textwidth]{\Figures/Modeles/publis_medaka.png}
        \caption{
-            \label{fig:model:oz:stats}Référencement du terme "medaka" au sein de PubMed
+            \label{fig:model:oz:stats}Référencement du terme "medaka" au sein de \href{https://pubmed.ncbi.nlm.nih.gov/?term=medaka&sort=pubdate}{PubMed}.\newline
+            Le médaka est un modèle complémentaire au \pz{}, surtout utilisé en toxicologie. La communauté de chercheur travaillant sur le médaka reste de taille beaucoup plus restreinte que celle travaillant sur le \pz{}.
             }
 \end{figure}
 
@@ -180,36 +240,55 @@ Cependant, il s'agit d'un organisme rarement référencé pour le \hcs{} par ima
 Il est pourtant possible d'utiliser un système d'imagerie développé sur le \pz{}
 en effectuant peu de modifications pour le faire fonctionner sur le médaka.
 
-    \subsection{le xénope, un modèle de référence en biologie du développement}
+    \subsection{Le xénope, un modèle de référence en biologie du développement}
 
 %
-\xl{} est une espèce d'amphibiens originaire respectivement d'Afrique de l'ouest et d'Afrique australe.
+\xl{} est une espèce d'amphibiens originaire respectivement d'Afrique de l'ouest et d'Afrique australe (voir \autoref{fig:model:xl}).
 %
 Bien qu'une femelle ne puisse être stimulée pour la reproduction que tous les trois mois,
 sa capacité à produire jusqu'à 4000 oeufs par ponte permet d'avoir rapidement un grand nombre d'échantillons.
 %
 Elle est en particulier connue du grand public pour être la base d'un des premiers procédés de détection de grossesse chez l'humain dans les années 1950~\cite{hobson_1958,Dittebrandt_1949,polack_1949}
 et pour avoir servi de modèle pour le clonage , ce qui a été récemment récompensé en incluant aux côtés d'autres chercheurs \textsc{John Gurdon}  dans un prix Nobel attribué au clonage.
+
+\begin{figure}[h!]{\textwidth} 
+    \centering
+       \centering \includegraphics[width=0.75\textwidth]{\Figures/Modeles/xenope.jpg}
+       \caption{
+            \label{fig:model:xl}
+            Xénopes adultes.
+            \newline
+            C'est un modèle utilisé de longue date en embryologie.
+            Ses ovocytes sont aussi utilisés pour exprimer des protéines.
+            De plus, sa métamorphose étant contrôlée par des hormones thyroïdienne, il s'agit d'un modèle de choix pour l'étude des perturbateurs endocriniens.
+            \newline
+            Photographie prise par David J. Stang et mise à disposition sour licence  Creative Commons Attribution-Share Alike 4.0 International
+            }
+\end{figure}
+
+
+%%
 %
 Il s'agit d'un organisme modèle donc établi de très longue date dans la communauté scientifique.
 %
 Les premières publications scientifiques l'utilisant date de 1930~\cite{edgeworth_1930},
 et plus de 1000 publications y faisaient dès l'an 2000.
 %
-Son utilisation est cependant en baisse au vue de la baisse de référence à partir de 2010. (voir Figure~\ref{fig:model:xl:stats}).
+Son utilisation est cependant en baisse depuis 2010. (voir \autoref{fig:model:xl:stats}).
 %
 
-\begin{figure}[htbp]{\textwidth} 
+\begin{figure}[h!]{\textwidth} 
     \centering
        \centering \includegraphics[width=\textwidth]{\Figures/Modeles/publis_xenopus.png}
        \caption{
-            \label{fig:model:xl:stats}Référencement des termes "xenopus laevis" au sein de PubMed
+            \label{fig:model:xl:stats}Référencement des termes "xenopus laevis" au sein de \href{https://pubmed.ncbi.nlm.nih.gov/?term=xenopus+laevis&sort=pubdate}{PubMed}.\newline
+            Le xénope est un modèle historiquement très utilisé qui reste encore important pour la communauté scientifique même si le nombre de publications est en baisse.
             }
 \end{figure}
 
 %%
 %
-\xl{} est un modèle d'intérêt pour plusieurs domaines.
+Le xénope est un modèle d'intérêt pour plusieurs domaines.
 %
 Il s'agit par exemple d'un modèle de référence dans l'étude du système visuel~\cite{viet_2020,Rahman_2020,kha_2020},
 en particulier grâce à sa capacité de régénération de la lentille de l'oeil après ablation de cette lentille~\cite{henry_2019}.
@@ -224,17 +303,19 @@ Enfin, \xl{} ne développe que peu de cancers spontanés~\cite{ruben_2007} mais 
 
     \subsection{La souris, un modèle omniprésent en neuroscience}
 
+%%
 La souris est l'organisme vertébré le plus étudié en laboratoire.
 %
 Son utilisation  est décrite dès le dix-septième siècle.
 %
-Plus de 80000 publications référençaient ce modèle en 2019 (voir Figure~\ref{fig:model:mm:stats}).
+Plus de 80000 publications référençaient ce modèle en 2019 (voir \autoref{fig:model:mm:stats}).
 
-\begin{figure}[htbp]{\textwidth} 
+\begin{figure}[h!]{\textwidth} 
     \centering
        \centering \includegraphics[width=\textwidth]{\Figures/Modeles/publis_mus.png}
        \caption{
-            \label{fig:model:mm:stats}Référencement des termes "mus musculus" au sein de PubMed
+            \label{fig:model:mm:stats}Référencement des termes "mus musculus" au sein de \href{https://pubmed.ncbi.nlm.nih.gov/?term=mus+musculus&sort=pubdate}{PubMed}.\newline
+            La souris est incontestablement le modèle le plus utilisé par les chercheurs.
             }
 \end{figure}
 
@@ -247,5 +328,7 @@ Par exemple, la souris est régulièrement utilisée pour étudier diverses mala
 comme la maladie d'Alzheimer~\cite{han_2020,thadathil_2020,shin_2020},
 la sclérose latérale amyotropique~\cite{Ahmed_2020,konopka_2020,mcleod_2020}
 ou la maladie de Huntington~\cite{deng_2020,dridi_2020,pfister_2020}.
+
+%%
 
 \end{document}

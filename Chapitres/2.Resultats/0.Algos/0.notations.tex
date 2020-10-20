@@ -19,8 +19,17 @@
                 \midrule
                 %Image
                 $I$ &
-                une image de $N \times M \times O$ voxels encodée en 12-bit image &
-                $\forall p\in[1,N]\times[1,M]\times[1,O],\newline I(p)\in[0;4095] \cap \mathbb{Z} $ %
+                une image de $M \times N \times O$ voxels encodée en 12-bit image &
+                $\forall p\in[1,M]\times[1,N]\times[1,O],\newline I(p)\in[0;4095] \cap \mathbb{Z} $ %
+                \\
+                $F$ &
+                une cadre de $N \times M \times O$ &
+                $\forall x\in[1,M], y\in[1,N], z \in [1,O],\newline I(p)\left\{
+                    \begin{array}{ll}
+                    1 & \mbox{si } x \in[1,M-1] et y \in [1,N-1] et z \in [1, O-1]\\
+                    0 & \mbox{sinon.}
+                    \end{array}
+                    \right.$ %
                 \\
                 %Maximum
                 $ \max(I) $ &
@@ -44,18 +53,18 @@
                     1 & \mbox{si } I(p) \ge \theta \\
                     0 & \mbox{sinon.}
                     \end{array}
-                    \right.
+                    \right.$
                 \\
-                %Otsu threshold
-                $T_{\textnormal{Otsu}} $ &
-                Seuillage d'\textsc{Otsu} &
-                $ $
-                \\
-                %Multi class otsu threshold
-                $T^n_{\textnormal{Otsu}} $ &
-                Seuillage d'\textsc{Otsu} à n classes &
-                $ $
-                \\
+                % %Otsu threshold
+                % $T_{\textnormal{Otsu}}$ &
+                % Seuillage d'\textsc{Otsu} &
+                % $ $
+                % \\
+                % %Multi class otsu threshold
+                % $T^n_{\textnormal{Otsu}} $ &
+                % Seuillage d'\textsc{Otsu} à n classes &
+                % $ $
+                % \\
                 %Inversion
                 $ \inv(I)$ &
                 Inverse de l'image $I$ &
@@ -118,6 +127,10 @@
                 $ \median_{se}(I) $ &
                 Filtre médian\newline utilisant un element structurant se &
                 $ $ 
+                \\
+                $\watershedMath(I,I^2)$ &
+                Ligne de partage des eaux de l'image $I$ en utilisant les racines contenues dans $I^2$ &
+                $ $
                 \\
                 % Median of array
                 $ \mu = \median(I) $ &

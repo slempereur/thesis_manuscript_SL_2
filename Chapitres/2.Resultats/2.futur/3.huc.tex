@@ -5,9 +5,12 @@
 
 \begin{document}
                     
-\section{\label{sec:HuC}Segmentation du HuC}
+\chaptermark{Segmentation de la matière grise}
+\chapter{Résultat non publié 2 :L'utilisation d'un marqueur paneuronal permet de détecter la matière grise au sein du cerveau du \pz{}
+\label{sec:HuC}
+}
 
-    \subsection{Utilisation d'HuC, marqueur de la matière grise, pour détecter les défauts de neurogenèse et compléter l'estimation volumétrique du cerveau}
+    \section{Le marquage anti-HuC pour détecter les défauts de neurogenèse ou compléter l'estimation volumétrique du cerveau}
 
 %%
 %
@@ -18,7 +21,7 @@ L'utilisation d'un anticorps anti-HuC permet ainsi un marquage pan-neuronal du \
 Un marquage anti-HuC permet donc la détection de la matière grise cérébrale, à condition d'être en mesure de séparer les neurones cérébraux des autres régions. En couplant ce marquage avec un marqueur lipophile comme le DiI, on peut détecter l'ensemble du volume cérébral, car il devient possible de mesurer la matière blanche par le DiI et la matière grise par l'anticorps anti-HuC.
 Dans la suite, j'expose un algorithme permettant de segmenter automatiquement les régions HuC positives du cerveau, je propose une méthode d'estimation de la qualité des segmentations, pour termine par une discussion sur les perspectives offertes par cette approche.
     
-    \subsection{Algorithme de segmentation}
+    \section{La segmentation de la matière grise est réalisée par \watershed{}}
     
 De manière analogue à la segmentation de la matière blanche(voir \ref{sec:lempereur_info}), la segmentation de la matière grise par la segmentation d'un marquage anti-HuC est réalisée par l'utilisation de lignes de partage des eaux
 (voir \ref{sec:morpho:watershed}). Pour cette stratégie, il est nécessaire d'établir une carte topologique et une liste de marqueurs.
@@ -34,7 +37,7 @@ Cette objet va ensuite servir à attribuer une valeur à chaque maxima local de 
 %
 En utilisant la carte topologique et la liste de marqueurs, on peut maintenant calculer une segmentation par ligne de partage des eaux. Ainsi, on obtient une segmentation de la matière grise cérébrale.
     
-    \subsection{Résultats et discussion}
+    \section{Cet algorithme est précis, mais très sensible aux défauts de marquage}
     
 Afin de mesurer les erreurs induites par notre procédure de segmentation, nous avons demandé à un spécialiste d'effectuer la segmentation manuelle de la matière grise de six \pzs{} à 5 dpf.
 %
@@ -104,11 +107,15 @@ Il s'agit d'une des raisons ayant amené au developpement du SBLC ( voir \ref{se
     \end{subfigure}
     %
     \caption{
-        Repésentation des limitations d'un seuillage d'Otsu
+        Représentation d'une limite des seuillages d'Otsu
         \newline
-        Les voxels ayant une valeur de gris nulle  sont représentés respectivement en vert.
-        Les voxels segmentés par le seuillage d'Otsu sont représentés en magenta.
-        Les barres noires verticales au sein des histogrammes représentent la valeur du seuil.
+        La présence d'un gradient induit une diminution de la valeur seuil(e;f).
+        La nouvelle valeur de seuil peut devenir suffisamment basse pour détecter du bruit de fond ((d): têtes de flèche).
+        A l'inverse, le signal d'intérêt peut ne plus être détecté si sa valeur passe en dessus de la valeur seuil ((d): flêche).
+        \newline
+        Les voxels ayant une valeur de gris nulle  sont représentés en vert.
+        Les voxels segmentés par seuillage d'Otsu sont représentés en magenta.
+        Les barres noires verticales au sein des histogrammes représentent la valeur du critère d'Otsu.
         }
     \label{fig:sblc:defaut:surface}
 \end{figure}

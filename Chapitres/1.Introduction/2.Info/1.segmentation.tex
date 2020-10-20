@@ -8,7 +8,7 @@
 
 \begin{document}
             
-\section{Etat de l'art de la segmentation automatique}
+\section{Présentation de différentes stratégies de segmentation automatique}
 
 %
 La segmentation d'image consiste à grouper des pixels afin d'extraire une information de l'image, par exemple identifier une ou plusieurs régions d'intérêt.
@@ -33,7 +33,7 @@ Pour accélérer la segmentation et le rendre plus précise, il est possible de 
 %
 Nous allons donc maintenant faire un état de l'art de différentes approches de la segmentations automatiques, et aussi exposer les limites inhérentes à ces algorithmes.
 
-    \subsection{Une approche simple, le seuillage}
+    \subsection{Le seuillage, une approche simple mais insuffisante}
     
 %
 Le seuillage est une procédure d'étiquetage des pixels en deux classes en fonction des valeurs de gris des pixels. Elle consiste à conserver tous les pixels supérieurs à une valeur définie. De par sa simplicité, elle a été une des premières stratégie de segmentation automatique~\cite{sakai_1969,otsu_1979}.
@@ -81,14 +81,14 @@ Il faut donc mettre en place un ensemble de filtre permettant de corriger les im
 %
 Nous allons donc maintenant voir comment la morphologie mathématique peut permettre d'améliorer la segmentation automatique d'images.
 
-    \subsection{La morphologie mathématique permet d'introduire l'analyse du voisinage de chaque voxel}
+    \subsection{La morphologie mathématique améliore la précision des segmentations}
     
 %
 La morphologie mathématique est un théorie mathématique principalement développée afin de mettre au point des procédures d'analyse d'image.
 %
 Deux opérateurs de bases sont employés, l'érosion et la dilatation.
 %
-Pour une image en niveaux de gris, il s'agit de calculer respectivement le minimum ou le maximum au voisinage de chaque pixel (Voir Figure~\ref{fig:morpho:operateurs}).
+Pour une image en niveaux de gris, il s'agit de calculer respectivement le minimum ou le maximum au voisinage de chaque pixel (Voir \autoref{fig:morpho:operateurs}).
 %
 Le voisinage concerné est appelé élément structurant, et peut avoir un grand nombre de formes.
 %
@@ -122,7 +122,8 @@ L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace ch
     \end{subfigure}
     \caption{
         \label{fig:morpho:operateurs}
-        Exemple d'application d'une érosion et d'une dilatation par un élement structurant circulaire
+        Exemple d'application d'une érosion et d'une dilatation.\newline
+        La dilatation consistant à conserver pour chaque pixel le maximum local se trouvant au sein du voisinage, elle va avoir pour effet d'étaler les blancs. A l'inverse, l'érosion va étaler les noirs.
     }
     
 \end{figure}
@@ -155,7 +156,11 @@ L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace ch
     \end{subfigure}
     \caption{
         \label{fig:morpho:operateurs}
-        Exemple d'application d'une dilation avec différentes formes d'éléments structurants
+        Exemple d'application d'une dilatation avec différentes formes d'éléments structurants, comme indiquant au dessus de chaque panneau.
+        \newline
+        Le choix de l'élément structurant utilisé à un impact important sur le résultat.
+        L'utilisation d'éléments structurants circulaires ou elliptiques ne permet pas de conserver les lignes.
+        L'utilisation de ligne horizontale fera disparaître toute ligne n'ayant pas la même orientation.
     }
     
 \end{figure}
@@ -165,16 +170,16 @@ En combinant l'érosion et la dilatation, deux opérateurs se rajoutent.
 %
 La succession d'une érosion puis d'une dilatation utilisant le même élément structurant
 est appelé une ouverture
-(voir Figure~\ref{fig:ouverture}).
+(voir \autoref{fig:ouverture}).
 %
 Cette opérateur permet de supprimer des objets de petites tailles ou des structures fines.
 %
 A l'inverse, la succession d'une dilatation puis d'une érosion est appelée une fermeture
-(voir Figure~\ref{fig:fermeture}).
+(voir \autoref{fig:fermeture}).
 %
 A l'inverse de l'ouverture, cet opérateur permet de remplir des aires et permet de joindre des éléments proches entre eux.
 %
-L'ouverture, la fermeture et le filtre de rang sont ainsi des outils de choix pour le pré\hyp{}traitement d'images, en permettant d'apporter une cohérence topologique à l'image que l'on veut étudier).
+L'ouverture, la fermeture et le filtre de rang sont ainsi des outils de choix pour le pré\hyp{}traitement d'images, en permettant d'apporter une cohérence topographique à l'image que l'on veut étudier).
 
 
 \begin{figure}[h]
@@ -200,7 +205,12 @@ L'ouverture, la fermeture et le filtre de rang sont ainsi des outils de choix po
        \centering \includegraphics[width=\textwidth]{\Images/closed.png}
     \end{subfigure}
     \caption{
-        Exemple d'application d'une ouverture et d'une fermeture utilisant une élément structurant circulaire de rayon 10.
+        Exemple d'application d'une ouverture et d'une fermeture.
+        \newline
+        L'ouverture permet de supprimer les éléments fins ou isolés.
+        La fermeture permet de relier deux régions ou de supprimer des zones sombres.
+        %
+        En lissant les images en fonction du voisinage de chaque pixel, ces opérateurs améliore les segmentations par seuilage
     }
     
 \end{figure}
@@ -209,9 +219,9 @@ Grâce à ces deux opérateurs, il est possible de définir deux transformations
 %
 Le chapeau haut-de-forme blanc consiste en la soustraction d'une ouverture à l'image d'origine, alors que le chapeau haut-de-forme noir est la soustraction de l'image d'origine à une fermeture de cette image.
 %
-L'utilisation du chapeau haut-de-forme blanc permet la mise en évidence de régions ayant une forte intensité dans une zone restreinte ou ayant une forme particulière (voir Figure~\ref{fig:tophat:blanc}).
+L'utilisation du chapeau haut-de-forme blanc permet la mise en évidence de régions ayant une forte intensité dans une zone restreinte ou ayant une forme particulière (voir \autoref{fig:tophat:blanc}).
 %
-A l'inverse, le chapeau haut-de-forme noir permet la mise en évidence de la proximité entre deux régions, ou la délimitation entre deux objets clairs (voir Figure~\ref{fig:tophat:noir}).
+A l'inverse, le chapeau haut-de-forme noir permet la mise en évidence de la proximité entre deux régions, ou la délimitation entre deux objets clairs (voir \autoref{fig:tophat:noir}).
 %
 Enfin, une dernière transformation est le gradient morphologique.
 %
@@ -229,19 +239,26 @@ le gradient morphologique permet de connaître l'évolution des valeurs de gris 
     \begin{subfigure}[b]{0.30\textwidth}
        \caption{
        \label{fig:tophat:blanc}
-            tophat blanc
+            Chapeau haut-de-forme blanc
             }
        \centering \includegraphics[width=\textwidth]{\Images/tophat_blanc.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.30\textwidth}
        \caption{
            \label{fig:tophat:noir}
-            Tophat noir
+            Chapeau haut-de-forme noir
             }
        \centering \includegraphics[width=\textwidth]{\Images/tophat_noir.png}
     \end{subfigure}
     \caption{
-        Exemple de l'application d'un tophat en utilisant un élement structurant circulaire de rayon 10 pixels.
+        Exemple de l'application d'un chapeau haut-de-forme.
+        \newline
+        Le chapeau haut\hyp{}de\hyp{}forme noir consiste à soustraire l'image d'origine à une fermeture de cette image. À l'inverse, le chapeau haut\hyp{}de\hyp{}forme blanc consiste à soustraire une ouverture à l'image d'origine.
+        \newline
+        Les chapeaux haut-de-forme permettent ainsi de détecter des éléments isolés,
+        de mettre en avant des démarcations
+        ou des régions situées entre deux objets proches.
+        
     }
     
 \end{figure}
@@ -264,9 +281,9 @@ Un algorithme de ligne de partage des eaux aura ainsi pour but de définir à qu
 Pour définir son appartenance,
 cet algorithme calculera à quel bassin versant appartient chaque pixel.
 %
-Pour cela, il utilise deux informations: une image qui servira de carte topologique, comme le gradient d'une image, et une liste de marqueurs qui serviront à définir les bassins versants(voir Figure~\ref{fig:lpe:marqueurs}).
+Pour cela, il utilise deux informations: une image qui servira de carte topographique, comme le gradient d'une image, et une liste de marqueurs qui serviront à définir les bassins versants(voir \autoref{fig:lpe:marqueurs}).
 %
-L'algorithme va alors attribuer à chaque pixel un label définissant à quel bassin versant il appartient (voir Figure~\ref{fig:lpe:lines} et \ref{fig:lpe:zones}).
+L'algorithme va alors attribuer à chaque pixel un label définissant à quel bassin versant il appartient (voir \autoref{fig:lpe:lines} et \ref{fig:lpe:zones}).
 %
 Les lignes de partages des eaux seront alors l'ensemble des pixels pour lesquels deux bassins versants se sont rencontrés.
 %
@@ -274,21 +291,28 @@ Cette approche permet ainsi de relier entre eux des régions présentant des val
 %
 
 \begin{figure}[h]
-    \begin{subfigure}[b]{0.30\textwidth}
+    \begin{subfigure}[b]{0.50\textwidth}
        \caption{
            \label{fig:lpe:marqueurs}
-            Marqueurs et\\ carte topologiques\\employés
+            Image d'origine
+            }
+       \centering \includegraphics[width=\textwidth]{\Images/fantome.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.5\textwidth}
+       \caption{
+           \label{fig:lpe:marqueurs}
+           Gradient morphologique de l'image d'origine et marqueurs employés
             }
        \centering \includegraphics[width=\textwidth]{\Images/markers.png}
     \end{subfigure}
-    \begin{subfigure}[b]{0.30\textwidth}
+    \begin{subfigure}[b]{0.5\textwidth}
        \caption{
            \label{fig:lpe:lines}
-            Résultat du calul\\ de la ligne\\ de partage des eaux
+           ligne\\ de partage des eaux
             }
        \centering \includegraphics[width=\textwidth]{\Images/water_lines.png}
     \end{subfigure}
-    \begin{subfigure}[b]{0.30\textwidth}
+    \begin{subfigure}[b]{0.5\textwidth}
        \caption{
            \label{fig:lpe:zones}
             Bassins versants obtenus
@@ -296,7 +320,11 @@ Cette approche permet ainsi de relier entre eux des régions présentant des val
        \centering \includegraphics[width=\textwidth]{\Images/water_comp.png}
     \end{subfigure}
     \caption{
-        Exemple d'application d'une ligne de partage des eaux
+        Exemple d'application d'une \watershed{}.\newline
+        La \watershed{} est calculée en utilisant le gradient morphologique de l'image d'origine et les marqueurs représentés en (b).
+        Le gradient morphologique est un opérateur de morphologie mathématique consistant à soustraire une érosion à une dilatation de l'image d'entrée, ce qui permet de connaître l'évolution locale des niveaux de gris.
+        La ligne de partage des eaux fourni ainsi une démarcation entre différentes bassins versants, ce qui fournit une segmentation une segmentation de l'image.
+        
     }
     
 \end{figure}
@@ -305,9 +333,9 @@ Cette approche permet ainsi de relier entre eux des régions présentant des val
 %
 Cependant, la sélection des marqueurs permettant l'initialisation du calcul de lignes de partage des eaux constitue une limite de cette méthode.
 %
-En effet, l'utilisation d'un trop grand nombre de points peut amener à un découpage en un trop grand nombre de parties différentes (voir Figure~\ref{fig:watershed:errors:quantite}).
+En effet, l'utilisation d'un trop grand nombre de points peut amener à un découpage en un trop grand nombre de parties différentes (voir \autoref{fig:watershed:errors:quantite}).
 %
-De plus, un marqueur absent ou mal positionné induira une mauvaise segmentation de la région d'intérêt (voir Figure~\ref{fig:watershed:errors:position}).
+De plus, un marqueur absent ou mal positionné induira une mauvaise segmentation de la région d'intérêt (voir \autoref{fig:watershed:errors:position}).
 
 \begin{figure}[h]
     \begin{subfigure}[b]{\textwidth}
@@ -328,7 +356,8 @@ De plus, un marqueur absent ou mal positionné induira une mauvaise segmentation
        \centering
     \end{subfigure}
     \caption{
-        Exemple de marqueurs entraînant des erreurs de segmentation
+        Exemple de marqueurs entraînant des erreurs de segmentation.\newline
+        Un trop grand nombre de classes de marqueurs va entraîner un sur\hyp{}découpage, alors qu'un mauvais placement des marqueurs peut mener à omettre certains éléments ou mener à de mauvais définitions de la ligne de partage des eaux.
     }
     
 \end{figure}
@@ -338,7 +367,7 @@ En plus d'une forte sensibilité aux paramètres fournis, ces algorithmes sont p
 %
 Ils ont ainsi été remplacés au cours de la dernière décennie par des algorithmes utilisant les réseaux de neurones profonds.
 
-    \subsection{L'approche émergente, La segmentations par réseaux de neurones profonds}
+    \subsection{Une approche émergente, la segmentations par réseaux de neurones profonds}
 
 % % Principe théorique
 %
@@ -359,10 +388,10 @@ L'étape d'apprentissage du réseau de neurones consiste ainsi à faire varier c
 La profondeur du réseau de neurones est alors défini par le nombre de couches employé.
 %
 Une fois entraînés, ces réseaux de neurones permettent d'obtenir rapidement une classification efficace des signaux fournis.
-\color{magenta}Ajouter figure explicative\color{black}
+
 %%
 %
-Les première utilisation de l'apprentissage de réseaux de neurones profonds pour l'analyse d'images a été la classification d'image en différentes classes~\cite{lecun_1989,krizhevsky_2017,Simonyan_2014}.
+Les première utilisation de l'apprentissage de réseaux de neurones profonds pour l'analyse d'images a été la classification d'image en différentes classes~\cite{lecun_1989,krizhevsky_2012,Simonyan_2014}.
 %
 L'évolution des systèmes informatiques durant la dernière décennies ayant permis d'effectuer des réseaux de neurones de plus en plus profonds et de plus en plus peuplés, il a été possible de transformer ces classifications d'images en classification de pixels permettant ainsi de mettre au point les premières méthodes de segmentation par réseau de neurones profonds.~\cite{ronneberger_2015,milletari_2016}.
 %
@@ -413,7 +442,7 @@ En effet, ces algorithmes considèrent que l'objet possède des particularités 
 %
 Nous allons maintenant discuter cet a priori.
 
-    \subsection[limite de ces approches]{Le fond peut\hyp{}il toujours être différencié  de l'objet?}
+    \subsection{Le fond peut\hyp{}il toujours être différencié  de l'objet?}
 
 %
 La plus grande partie des approches de segmentation automatique considèrent que l'objet est toujours différent du fond. Ces différences peuvent par exemple concerner les valeurs de gris, de forme ou de texture.
@@ -470,10 +499,13 @@ Il devient alors possible qu'une région d'intérêt présente les mêmes valeur
     \end{subfigure}
     \caption{
     \label{apriori:grad}
-        Résultat de segmentation sur une coupe transversale d'un échantillon de \pz à 5dpf marquée par anticorps anti\hyp{}HuC/D et acquise par microscopie confocale.
-        Les pixels cyan, jaune et blanc représentent respectivement la vérité de terrain,
+        Résultat de segmentation sur une coupe transversale d'un échantillon de \pz{} à 5dpf marquée par anticorps anti\hyp{}HuC/D et acquise en microscopie confocale.
+        \newline
+        La présence d'un important défaut de marquage peut entraîner simultanément une sous-segmentation et une sur\hyp{}segmentation. Ce défaut peut ainsi compromettre la distinction entre le fond et l'objet d'intérêt.
+        Cet exemple montre qu'un marquage insuffisamment contrasté ne peut être segmenté correctement par la machine alors qu'un opérateur humain est mesure d'effectuer une segmentation correcte en utilisant ses connaissances.
+        \newline
+        Les pixels cyan, jaune et blanc représentent respectivement une segmentation manuelle considérée comme la vérité de terrain,
         le résultat de la segmentation automatique et la superposition entre les deux.
-        La segmentation automatique a été réalisée par un seuillage des valeurs inférieurs à 240, suivi d'une ouverture morphologique par un élément sphérique de rayon 5.
     }
 \end{center}
 \end{figure}

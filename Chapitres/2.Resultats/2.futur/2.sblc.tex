@@ -5,7 +5,11 @@
 
 \begin{document}
 
-\section{\label{sec:sblc}\sblc}
+\chaptermark{SBLC}
+\chapter{Résultat non publié 1 :
+SBLC: Un algorithme pour compenser des gradients de marquages 
+\label{sec:sblc}
+}
 
 %
 %
@@ -19,7 +23,7 @@ a été nommé \sblc{} (SBLC).
 %
 Dans la suite de cette section seront présentées les hypothèses, une description de l'algorithme créé, une présentation des résultats obtenus et finalement une discussion des limites de ce procédé.
 
-    \subsection{Hypothèse}
+    \section{La décroissance des marquages suit une loi exponentielle fonction de l'épaisseur des tissus traversés}
   
 %%
 %
@@ -45,7 +49,7 @@ Les hypothèses posées m'ont donc permis de mettre au point une méthode de cor
 %
 En utilisant une méthode de correction similaire au SBDDCC (voir mansucrit), nous avons ainsi mis au point un algorithme permettant la correction d'un tel défaut de marquage.
     
-    \subsection{Algorithme}
+    \subsection{SBLC corrige les défauts de pénétration des marqueurs selon une stratégie similaire à celle développée pour corriger les défauts de pénétration de la lumière}
  
 %%
 %
@@ -78,8 +82,6 @@ De cette manière, un défaut de marquage immuno-histochimique
 induisant une perte croissante de l'intensité de la fluorescence avec
 l'épaisseur de tissus à pénétrer pour l'anticorps peut être
 compensé.
-
-\color{magenta} Mise en équation?\color{black}
 
 %%
 %
@@ -162,7 +164,7 @@ La visualisation de ce ratio est visible en Figure~\ref{fig:sblc:algo:ratio}.
        \caption{
         \centering
             \label{fig:sblc:algo:ellipse}
-            Ellipse superposée au fantôme
+            Segmentation du fantôme
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/ellipse_cut.png}
     \end{subfigure}
@@ -171,7 +173,7 @@ La visualisation de ce ratio est visible en Figure~\ref{fig:sblc:algo:ratio}.
        \caption{
         \centering
             \label{fig:sblc:algo:dist}
-            Carte des distances
+            Carte des distances depuis l'extérieur du fantôme
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/dist_cut.png}
     \end{subfigure}
@@ -180,7 +182,7 @@ La visualisation de ce ratio est visible en Figure~\ref{fig:sblc:algo:ratio}.
        \caption{
         \centering
             \label{fig:sblc:algo:decay}
-            Décroissance exponentielle
+            Fantôme avec décroissance exponentielle du signal en fonction de la distance depuis l'extérieur
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/decay_cut.png}
     \end{subfigure}
@@ -189,7 +191,7 @@ La visualisation de ce ratio est visible en Figure~\ref{fig:sblc:algo:ratio}.
        \caption{
         \centering
             \label{fig:sblc:algo:correction}
-            Résultat du SBLC
+            Résultat du SBLC appliqué à (d)
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/correction_cut.png}
     \end{subfigure}
@@ -198,23 +200,21 @@ La visualisation de ce ratio est visible en Figure~\ref{fig:sblc:algo:ratio}.
        \caption{
         \centering
             \label{fig:sblc:algo:ratio}
-            Ratio des \newline valeurs de gris
+            Ratios des valeurs de gris comparant (a) et (e)
             }
        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/delta_cut.png}
     \end{subfigure}
     %
     \caption{
         \label{fig:sblc:algo}
-        Illustration du \sblc{} par l'emploi d'un fantôme.
+        Illustration du \sblc{} (SBLC) par l'emploi d'un fantôme.
         \newline
-        pour créer ce fantôme, on commence par créer l'image de référence,
-        puis on lui applique une décroissance exponentielle.
-        On applique ensuite le SBLC sur l'image dégradée.
+        Comme le montre la comparaison entre (d) et (e), le SBLC permet de compenser une atténuation exponentielle.
     }
 \end{figure}
 
 
-    \subsection{Résultats et discussions}
+    \section{Cette approche, bien que rapide, n'est pas applicable à tous les marqueurs}
     
 
 %%
@@ -223,37 +223,9 @@ Dans le cadre des marquages \ihc{}, cette approche peut donc permettre de compen
 %
 Certains anticorps, comme anti-HuC/D, présente des gradients de marquages importants.
 %
-La région marquée ayant une taille importante, il est difficile d'obtenir un marquage homogène sur l'ensemble des tissus (voir Figure~\ref{fig:sblc:huc:raw}).
+La région marquée ayant une taille importante, il est difficile d'obtenir un marquage homogène sur l'ensemble des tissus.
 %
-Le SBLC permet ainsi de compenser ce défaut de marquage en corrigeant informatiquement les valeurs de gris. (voir Figure~\ref{fig:sblc:huc:appliqué}).
-%
-En comparant les deux résultats (Voir Fig~\ref{fig:sblc:huc:comp}), on peut ainsi observer que l'image obtenue n'a eu un effet que dans la profondeur de l'échantillon, et que cet algorithme permet bien de retrouver une information cohérente.
-
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.30\textwidth}
-        
-        \caption{image d'origine}
-        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/huc_original_magenta.png}
-        \label{fig:sblc:huc:raw}
-    \end{subfigure}
-    %
-    \begin{subfigure}[b]{0.30\textwidth} 
-        \caption{Résultat du SBLC}
-        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/huc_corrected_green.png}
-        \label{fig:sblc:huc:appliqué}
-    \end{subfigure}
-    %
-    \begin{subfigure}[b]{0.30\textwidth} 
-        \caption{superposition}
-        \centering \includegraphics[width=\textwidth]{\Figures/Sblc/huc_compared.png}
-        \label{fig:sblc:huc:comp}
-    \end{subfigure}
-    %
-    \caption{
-        Résultat de l'application du SBLC représenté par une coupe transversale d'un marquage anti-HuC/D sur un échantillon de \pz{} à 5 dpf.}
-    \label{fig:sblc:defaut:surface}
-\end{figure}
+Le SBLC pourrait ainsi permettre de compenser ce défaut de marquage en corrigeant informatiquement les valeurs de gris.
 
 %%
 %
@@ -289,19 +261,22 @@ L'échantillon se verrait ainsi artificiellement "rempli" par un signal n'exista
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         
-        \caption{Fantôme employé}
+        \caption{Fantôme d'un marquage de surface}
         \centering \includegraphics[width=\textwidth]{\Figures/Sblc/surface_cut.png}
         \label{fig:sblc:defaut:surface:fantôme}
     \end{subfigure}
     %
     \begin{subfigure}[b]{0.45\textwidth} 
-        \caption{Résultat du SBLC sur le fantôme}
+        \caption{Résultat inapproprié du SBLC}
         \centering \includegraphics[width=\textwidth]{\Figures/Sblc/surface_corrected_cut.png}
         \label{fig:sblc:defaut:surface:application}
     \end{subfigure}
     %
     \caption{
-        Modélisation de l'utilisation du SBLC sur un marquage de surface
+        Modélisation de l'utilisation du SBLC sur un marquage de surface.
+        \newline
+        Dans ce cas, le SBLC entraîne une augmentation du bruit, pouvant aller jusqu'à saturation.
+        Il est donc contre\hyp{}indiqué d'utiliser cet algorithme pour ce type de marquage.
         \newline
         Les voxels ayant une valeur de gris nulle ou supérieure à 4095 sont représentés respectivement en vert et en magenta.
         }
@@ -324,21 +299,23 @@ Ce défaut présente en soit une qualité car il permet de s'assurer qu'aucun si
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         
-        \caption{Fantôme utilisé}
+        \caption{Fantôme d'un marquage profond}
         \centering \includegraphics[width=\textwidth]{\Figures/Sblc/deep_cut.png}
         \label{fig:sblc:defaut:deep:application}
     \end{subfigure}
     %
     \begin{subfigure}[b]{0.45\textwidth} 
-        \caption{Résultat du SBLC sur le fantôme}
+        \caption{Résultat du SBLC:\newline aucun changement}
         \centering \includegraphics[width=\textwidth]{\Figures/Sblc/deep_corrected_cut.png}
         \label{fig:sblc:defaut:deep:application}
     \end{subfigure}
     %
     \caption{
-        Modélisation de l'emploi du SBLC sur sur un marquage profond.
+        Modélisation de l'emploi du SBLC sur un marquage profond.
         \newline
-        Les voxels ayant une valeur de gris nulle ou supérieure à 4095 sont représentés respectivement en vert et en magenta.
+        Sur ce type de marquage, le SBLC n'induit aucune modification. Son utilisation ne présente donc pas d'intérêt sur des marquages profonds de bonne qualité, comme ceux  obtenues par révélation anticorps de lignées rapportrices de gènes puissamment exprimés.
+        \newline
+        Les voxels ayant une valeur de gris nulle sont représentés en vert.
         }
     \label{fig:sblc:defaut:deep}
 \end{figure}
@@ -352,21 +329,24 @@ un coefficient, un signal ayant complètement disparu ne pourra pas être récup
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         
-        \caption{Fantôme utilisé}
+        \caption{fantôme\newline d'un marquage indétectables dans les zones profondes}
         \centering \includegraphics[width=\textwidth]{\Figures/Sblc/surface0_cut.png}
         \label{fig:sblc:defaut:surface0:application}
     \end{subfigure}
     %
     \begin{subfigure}[b]{0.45\textwidth} 
-        \caption{Résultat du SBLC sur le fantôme}
+        \caption{Application du SBLC:\newline aucun signal n'a été créé\newline au coeur de l'échantillon}
         \centering \includegraphics[width=\textwidth]{\Figures/Sblc/surface0_corrected_cut.png}
         \label{fig:sblc:defaut:surface0:application}
     \end{subfigure}
     %
     \caption{
-        Modélisation de l'emploi du SBLC sur sur un marquage disparaisant avec la profondeur.
+        Modélisation de l'emploi du SBLC sur un marquage indétectable au coeur de l'échantillon.
         \newline
-        Les voxels ayant une valeur de gris nulle ou supérieure à 4095 sont représentés respectivement en vert et en magenta.
+        Cette approche n'est pas en mesure de corriger des signaux non détectés.
+        Elle ne crée donc pas de signal \emph{ex\hyp{}nihilo}.
+        \newline
+        Les voxels ayant une valeur de gris nulle sont représentés en vert.
         }
     \label{fig:sblc:defaut:surface0}
 \end{figure}

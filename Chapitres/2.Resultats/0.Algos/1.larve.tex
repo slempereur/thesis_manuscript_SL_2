@@ -4,40 +4,31 @@
 
 \begin{document}
 
-\section{Segmentation de la larve entière}
+\section{La segmentation de la larve entière doit tenir compte de la déperdition lumineuse, fonction de l'épaisseur de tissu traversé
+\label{sec:algo:larva}
+}
 
 \subsection{Pourquoi segmenter la larve entière et quelles sont les difficultés?}
 
 %
-La segmentation de la larve entière est une étape essentielle, car elle permet à la fois de rajouter un volume pour l'analyse, mais permet aussi d'initier des calculs ultérieurs.
+La segmentation de la larve entière est une étape essentielle, car elle permet évidemment, d'abord d'obtenir un important volume pour l'analyse, mais en plus d'initier des calculs ultérieurs.
 %
-En permettant de mesurer le volume total de la larve, elle permet de déterminer si un échantillon présente un nanisme.
+En permettant de mesurer le volume total de l'alevin, on peut par exemple déterminer si un échantillon présente un nanisme. De plus, la mesure du volume de la matière blanche doit être comparée au volume de l'alevin,  pour par exemple caractériser si un polluant a un impact plus fort sur le développement du cerveau que sur le reste du corps.
 %
-La mesure du volume de la matière blanche seule peut induire une erreur de détection, car il est par exemple possible qu'un polluant implique un nanisme des individus intoxiqués tout en ayant aucun impact sur le développement du cerveau.
-%
-De plus, au cours de cette thèse, la détection de la larve entière a été utilisé comme étape initiale pour le calcul d'autres algorithmes, comme le recalage des larves avec le système de coordonnées de l' acquisition ou encore le calcul des améliorations de contrastes que sont le \sbddcc{} ou le \sblc{}.
+De plus, au cours de cette thèse, la détection de la larve entière a été utilisée comme étape initiale pour le calcul d'autres algorithmes, comme le recalage des larves avec le système de coordonnées de l' acquisition ou encore le calcul des améliorations de contrastes que sont le \sbddcc{} ou le \sblc{}.
 
 %%
 %
-La segmentation de la larve entière peut paraître triviale.
-%
-À première vue, la larve est facilement différenciable du reste de l'image.
-%
-Il parait ainsi possible de segmenter la larve par l'utilisation d'un simple seuillage.
-%
-Mais la perte de lumière induite par des solutions de clarifications de tissus par simple immersion entraîne une différence de contraste entre les deux cotés opposées de l'échantillon.
+La segmentation de la larve entière semble a priori aisée, par exemple par l'utilisation d'un simple seuillage. En effet, à première vue, la larve est facilement différenciable du reste de l'image. Néanmoins, la perte de lumière induite par des solutions de clarifications insuffisamment puissantes entraîne une perte de contraste et de luminosité en profondeur.
+On doit donc adapter la segmentation à ce défaut car la segmentation par seuillage ne fonctionne pas. On réalise une première segmentation par l'emploi d'une \watershed{}, puis une amélioration de la segmentation par la réduction du signal du coté de l'acquisition.
 
-%%
-%
-La méthode de segmentation de la larve entière est ainsi basée sur une première segmentation par l'emploi d'une \watershed{}, puis d'une amélioration de la segmentation par la réduction du signal du coté de l'acquisition.
-
-\subsection{Description de l'algorithme de segmentation de la larve entière}
+\subsection{Un algorithme de segmentation pensé pour diminuer les temps de calcul}
 
 Considérons $I$ comme l'image 3D produite pendant l'acquisition d'une larve de \pz{}.
 
 %%
 %
-Afin de réduire le temps de calcul, une première segmentation par watershed est calculé sur une version sous\hyp{}échantillonnée de $I$.
+Afin de réduire le temps de calcul, une première segmentation par watershed est calculée sur une version sous\hyp{}échantillonnée de $I$.
 %
 Appelons $D$ l'image sous\hyp{}échantillonnée.
 %
@@ -51,33 +42,33 @@ Ces deux seuillages sont alors utilisés pour définir des régions supposées i
 
 \begin{equation}
     \label{eq:larva:down:clos}
-    D^1 = \varphi_{c_{5}}(D)
+    D_1 = \varphi_{c_{5}}(D)
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:thresh:high}
-    D^2 = T_{150}(D^{1})
+    D_2 = T_{150}(D_{1})
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:thresh:low}
-    D^3 = \inv(T_{0}(D^{1}))
+    D_3 = \inv(T_{0}(D_{1}))
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:zones}
-    D^{4} = D^3 + 2D^{2} 
+    D_{4} = D_3 + 2D_{2} 
 \end{equation}
 
 %%
 %
 La définition de ces régions va permettre de définir des racines pour l'initialisation du calcul de \watershed{}.
 %
-On définit tout d'abord une carte des maxima locaux de $D^1$~\eqref{eq:larva:down:max_loc}.
+On définit tout d'abord une carte des maxima locaux de $D_1$~\eqref{eq:larva:down:max_loc}.
 %
 Les racines sont alors définies comme le produit entre la carte des maxima et les régions définies par $D_{4}$~\eqref{eq:larva:down:seeds}.
 %
-Une fois ces racines calcules, on calcule le gradient morphologique de $D^1$~\eqref{eq:larva:down:grad}.
+Une fois ces racines calculées, on va aussi calculer le gradient morphologique de $D_1$~\eqref{eq:larva:down:grad}.
 %
 En utilisant ces racines et ce gradient morphologique, on calcule enfin la \watershed{}~\eqref{eq:larva:down:water}.
 %
@@ -87,101 +78,101 @@ Ce plus gros objet est considéré comme une première segmentation de la larve 
 
 \begin{equation}
     \label{eq:larva:down:max_loc}
-    D^{5} = \localmax(D^1) \\
+    D_{5} = \localmax(D_1) \\
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:seeds}
-    D^{6}= D^{5} * D^{4}
+    D_{6}= D_{5} * D_{4}
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:grad}
-    D^{7}= \grad_M{D^1}
+    D_{7}= \grad_M{D_1}
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:water}
-    D^{8}= \watershedMath(D^{7},D^{6})
+    D_{8}= \watershedMath(D_{7},D_{6})
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:water}
-    D^{9}= \gamma^{\alpha}_{u}(D^8)
+    D_{9}= \gamma^{\alpha}_{u}(D_8)
 \end{equation}
 
 En effectuant cette procédure sur une image sous-échantillonnée, on obtient un résultat de segmentation insuffisant.
 %
-Cependant, cette première segmentation peut servir à la définition d'une boite englobante qui permet d'effectuer un nouveau calcul de \watershed{} sur l'image à résolution original.
+Cependant, cette première segmentation peut servir à la définition d'une boîte englobante qui permet d'effectuer un nouveau calcul de \watershed{} sur l'image à résolution originale.
 %
 En réduisant ainsi la taille de l'image à traiter, cette approche permet ainsi de réduire le temps nécessaire au calcul de cette première étape.
 %
 Appelons $B$ la région de $I$ se trouvant au sein de la boite englobante.
 %
-On commence par appliqué à $I_{bb}$ une fermeture par un élément structurant cubique de 7 voxels d'arête \eqref{eq:larva:closing_1}.
+On commence par appliquer à $I_{bb}$ une fermeture par un élément structurant cubique de 7 voxels d'arête \eqref{eq:larva:closing_1}.
 %
 On applique ensuite une ouverture par le même élément structurant~\eqref{eq:larva:open_1}.
 %
-On calcule ensuite deux seuillages, un premier conservant les voxels de $B^2$ ayant une valeur supérieure à 200~\eqref{eq:larva:thresh:high} et un second conservant les voxels ayant une valeur inférieure à 50~\eqref{eq:larva:thresh:low}.
+On calcule ensuite deux seuillages, un premier conservant les voxels de $B_2$ ayant une valeur supérieure à 200~\eqref{eq:larva:thresh:high} et un second conservant les voxels ayant une valeur inférieure à 50~\eqref{eq:larva:thresh:low}.
 %
 Grâce à ces deux seuillages, on définit une carte de zones internes et externes~\eqref{eq:larva:zones}).
 %
 On calcule ensuite la position des maxima locaux~\eqref{eq:larva:max_loc}, pour ensuite définir une liste de racines~\eqref{eq:larva:seeds}.
 %
-On calcule ensuite un gradient morphologique de $B^2$~\eqref{eq:larva:grad}.
+On calcule ensuite un gradient morphologique de $B_2$~\eqref{eq:larva:grad}.
 %
-On calcule une \watershed{} en utilisant $B^7$ et $B^8$~\eqref{eq:larva:water}.
+On calcule une \watershed{} en utilisant $B_7$ et $B_8$~\eqref{eq:larva:water}.
 %
-Enfin, on calcule une ouverture ultime par volume pour ne conserver que le plus gros objet obtenu par le calcul de la \lpe{}.
+Enfin, on calcule une ouverture ultime par volume pour ne conserver que le plus gros objet obtenu par le calcul de la \watershed{}.
 
 \begin{equation}
     \label{eq:larva:closing_1}
-    B^1= \varphi_{c_7}(B)
+    B_1= \varphi_{c_7}(B)
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:open_1}
-    B^2= \gamma_{c_7}(B^1)
+    B_2= \gamma_{c_7}(B_1)
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:thresh:high}
-    B^3= T_{200}(B^2))
+    B_3= T_{200}(B_2))
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:thresh:low}
-    B^4= \inv(T_{50}(B^2))
+    B_4= \inv(T_{50}(B_2))
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:zones}
-    B^5= B^4 + 2B^3
+    B_5= B_4 + 2B_3
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:max_loc}
-    B^6 = \localmax(B^2)
+    B_6 = \localmax(B_2)
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:seeds}
-    B^7= B^5 * B^6
+    B_7= B_5 * B_6
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:grad}
-    B^8= \grad_M(B^6)
+    B_8= \grad_M(B_6)
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:water}
-    B^9= \watershedMath(B^8,B^7)
+    B_9= \watershedMath(B_8,B_7)
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:down:water}
-    B^{10}= \gamma^{\alpha}_{u}(B^9)
+    B_{10}= \gammB_{\alpha}_{u}(B_9)
 \end{equation}
 
 %%
@@ -189,15 +180,15 @@ Enfin, on calcule une ouverture ultime par volume pour ne conserver que le plus 
 Ces étapes permettent ainsi d'obtenir rapidement une segmentation de la larve entière.
 %
 Cependant, comme décrit précédemment,
-la méthode de clarification de tissus employée induit une déperdition de contraste proportionnelle à la quantité de tissus rencontrées.
+la méthode de clarification de tissus employée induit une déperdition de contraste proportionnelle à la quantité de tissus rencontrée.
 %
 Posons $b$ le dernier plan de $I$ depuis le coté de l'acquisition.
 %
-Afin de corriger ce défaut et éviter une sur-segmentation de l'échantillon du coté de l'acquisition, nous avons développé une procédure de seuillage directionnelle.
+Afin de corriger ce défaut et éviter une sur-segmentation de l'échantillon du coté de l'acquisition, nous avons développé une procédure de seuillage directionnel.
 %
 La première étape consiste à calculer une somme cumulative depuis le plan d'acquisition~\eqref{eq:larva:acq:cum_sum}.
 %
-Cette somme est alors considéré comme une mesure de la distance que doit parcourir un photon au sein des tissus.
+Cette somme est alors considérée comme une mesure de la distance que doit parcourir un photon au sein des tissus.
 %
 On calcule alors la valeur du médian de valeur de gris pour chaque couche et on détermine la couche $d_{max}$, couche ayant la valeur médiane la plus élevée.
 %
@@ -205,28 +196,28 @@ Cette couche est considérée comme la dernière couche de l'échantillon pour l
 %
 On applique alors un seuillage afin de ne conserver que les couches de l'échantillon se trouvant au dessus de cette couche limite~\eqref{eq:larva:acq:side}.
 %
-Enfin, on calcule un seuillage conservant les voxels ayant une valeur de gris supérieurs à 500 au sein de $A^2$~\eqref{eq:larva:acq:thresh}.
+Enfin, on calcule un seuillage conservant les voxels ayant une valeur de gris supérieure à 500 au sein de $L_2$~\eqref{eq:larva:acq:thresh}.
 %
 Enfin, afin de supprimer les trous au sein de l'échantillon, on applique une dernière fermeture par un élement structurant cubique de 51 voxels d'arête~\eqref{eq:larva:fin}.
 
 \begin{equation}
     \label{eq:larva:acq:cum_sum}
-        \forall z \in [0,b], A^1(z)=\sum_{n=1}^{z}^(B^{10}(z))
+        \forall z \in [0,b], L_1(z)=\sum_{n=1}^{z}(B_{10}(z))
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:acq:side}
-    A^2 = \inv(T_{d_{max}}(A^1) \cap B^{10}
+    L_2 = \inv(T_{d_{max}}(L_1) \cap B_{10}
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:acq:thresh}
-    A^3 = T_{500}(I) * A^2 + B^{10} \cap T_{d_max}(A^1)
+    L_3 = T_{500}(I) * L_2 + B_{10} \cap T_{d_max}(L_1)
 \end{equation}
 
 \begin{equation}
     \label{eq:larva:fin}
-    S_{larva} = \varphi_{c_{51}}(A^3)
+    S_l = \varphi_{c_{51}}(L_3)
 \end{equation}
 
 \end{document}

@@ -1,0 +1,281 @@
+\providecommand{\main}{../../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+
+
+\sectionmark{Recalage}
+\section{\label{sec:algo:recalage}Le recalage des échantillons peut être réalisé en utilisant les cristallins et la matière blanche
+}
+\sectionmark{Recalage de la matière blanche}
+
+\subsection{Le marqueur lipophile permet la détection de la matière blanche et des cristallins}
+
+%%
+%
+Le marquage au Dye permet de détecter la matière blanche, comme montré en section~\ref{sec:algo:white}.
+%
+Cependant, ce marquage a pour particularité de ne marquer que très faiblement les cristallins.
+%
+Une seconde propriété des cristallins est d'être sphérique.
+%
+Ces deux particularités permettent ainsi d'imaginer une approche de segmentation automatique des cristallins.
+%
+
+%%
+%
+En détectant les deux cristallins, il devient possible de définir l'axe interoculaire de la larve.
+%
+De plus, le calcul de l'ellipsoïde englobant la matière blanche permet de définir trois axes décrivant la matière blanche.
+%
+L'axe majeur de la matière blanche décrit ainsi la direction prise par la larve.
+%
+Ces deux axes peuvent permettre de définir une matrice de transformation de rotation permettant d'aligner les échantillons sur le repère de coordonnées.
+
+%%
+%
+De prime abord, le calcul des axes décrivant l'ellipsoïde englobant la matière blanche parait suffisant pour aligner les échantillons.
+%
+Cependant, le plus grand demi-axe pouvant avoir une longueur importante, il est possible que le cerveau de l'échantillon possède une courbure.
+%
+En considérant l'axe interoculaire comme axe de référence pour l'alignement des échantillons, l'axe principal de la matière blanche ne sert qu'à définir l'axe de roulis de l'échantillon, ce qui permet de réduire les risques de mauvais alignement due à de potentiels courbures du cerveau.
+
+%%
+%
+Dans le cadre de l'hca{}, l'utilisation d'une procédure de recalage rigide a été choisi pour plusieurs raisons.
+%
+Une fois le matrice de transformation obtenue, le recalage des échantillons est réalisées par l'application d'une transformée affine.
+%
+Ce calcul pouvant être facilement paralléliser, cette procédure permet de rapidement effectuer le recalage, quelque soit le nombre de canal de l'image.
+%
+Contrairement aux approches de recalage elastiques, le recalage rigide proposé ne demande pas de référence pour le recalage.
+%
+Cette procédure peut donc être développé sans demandé de préparation initiale.
+%
+Enfin, cet approche ne consiste qu'en l'application d'une rotation et d'une translation.
+%
+Elle n'implique donc pas de modifications de la morphologie de l'échantillon, ce qui permet de conserver intact les dimensions d'origines de l'échantillon.
+
+%%
+%
+Dans le cadre de cette thèse, le recalage ne visait qu'à permettre la comparaison visuelle d'échantillons.
+%
+Il était donc nécessaire d'utiliser une méthode ne déformant pas les échantillons.
+%
+En ne cherchant qu'à comparer les échantillons visuellement, il n'est de plus pas nécessaire de recaler très précisément les échantillons.
+%
+Cependant, la grande quantité d'échantillons à comparer rendait nécessaire l'utilisation d'une méthode rapide.
+%
+Ces critères ont imposé l'emploi d'un recalage rigide.
+
+\subsection{Les segmentations de la matière blanche et des cristallins permet la mise en place d'un recalage rigide}
+
+Pour effectuer le recalage rigide, il est nécessaire d'effectuer une segmentation de la matière blanche et de la larve entière.
+%
+Je vais présenté en section~\ref{sec:algo:larva} et \ref{sec:algo:white} deux algorithmes permettant d'obtenir des segmentations précises de ces deux éléments.
+%
+Cependant, ces segmentations demandent un temps de calcul relativement long.
+%
+Afin de réduire le temps de calcul si ces segmentations n'ont pas été effectué, des procédures de segmentation grossières ont été développées, que nous allons commencé par décrire.
+
+%%
+%
+Soit $I$ une image représentant l'acquisition d'un marquage Dye.
+%
+Pour réaliser une segmentation de la matière blanche, on commence par réaliser une ouverture par un élément structurant carré de 5 voxels d'arête~\eqref{eq:reg:open_1} puis une fermeture par le même élément structurant~\eqref{eq:reg:clos_1}
+%
+On calcule ensuite le neuvième décile de cette image~\eqref{eq:reg:decile}.
+%
+La segmentation de la matière blanche est obtenue en conservant tous les voxels supérieurs à cette valeur seuil~\eqref{eq:reg:white}.
+
+\begin{equation}
+    \label{eq:reg:open_1}
+    W'_{1} = \gamma_{c_5}(I)
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:clos_1}
+    W'_{2} = \gammvarphi_{c_5}(W'_1)
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:decile}
+    \beta = \percentile_{90}(W'_2)
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:white}
+    S'_w = T_{\beta}(W'_2)
+\end{equation}
+
+%%
+%
+La segmentation grossière de la larve entière commence par un seuillage.
+%
+On conserve ainsi tous le voxels ayant une valeur de gris supérieur à 100~\eqref{eq:reg:larve:thres}.
+%
+On applique ensuite une ouverture ultime par volume pour ne conserver que le plus gros objet détecté par seuillage~\eqref{eq:reg:size}.
+%
+On ferme ensuite cette ouverture ultime par l'application d'un élément structurant carré de 25 voxels d'arête~\eqref{eq:reg:clos_2}.
+%
+Enfin, afin de supprimer de potentiels trous dans l'objet détecté, on applique une dilatation géodésique d'un cadre en utilisant l'inverse de $L'_3$~\eqref{eq:reg:larva}.
+%
+Le résultat de cette dilatation géodésique sera notre segmentation grossière de la larve entière.
+
+\begin{equation}
+    \label{eq:reg:larve:thresh}
+    L'_{1} = T_{100}(I)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:open_volume}
+    L'_{2} = \gamma^{\alpha}_{u}(L'_1)
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:clos_2}
+    L'_{3} = \varphi_{c_25}(L'_2)
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:larva}
+    S'_l = \delta_{L'_3}(F)
+\end{equation}
+
+%%
+%
+Dans la suite, $S_l$ et $S_w$ décriront respectivement la semgnetation de la larve entière et la segmentation de la matière blanche, qu'il s'agisse des segmentations grossières ou des segmentations obtenues par l'application des algorithmes dans les sections~\ref{sec:algo:larva} et \ref{sec:algo:white}.
+
+%%
+%
+Pour calculer l'axe interoculaire, on commence par réaliser la segmentation des cristallins.
+%
+On calcule tout d'abord le premier centile de l'image~\eqref{eq:reg:crist:percentile}.
+%
+On effectue un seuillage afin de conserver les voxels ayant une valeur inférieur au premier centile~\eqref{eq:reg:crist:thresh_in}.
+%
+Afin de ne conserver que les régions se trouvant à l'intérieur de la larve, on calcule l'intersection entre ce seuillage et la segmentation de la larve entière~\eqref{eq:reg:crist:intersection}.
+%
+
+\begin{equation}
+    \label{eq:reg:crist:percentile}
+    \zeta = \percentile_1(I) 
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:crist:thresh_in}
+    E_1= T_{\zeta}(I) 
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:crist:intersection}
+    E_2 = E_1 \cap S_l
+\end{equation}
+
+%%
+%
+On seuille une seconde fois I pour ne conserver que les voxels ayant une valeur de gris supérieur au médian de $I$~\eqref{aq:reg:crist:thresh_out}.
+%
+On calcule ensuite l'union entre ce second seuillage et la segmentation de la larve entière~\eqref{eq:reg:crist:union}.
+%
+Afin de supprimer de petits éléments pouvant se trouvant dans cette image, on calcule une érosion par un élément structurant cubique de 5 voxels d'arête~\eqref{eq:reg:crist:erod_1}, puis une dilatation géodésique de cette érosion en utilisant $E_4$ comme masque~\eqref{eq:reg:crist:geo_dilat}.
+
+\begin{equation}
+    \label{eq:reg:crist:thresh_in}
+    E_3= T_{\mu(I)}(I) 
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:crist:union}
+    E_4= E_3 \cup S_l
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:crist:erod_1}
+    E_5= \varepsilon_{c_5}(E_4)
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:crist:geo_dilat}
+    E_6= \delta_{E_4}(E_5)
+\end{equation}
+
+%%
+%
+On combine ensuite $E_6$ et $E_2$ pour obtenir une carte des racines internes et externes aux cristallins~\eqref{eq:reg:crist:zones}.
+%
+On calcule le gradient morphologique de $I$~\eqref{eq:reg:crist:grad}.
+%
+On calcule ensuite une \watershed{} en utilisant $E_7$ comme liste de racine et $E_8$ comme carte topologique~\eqref{eq:reg:crist:water}.
+
+\begin{equation}
+    \label{eq:reg:crist:zones}
+    E_7= E_6 + 2 * E_2
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:crist:grad}
+    E_8= \grad_M(I)
+\end{equation}
+
+\begin{equation}
+    \label{eq:reg:crist:water}
+    E_9= \watershedMath(E_8,E_7)
+\end{equation}
+
+%%
+%
+On calcule maintenant la sphéricité de chaque objet de $E_9$, et on ne conserve que les objets ayant une sphéricité supérieur à $0.8$.
+%
+En conservant les deux plus grands objets restants, on obtient la segmentation des deux cristallins.
+%
+En calculant le vecteur unitaire allant du centre de $I$ au centre des deux cristallins, on obtient le vecteur décrivant la translation que l'on souhaite appliquer pendant notre transformation rigide. Appelons ce vecteur $T$
+%
+On calcule ensuite le vecteur unitaire allant du centre du cristallin gauche au centre du cristallin droit.
+%
+Appelons ce vecteur $V_e$.
+
+%%
+%
+On cherche ensuite à calculer le vecteur décrivant l'axe majeur de la matière blanche.
+%
+Pour ce faire, on commence par calculer les moments seconds de $S_w$.
+%
+Le calcul des vecteurs propres de ces moments permet d'obtenir les vecteurs décrivant l'ellipsoïde englobant la matière blanche.
+%
+On conserve le plus grand demi-axe.
+%
+Pour définir un vecteur unitaire à partir de demi-axe,
+on oriente le vecteur de manière à ce qu'il aille du centre de la matière blanche vers le projeté du centre de $S_l$ sur la droite définie par le plus grand demi axe et le centre de la matière blanche.
+%
+De cette manière, ce vecteur est orienté de la tête vers la queue.
+%
+Appelons le $V_m$.
+
+%%
+%
+Afin d'assurer l'orthogonalité de la base que l'on cherche à définir, on calcule le projeté de $V_m$ sur $V_e$.
+%
+Cette projection sera appelé $V_p$.
+%
+Afin d'obtenir le troisième vecteur décrivant la rotation a effectuée, on calcule le produit vectoriel entre $V_m$ et $V_e$.
+%
+L'orientation de ce vecteur est choisie de manière à pointer du centre de $S_l$ vers le projeté du centre de la matière blanche.
+%
+Appelons ce vecteur $V_t$.
+
+%%
+%
+Il est donc possible de construire la matrice décrivant la transformation rigide a effectué en associant $T$, $V_e$, $V_m$ et $V_t$.
+%
+Appelons cette matrice $M_T$
+%
+Le recalage est alors effectué en calculant la transformée affine de I par la $M_T$.
+
+%%
+%
+Une fois la matrice de transformation obtenue, il est possible d'appliquer la transformation affine décrite à n'importe quelle image.
+%
+Cette approche permet ainsi de calculer une matrice de transformation sur le canal Dye tout en appliquant la même transformation à tous les canaux ayant été acquis simultanément.
+\end{document}

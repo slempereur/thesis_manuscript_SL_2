@@ -5,7 +5,8 @@
 
 \begin{document}
             
-\section{Méthodes d'amélioration de contraste au sein d'images 3D}
+\sectionmark{Amélioration de contraste}
+\section{L'amélioration de contraste, une méthode indispensable pour compenser la perte d'intensité lumineuse en profondeur}
 
 %
 Comme vu précédemment, les images obtenues par un système d'imagerie peuvent présenter de fortes disparités de contraste, ayant différentes origines, et il n'est pas toujours possible de corriger tous les défauts lors de l'acquisition.
@@ -14,7 +15,7 @@ Il a donc été nécessaire de développer un certain nombre d'approches de corr
 %
 Je vais aborder trois sortes de méthodes permettant de compenser des défauts de contraste: des approches basées sur l'étude de l'histogramme des valeurs de gris, des approches basées sur la correction de la loi de Beer-Lambert et enfin des approches basées sur de multiplies acquisitions.
 
-\subsection{Amélioration par égalisation d'histogrammes}
+\subsection{L'égalisation d'histogrammes, une approche historique mais limitée}
 
 %%
 %
@@ -23,9 +24,9 @@ Une des premières approches d'amélioration de contraste d'une image se basant 
 Cette méthode vise à "aplanir" l'histogramme des valeurs de gris de l'image.
 %
 En considérant la probabilité qu'un pixel ait une valeur inférieure ou égale à une certaine valeur de gris,
-il est possible de calculer une fonction de répartition, qui attribuera à chaque valeur de gris une nouvelle valeur. De cette manière, le nouvelle histogramme aura une répartition plus homogène des valeurs de gris, ce qui permet en principe d'améliorer le contraste de l'image (voir Figure~\ref{fig:he}).
+il est possible de calculer une fonction de répartition, qui attribuera à chaque valeur de gris une nouvelle valeur. De cette manière, le nouvelle histogramme aura une répartition plus homogène des valeurs de gris, ce qui permet en principe d'améliorer le contraste de l'image (voir \autoref{fig:he}).
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
        \caption{
@@ -41,8 +42,7 @@ il est possible de calculer une fonction de répartition, qui attribuera à chaq
     \end{subfigure}
     \caption{
         \label{fig:he}
-        Exemple d'application d'une \he{}.
-    }
+        Exemple d'application d'une \he{}.\newline Après égalisation d'histogramme, le contraste est augmenté ce qui permet de rendre visibles certaines structures tout en entraînant une saturation de certaines régions.L'image d'origine et l'algorithme de \he{} ont été extraits respectivement du module \href{https://scikit-image.org/docs/dev/api/skimage.data.html#skimage.data.moon}{data} et du module \href{https://scikit-image.org/docs/dev/api/skimage.exposure.html}{exposure} de skimage}
 \end{figure}
 
 
@@ -50,14 +50,14 @@ il est possible de calculer une fonction de répartition, qui attribuera à chaq
 %
 Cependant, cette approche calculant les nouvelles valeurs de gris sur la base de l'histogramme des valeurs de gris de l'ensemble de l'image, cette approche ne tient pas compte du voisinage de chaque pixel. Cette approche ne sera par exemple pas en mesure de détecter un gradient de contraste au sein de l'image, ou une modification locale d'illumination.
 %
-Une correction de ce défaut a été apporté par le développement de l'\ahe{}\cite{hummel_1977}. Cette méthode consiste à calculer pour chaque pixel une fonction de répartition (voir Figure~\ref{fig:ahe}).
+Une correction de ce défaut a été apporté par le développement de l'\ahe{}\cite{hummel_1977}. Cette méthode consiste à calculer pour chaque pixel une fonction de répartition (voir \autoref{fig:ahe}).
 %
 On choisit pour cela une forme représentant le voisinage de chaque pixel. L'\ahe{} calcule  la valeur de gris de chaque pixel en effectuant une \he{} au sein du voisinage. Cette approche locale permet ainsi de compenser des défauts liés à l'égalisation d'histogramme simple.
 Cependant, cette approche est très sensible au bruit. En effet, le calcul de la fonction de répartition d'un pixel de bruit présent dans une région à intensité quasi-constante entraîne l'amplification du bruit.
 %
 La première solution proposé pour corriger ce défaut fut l'application d'un filtre Laplacien avant de calculer l'\ahe{}~\cite{hummel_1977}. Malheureusement , cela peut altérer certaines structures de l'image d'origine, et ainsi faire perdre de l'information.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
        \caption{
@@ -73,17 +73,18 @@ La première solution proposé pour corriger ce défaut fut l'application d'un f
     \end{subfigure}
     \caption{
         \label{fig:ahe}
-        Exemple d'application d'une \ahe{}. Un noyau de 16 pixels a été choisi.
+        Exemple d'application d'une \ahe{}.\newline
+        Un noyau de 16 pixels a été choisi. Les régions que l'\he{} saturaient ne le sont plus, mais le résultat de l'\ahe{} est particulièrement bruité.
     }
 \end{figure}
 %%s
 %
-Une solution ultérieure fut le développement de l'\clahe{}~\cite{pizer_1987}. Avant le calcul de l'\clahe{}, on définit une valeur seuil. L'histogramme des valeurs de gris pour chaque pixel est calculé et le nombre de pixels pour chaque valeur de gris est comparé à la valeur seuil choisie. Si une valeur de gris a un nombre de pixels supérieure à la valeur seuil, on redistribue cet excédant aux autres valeurs de gris. La fonction de répartition est alors calculée sur cet histogramme tronqué plutôt que sur l'histogramme d'origine (voir Figure~\ref{fig:clahe}).
+Une solution ultérieure fut le développement de l'\clahe{}~\cite{pizer_1987}. Avant le calcul de l'\clahe{}, on définit une valeur seuil. L'histogramme des valeurs de gris pour chaque pixel est calculé et le nombre de pixels pour chaque valeur de gris est comparé à la valeur seuil choisie. Si une valeur de gris a un nombre de pixels supérieure à la valeur seuil, on redistribue cet excédant aux autres valeurs de gris. La fonction de répartition est alors calculée sur cet histogramme tronqué plutôt que sur l'histogramme d'origine (voir \autoref{fig:clahe}).
 %%
 %
 Pour une région quasi-constante, la redistribution des valeurs trop présentes transforme un histogramme présentant une région de pics en un histogramme plat. Ce changement de forme de l'histogramme permet de réduire l'amplification du bruit, car un pixel de bruit dans une zone constante ne sera plus détectable sur l'histogramme de répartition obtenue, et ne sera donc que peu modifié par l'application de la fonction de répartition.
 
-\begin{figure}[h]
+\begin{figure}[!h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
        \caption{
@@ -112,15 +113,15 @@ Pour une région quasi-constante, la redistribution des valeurs trop présentes 
     \end{subfigure}
     \caption{
         \label{fig:clahe}
-        Exemple d'application de l'\clahe{}.
-        Le cadre magenta représente la région utilisée pour calculer l'histogramme des valeurs de gris.
+        Exemple d'application de l'\clahe{}.\newline
+        Le cadre noir représente la région utilisée pour calculer l'histogramme des valeurs de gris.
         Un noyau de 16 pixels et une valeur seuil de 0.03 ont été choisis.
-        Pour les histogrammes, les ligne verte et  magenta représentent respectivement la valeur seuil et l'histogramme cumulé. 
+        Pour les histogrammes, les ligne vertes et magentas représentent respectivement la valeur seuil et l'histogramme cumulé.
+        %
+        En empêchant la sureprésentation de certaines classes de pixels, la limitation de contraste permet d'étaler l'histogramme des valeurs de gris, évitant ainsi un pic sur l'histogramme cumulé qui aurait entrainait une saturation de pixels de bruit.
+        
     }
 \end{figure}
-
-
-\color{magenta}Ajouter figures explicative et d'illustration\color{black}
 
 %%
 %
@@ -145,10 +146,11 @@ En ne considérant que l'information fournie par l'image, ces algorithmes ne pre
 %
 Cependant, d'autres méthodes ont été développés pour permettre de tenir compte de défauts provenant du système d'imagerie lui-même.
 
-\subsection{Compensation de l'atténuation décrite par la loi de Beer-Lambert} % Il faut trouver une meilleur nom
+\subsection{Compensation de l'atténuation par la modélisation d'une exponentielle décroissante} % Il faut trouver une meilleur nom
 
 %% Loi de Beer lambert
 %
+\label{sec:beer}
 La loi de Beer-Lambert décrit l'absorption d'un faisceau lumineux en fonction de l'épaisseur de milieu traversé. Elle établit ainsi que l'absorption d'un rayon lumineux dans un milieu est proportionnelle à l'intensité lumineuse du rayon, la distance parcourue par ce rayon et la concentration de molécules responsables de l'atténuation.
 %
 Cette loi peut être décrite par la formule suivante:
@@ -181,7 +183,7 @@ Il est alors possible de compenser la loi de Beer-Lambert en multipliant les acq
 %
 Nous allons donc maintenant voir différentes solutions utilisant la multiplication des acquisitions.
 
-\subsection{Approches par la multiplication d'acquisitions}
+\subsection{La multiplication des acquisitions permet de corriger le contraste des images 3D}
 
 Plusieurs approches font appel à des acquisitions successives afin d'améliorer le contraste de l'image finale.
 %
@@ -215,7 +217,7 @@ L'acquisition dorsale permet alors de compenser l'atténuation en profondeur de 
 %
 La fusion de deux acquisitions permet ainsi de corriger les défauts présents sur l'une d'entre elle.
 %
-En augmentant le  d'acquistions, il est alors possible d'améliorer le contraste de l'image finale.
+En augmentant le nombre d'acquistions, il est alors possible d'améliorer le contraste de l'image finale.
 
 %% Principe de la tomographie
 %

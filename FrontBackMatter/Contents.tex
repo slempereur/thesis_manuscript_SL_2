@@ -9,13 +9,11 @@
 \setcounter{secnumdepth}{3} % Depth of sections to number in the text itself - currently up to subsubsections
 
 \manualmark
-\markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
+%\markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
 \tableofcontents 
 \automark[section]{chapter}
 \renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
-
-\begin{comment}
 
 \clearpage
 
@@ -28,41 +26,40 @@
 %	List of Figures
 %----------------------------------------------------------------------------------------
 
-\refstepcounter{dummy}
-%\addcontentsline{toc}{chapter}{\listfigurename} % Uncomment if you would like the list of figures to appear in the table of contents
-\pdfbookmark[1]{\listfigurename}{lof} % Bookmark name visible in a PDF viewer
+%\refstepcounter{dummy}
+%%\addcontentsline{toc}{chapter}{\listfigurename} % Uncomment if you would like the list of figures to appear in the table of contents
+%\pdfbookmark[1]{\listfigurename}{lof} % Bookmark name visible in a PDF viewer
 
-\listoffigures
+%\listoffigures
 
-\vspace{8ex}
-\newpage
+%\vspace{8ex}
+%\newpage
 
 %----------------------------------------------------------------------------------------
 %	List of Tables
 %----------------------------------------------------------------------------------------
 
-\refstepcounter{dummy}
-%\addcontentsline{toc}{chapter}{\listtablename} % Uncomment if you would like the list of tables to appear in the table of contents
-\pdfbookmark[1]{\listtablename}{lot} % Bookmark name visible in a PDF viewer
+%\refstepcounter{dummy}
+%%\addcontentsline{toc}{chapter}{\listtablename} % Uncomment if you would like the list of tables to appear in the table of contents
+%\pdfbookmark[1]{\listtablename}{lot} % Bookmark name visible in a PDF viewer
 
-\listoftables
+%\listoftables
         
-\vspace{8ex}
-\newpage
+%\vspace{8ex}
+%\newpage
     
 %----------------------------------------------------------------------------------------
 %	List of Listings
 %---------------------------------------------------------------------------------------- 
 
-\refstepcounter{dummy}
-%\addcontentsline{toc}{chapter}{\lstlistlistingname} % Uncomment if you would like the list of listings to appear in the table of contents
-\pdfbookmark[1]{\lstlistlistingname}{lol} % Bookmark name visible in a PDF viewer
+%\refstepcounter{dummy}
+%%\addcontentsline{toc}{chapter}{\lstlistlistingname} % Uncomment if you would like the list of listings to appear in the table of contents
+%\pdfbookmark[1]{\lstlistlistingname}{lol} % Bookmark name visible in a PDF viewer
 
-\lstlistoflistings 
-\end{comment}
+%\lstlistoflistings 
 
-\vspace{8ex}
-\newpage
+%\vspace{8ex}
+%\newpage
        
 %----------------------------------------------------------------------------------------
 %	Acronyms
@@ -82,12 +79,14 @@
 \acro{dpf}{jours post-fertilisation (de l'anglais days post fertilization}
 \acro{hpf}{heures post-fertilisation}
 \acro{wpf}{semaines post-fertilisation (de l'anglais week post fertilisation}
-\acro{HCS}{Crible haut-débit (de l'anglais high content screening)}
-\acro{HTI}{Imagerie haut-débit (de l'anglais high troughput imaging)}
-\acro{HCA}{Analyse haut-débit (de l'anglais high content analysis)}
-\acro{RI}{indice de réfraction (de l'anglais refractive index)}
-\acro{ZFaCT}{}
+\acro{HCS}{\Hcs{} (de l'anglais high content screening)}
+\acro{HTI}{\Hti{} (de l'anglais high troughput imaging)}
+\acro{HCA}{\Hca{} (de l'anglais high content analysis)}
+\acro{EE}{\Ee}
 \acro{VAST}{Vertebrate Automated Screening Technology}
+\acro{SBDDCC}{\sbddcc}
+\acro{SBLC}{\sblc}
+\acro{ZBI}{ZeBraInspector}
 \end{acronym} 
 
 \endgroup

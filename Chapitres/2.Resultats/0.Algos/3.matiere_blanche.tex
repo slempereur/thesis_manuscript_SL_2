@@ -1,0 +1,186 @@
+\providecommand{\main}{../../..}
+
+\documentclass[\main/main.tex]{subfiles}
+
+\begin{document}
+
+\sectionmark{Segmentation de la matière blanche}
+\section{\label{sec:algo:white}
+La segmentation de la matière blanche, une étape centrale de la plateforme ZBI.
+}
+
+\subsection{Le marqueur liphophile révèle fortement la matière blanche}
+
+%%
+%
+Le Dye marque les lipides, ce qui entraîne deux types de marquages au sein du \pz{}.
+%
+En marquant les lipides contenues dans les membranes, il produit un marquage dans l'ensemble de l'échantillon.
+%
+Dans le cadre de la détection de la matière blanche cérébrale, ce marquage peut être considéré comme du bruit, bien qu'il permette de réaliser la segmentation de la larve entière.
+%
+Le second marquage est le marquage des fibres de myéline qui entoure certaines projections neuronales.
+%
+Ces gaines de myélines, formées de lipides, servent à isoler l'axone.
+%
+De cette manière, il permet d'accélérer la propagation du potentiel d'action au sein des neurones, tout en protégeant l'axone de potentiels agression.
+%
+La forte teneur en lipides de ces gaines de myélines va induire un marquage beaucoup plus intense, ce qui permet de détecter la matière blanche cérébrale.
+
+%%
+%
+L'étude de la matière blanche est intéressante pour plusieurs raisons.
+%
+Tout d'abord, certaines pathologies comme la sclérose en plaque ou les formes démyélinisantes de la  maladie de Charcot\hyp{}Marie\hyp{}Tooth altère la myéline.
+%
+La matière blanche peut donc être un marqueur de l'avancement d'une de ces maladies, et peut ainsi servir à étudier la réponse du \pz{} à un traitement visant à soigner une de ces pathologies~\cite{burrows_2019,kulkarni_2017}.
+%
+Le cerveau peut être découpé en deux parties différents :La matière grise, composée principalement des corps cellulaires des neurones et de certaines cellules gliales, et la matière blanche, composée des projections myélinisées des neurones.
+%
+La mesure de la matière blanche peut donc être une première approximation du volume cérébrale en l'absence de marqueur de la matière grise.
+%
+Cette possibilité est critiquable, car il est possible que le ratio entre matière grise et matière blanche soit affecté par une pathologie ou un agent neurotoxique.
+%
+Mais en étant couplé à une détection de la matière grise, La détection de la matière blanche peut donc permettre de détecter une anomalie dans le développement cérébrale en mesurant le ratio entre matière grise et matière blanche et peut permettre la mesure du volume total du cerveau.
+
+%%
+%
+Cette thèse a donc été l'occasion de développer un algorithme de segmentation de la matière blanche en utilisant les propriétés du marquage Dye.
+
+
+\subsection{Un algorithme pour isoler le cerveau des autres régions marquées}
+
+%%
+%
+Considérons $I$ comme une acquisition d'un marquage au Dye.
+%
+Si la segmentation de la larve entière a été réalisée, $I$ est réduit à la boite englobante de la segmentation de la larve entière pour réduire le temps de calcul.
+%
+De plus, s'il a été jugé utile de réaliser un SBDDCC (voir section~\ref{sec:sbddcc}, l'image à segmenté peut être l'image après application de l'algorithme de correction de contraste.
+%
+Dans la suite, $I$ décrira ainsi indistinctement quatre types d'image:
+Une image brute, la sous-région de l'image brute contenant la larve,
+l'image après application de SBDDCC ou encore la sous-région de l'image après SBDDCC dans laquelle se trouve la larve.
+
+%%
+%
+Afin de réduire l'importance du bruit, on applique une ouverture par un élément structurant cubique de 5 voxels d'arête~\eqref{eq:white:open_1} puis une fermeture par le même élément structurant~\eqref{eq:white:clos_1}.
+
+\begin{equation}
+\label{eq:white:open_1}
+    W_1 = \gamma_{c_5}(I)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:clos_1}
+    W_2 = \varphi_{c_5}(W_1)
+\end{equation}
+
+%%
+%
+On calcule ensuite les valeur de gris représentant le médian des valeur de gris de l'image~\eqref{eq:white:thresh:value:low} et le neuvième décile des valeurs de gris de l'image~\eqref{eq:white:thresh:value:low}.
+%
+On seuille ensuite $W_2$ une première fois pour conserver les voxels supérieurs au neuvième décile~\eqref{eq:white:thresh:high}, puis une seconde fois pour conserver les voxels inférieurs au médian~\eqref{eq:white:thresh:low}.
+%
+On applique à ce second seuillage une érosion par un élément structurant cubique de 15 voxels d'arête~\eqref{eq:white:erod_1}.
+
+\begin{equation}
+\label{eq:white:thresh:value:low}
+    \mu_w = \median{}(W_2)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:thresh:value:high}
+    \alpha = \percentile_{90}(W_2)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:thresh:high}
+    W_3 = T_{\alpha}(W_2)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:thresh:low}
+    W_4 = \inv{}(T_{\mu_w}(W_2))
+\end{equation}
+
+\begin{equation}
+\label{eq:white:erod_1}
+    W_5 = \varepsilon_{c_{15}}(W_4)
+\end{equation}
+
+%%
+%
+On associe le résultat de cette érosion avec le premier seuillage pour obtenir une première approximation des zones internes et externes à la matière blanche~\eqref{eq:white:zones}.
+%
+On calcule ensuite la liste des maxima locaux de $W_2$~\eqref{eq:white:maxima}.
+%
+En combinant la liste des maxima locaux avec les zones précédemment calculées,
+on obtient une liste de racines intérieures et extérieures à la matière blanche~\eqref{eq:white:seeds}
+
+\begin{equation}
+\label{eq:white:zones}
+    W_6 = W_5 + 2W_3
+\end{equation}
+
+\begin{equation}
+\label{eq:white:maxima}
+    W_7 = \localmax(W_2)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:seeds}
+    W_8 = W_7 * W_6
+\end{equation}
+
+%%
+%
+On calcule maintenant le gradient morphologique de $W_2$~\eqref{eq:white:grad}.
+%
+On utilise ensuite le gradient morphologique et $W_r$ pour calculer une \watershed{}~\eqref{eq:white:watershed}.
+%
+Cette \watershed{} permet de détecter la matière blanche, mais détecte aussi d'autres régions présentant des marquages importants, comme le sac vitélin.
+%
+Afin de supprimer ces éléments, on calcule une ouverture ultime par volume du résultat de la \watershed{}~\eqref{eq:white:open_volume}.
+
+\begin{equation}
+\label{eq:white:grad}
+    W_9 = \grad{}_M(W_2)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:watershed}
+    W_{10} = \watershedMath{}(W_9,W_8)
+\end{equation}
+
+\begin{equation}
+\label{eq:white:open_volume}
+    W_{11} = \gamma^{\alpha}_{u}(W_{10})
+\end{equation}
+
+%
+Cette procédure détruit cependant toutes les petites régions cérébrales.
+%
+Pour les récupérer, on commence par calculer une dilatation de $W_{11}$ par un élément structurant cubique de 11 voxels d'arête~\eqref{eq:white:dilat}.
+%
+On calcule ensuite l'intersection entre le résultat du calcul de la \watershed{}
+et la dilatation précedénte~\eqref{eq:white:inter}.
+%
+La segmentation finale est alors la dilatation géodésique de l'intersection en utilisant le résultat du calcul de la \watershed{} comme masque~\eqref{eq:white:geo_dilat}.
+
+\begin{equation}
+\label{eq:white:dilat}
+    W_{12} = \delta_{c_{11}}(W_{11})
+\end{equation}
+
+\begin{equation}
+\label{eq:white:inter}
+    W_{13} = W_{12} \cap W_{W10}
+\end{equation}
+
+\begin{equation}
+\label{eq:white:geo_dilat}
+    S_w = \delta_{W_{10}}(W_{13})
+\end{equation}
+
+\end{document}

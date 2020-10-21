@@ -4,18 +4,19 @@
 
 \begin{document}
 
-\sectionmark{Segmentation de la matière blanche}
+\sectionmark{Algorithme de segmentation de la matière blanche}
 \section{\label{sec:algo:white}
 La segmentation de la matière blanche, une étape centrale de la plateforme ZBI.
 }
+\sectionmark{Algorithme de segmentation de la matière blanche}
 
 \subsection{Le marqueur liphophile révèle fortement la matière blanche}
 
 %%
 %
-Le Dye marque les lipides, ce qui entraîne deux types de marquages au sein du \pz{}.
+Les marqueurs lipophiles marquent fortemment les lipides, ce qui entraîne deux types de marquages au sein du \pz{}.
 %
-En marquant les lipides contenues dans les membranes, il produit un marquage dans l'ensemble de l'échantillon.
+En marquant les lipides contenus dans les membranes, ils produisent un marquage dans l'ensemble de l'échantillon.
 %
 Dans le cadre de la détection de la matière blanche cérébrale, ce marquage peut être considéré comme du bruit, bien qu'il permette de réaliser la segmentation de la larve entière.
 %
@@ -23,43 +24,43 @@ Le second marquage est le marquage des fibres de myéline qui entoure certaines 
 %
 Ces gaines de myélines, formées de lipides, servent à isoler l'axone.
 %
-De cette manière, il permet d'accélérer la propagation du potentiel d'action au sein des neurones, tout en protégeant l'axone de potentiels agression.
+De cette manière, les gaines de myéline  permettent d'accélérer la propagation du potentiel d'action au sein des neurones, tout en protégeant l'axone de potentielles agressions.
 %
-La forte teneur en lipides de ces gaines de myélines va induire un marquage beaucoup plus intense, ce qui permet de détecter la matière blanche cérébrale.
+La forte teneur en lipides de ces gaines de myéline va induire un marquage beaucoup plus intense, ce qui permet de détecter la matière blanche cérébrale.
 
 %%
 %
-L'étude de la matière blanche est intéressante pour plusieurs raisons.
+L'étude de la matière blanche est intéressante en recherche biomédicale pour plusieurs raisons.
 %
-Tout d'abord, certaines pathologies comme la sclérose en plaque ou les formes démyélinisantes de la  maladie de Charcot\hyp{}Marie\hyp{}Tooth altère la myéline.
+Tout d'abord, certaines pathologies comme la sclérose en plaque ou les formes démyélinisantes de la  maladie de Charcot\hyp{}Marie\hyp{}Tooth altèrent la myéline.
 %
 La matière blanche peut donc être un marqueur de l'avancement d'une de ces maladies, et peut ainsi servir à étudier la réponse du \pz{} à un traitement visant à soigner une de ces pathologies~\cite{burrows_2019,kulkarni_2017}.
 %
-Le cerveau peut être découpé en deux parties différents :La matière grise, composée principalement des corps cellulaires des neurones et de certaines cellules gliales, et la matière blanche, composée des projections myélinisées des neurones.
+Le cerveau peut être découpé en deux parties différentes : la matière grise, composée principalement des corps cellulaires des neurones et de certaines cellules gliales, et la matière blanche, composée des projections myélinisées des neurones.
 %
-La mesure de la matière blanche peut donc être une première approximation du volume cérébrale en l'absence de marqueur de la matière grise.
+La mesure de la matière blanche peut donc être une première approximation du volume cérébral en l'absence de marqueur de la matière grise.
 %
-Cette possibilité est critiquable, car il est possible que le ratio entre matière grise et matière blanche soit affecté par une pathologie ou un agent neurotoxique.
+Cela doit être utilisé avec précaution, car il est possible que le ratio entre matière grise et matière blanche soit affecté par une pathologie ou un agent neurotoxique.
 %
-Mais en étant couplé à une détection de la matière grise, La détection de la matière blanche peut donc permettre de détecter une anomalie dans le développement cérébrale en mesurant le ratio entre matière grise et matière blanche et peut permettre la mesure du volume total du cerveau.
+Mais en étant couplé à une détection de la matière grise, la détection de la matière blanche peut donc permettre de détecter une anomalie dans le développement cérébral en mesurant le ratio entre matière grise et matière blanche et peut permettre la mesure du volume total du cerveau.
 
 %%
 %
-Cette thèse a donc été l'occasion de développer un algorithme de segmentation de la matière blanche en utilisant les propriétés du marquage Dye.
+Cette thèse a donc été l'occasion de développer un algorithme de segmentation de la matière blanche en utilisant les propriétés des marqueurs lipophiles.
 
 
 \subsection{Un algorithme pour isoler le cerveau des autres régions marquées}
 
 %%
 %
-Considérons $I$ comme une acquisition d'un marquage au Dye.
+Considérons $I$ comme une acquisition d'un marqueur lipophile.
 %
-Si la segmentation de la larve entière a été réalisée, $I$ est réduit à la boite englobante de la segmentation de la larve entière pour réduire le temps de calcul.
+Si la segmentation de la larve entière a été réalisée, $I$ est réduit à la boîte englobante de la segmentation de la larve entière afin de réduire le temps de calcul.
 %
-De plus, s'il a été jugé utile de réaliser un SBDDCC (voir \autoref{sec:sbddcc}, l'image à segmenté peut être l'image après application de l'algorithme de correction de contraste.
+De plus, s'il a été jugé utile de réaliser un SBDDCC (voir \autoref{sec:sbddcc}), l'image à segmenter peut être l'image après application de l'algorithme de correction de contraste.
 %
-Dans la suite, $I$ décrira ainsi indistinctement quatre types d'image:
-Une image brute, la sous-région de l'image brute contenant la larve,
+Dans la suite, $I$ décrira ainsi indistinctement quatre types d'images:
+une image brute, la sous-région de l'image brute contenant la larve,
 l'image après application de SBDDCC ou encore la sous-région de l'image après SBDDCC dans laquelle se trouve la larve.
 
 %%
@@ -78,7 +79,7 @@ Afin de réduire l'importance du bruit, on applique une ouverture par un éléme
 
 %%
 %
-On calcule ensuite les valeur de gris représentant le médian des valeur de gris de l'image~\eqref{eq:white:thresh:value:low} et le neuvième décile des valeurs de gris de l'image~\eqref{eq:white:thresh:value:low}.
+On calcule ensuite les valeurs de gris représentant le médian des valeur de gris de l'image~\eqref{eq:white:thresh:value:low} et le neuvième décile des valeurs de gris de l'image~\eqref{eq:white:thresh:value:low}.
 %
 On seuille ensuite $W_2$ une première fois pour conserver les voxels supérieurs au neuvième décile~\eqref{eq:white:thresh:high}, puis une seconde fois pour conserver les voxels inférieurs au médian~\eqref{eq:white:thresh:low}.
 %
@@ -164,7 +165,7 @@ Cette procédure détruit cependant toutes les petites régions cérébrales.
 Pour les récupérer, on commence par calculer une dilatation de $W_{11}$ par un élément structurant cubique de 11 voxels d'arête~\eqref{eq:white:dilat}.
 %
 On calcule ensuite l'intersection entre le résultat du calcul de la \watershed{}
-et la dilatation précedénte~\eqref{eq:white:inter}.
+et la dilatation précédénte~\eqref{eq:white:inter}.
 %
 La segmentation finale est alors la dilatation géodésique de l'intersection en utilisant le résultat du calcul de la \watershed{} comme masque~\eqref{eq:white:geo_dilat}.
 

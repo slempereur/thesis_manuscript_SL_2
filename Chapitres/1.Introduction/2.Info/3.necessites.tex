@@ -3,31 +3,49 @@
 \documentclass[\main/main.tex]{subfiles}
 
 \begin{document}
-            
-\sectionmark{Besoin des algorithmes pour le HCA}
+
+\sectionmark{Enjeux des algorithmes pour le HCA}
 \section{Enjeux des algorithmes de recalage et segmentation pour l'\hca{}}
+\sectionmark{Enjeux des algorithmes pour le HCA}
 
 %
-Le développement d'une procédure de \hca{} nécessite le développement de segmentations et d'analyses automatiques, rendues nécessaires à cause de la quantité de données générées, impossibles à traiter manuellement, et parce que l'automatisation des analyses assure une meilleure reproductibilité des analyses.
-Deux enjeux cruciaux pour les analyses automatiques sont la rapidité d'exécution des algorithmes et la flexibilité et larobustesse des approches proposées.
+Le développement d'une procédure d'\hca{} nécessite le développement de segmentations et d'analyses automatiques, rendues nécessaires par la quantité de données générées, impossibles à traiter manuellement, et parce que l'automatisation des analyses assure une meilleure reproductibilité des analyses.
+Deux enjeux cruciaux pour les analyses automatiques sont la rapidité d'exécution des algorithmes et la robustesse des approches proposées.
 
     \subsection{Le temps d'analyse d'image ne doit pas dépasser celui de l'acquisition}
 
 %
-Le développement de procédure de \hca{} nécessite le traitement d'un grand nombre d'échantillons en un temps limité, typiquement 96 échantillons imagés lors d'une unique session.
+Le développement de procédure d'\hca{} nécessite le traitement d'un grand nombre d'échantillons en un temps limité, typiquement 96 échantillons imagés lors d'une unique session.
 %
 Si le temps nécessaire à l'application des algorithmes de segmentation et d'analyse est supérieur au temps nécessaire à l'acquisition, le goulet d'étranglement se situe au niveau du traitement informatique des échantillons.   
+
+%%
 %
-Les systèmes d'imagerie en 3D créent  en effet des images de grande taille et la saturation des disques  durs est un problème récurrent. Une seule session nocturne  d'imagerie d'imagerie à TPS peut engendrer plusieurs centaines de giga-octets de données et les disques tera-octets sont rapidements saturés. Une fois les échantillons analysés, il est souvent nécessaire de les effacer des systèmes de stockage afin de libérer de l'espace disque pour les futures images. Le problème s'accroît avec l'optimisation des cribles. Un crible de juvéniles de 21 jours , deux fois plus longs et larges que des EE de 5 jours conduit à des images presque 10 fois plus grandes.
+Les systèmes d'imagerie en 3D créent  en effet des images de grande taille et la saturation des disques  durs est un problème récurrent.
+%
+Une seule session nocturne d'imagerie à TPS peut engendrer plusieurs centaines de giga-octets de données et les disques tera-octets sont rapidements saturés.
+%
+Une fois les échantillons analysés, il est souvent nécessaire de les archiver afin de libérer de l'espace disque pour les futures images.%
+Le problème s'accroît avec l'optimisation des cribles.
+%
+Un crible de juvéniles de 21 jours, deux fois plus longs et larges que des EE de \pz{}, conduit à des images presque 10 fois plus grandes.
 %
 Or, le temps de traitement étant souvent fonction du nombre de voxels, l'augmentation des tailles des images induit en premier lieu une augmentation du temps de calcul.
 %
 Le développement d'algorithmes de segmentation automatiques devient alors un compromis entre vitesse d'exécution et exactitude des segmentations obtenues.
+
+%%
 %
 Dans la plupart des cas, les méthodes développées depuis plusieurs décennies impliquent des calculs optimisés~\cite{vandroogenbroeck_1996,perreault_2007,trieu_2007}, ce qui permet ainsi souvent de créer des algorithmes rapides.
 %
-Plus le nombre d'acquisitions nécessaires pour la création d'une image est élevé, plus le temps nécessaire d'enregistrement est long. Ce point est souvent compris dans le temps d'acquisition, car les systèmes d'imageries réalisent cette étape automatiquement en routine après l'acquisition. Néanmoins, pour des stratégies  originales comme OPTiSPIM ou la tomographie par VAST, la reconstruction de l'image est à réaliser par l'utilisateur, ce qui ralentit l'analyse informatique.
-D'autres traitements peuvent aussi augmenter les temps d'analyse comme le recalage des échantillons ou la correction en profondeur des contraste des piles d'image
+Plus le nombre d'acquisitions nécessaires pour la création d'une image est élevé, plus le temps nécessaire d'enregistrement est long.
+%
+Ce point est souvent compris dans le temps d'acquisition, car les systèmes d'imageries réalisent cette étape automatiquement en routine après l'acquisition.
+%
+Néanmoins, pour des stratégies  originales comme OPTiSPIM ou la tomographie par VAST, la reconstruction de l'image est à réaliser par l'utilisateur, ce qui ralentit l'analyse informatique.
+%
+D'autres traitements peuvent aussi augmenter les temps d'analyse comme le recalage des échantillons ou la correction en profondeur des contraste des piles d'image.
+%
 Dans ce cas, l'optimisation de la préparation d'échantillons , du montage ou du système d'imagerie adaptés aux objets à étudier sont nécessaires.
 %
 
@@ -51,16 +69,21 @@ Le moyen le plus évident permettant d'éviter des écarts de qualité est de fi
 %
 Cependant, il n'est parfois pas possible d'assurer une qualité d'imagerie constante, pour des raisons diverses, comme des aléas liés aux marquages \ihc{} ou à cause de paramètres physiques comme une mauvaise homogénéité de l'indice de réfraction de la solution d'imagerie.
 
+%%
+%
 Lorsque les images ne sont pas homogènes en profondeur, l'amélioration de contraste peut permettre de compenser les aléas précédemment cités.
 %
 Une seconde approche est la création d'algorithmes les plus résistants possibles aux bruits et aux défauts d'imagerie.
 Une solution simple peut être le développement de méthodes de segmentation basées uniquement sur un seuillage.
 %
- Mais il est rare que des images issues de microscopie en fluorescence présentent des contrastes homogènes entre échantillons et entre expériences ; et le développement de méthodes de segmentations robustes doit bien souvent intégrer une détermination automatique et variable des paramètres de segmentation adaptés à chaque image. Ces approches indispensables sont souvent très longues.
+ Mais il est rare que des images issues de microscopie en fluorescence présentent des contrastes homogènes entre échantillons et entre expériences, et le développement de méthodes de segmentations robustes doit bien souvent intégrer une détermination automatique et variable des paramètres de segmentation adaptés à chaque image.
+ %
+ Ces approches indispensables sont souvent très longues.
+ 
  %%
  %
- En résumé, le développement d'algorithmes de segmentations automatiques doit répondre à un compromis  visant à réduire au maximum le temps de calcul tout en assurant la plus grande exactitude et reproductibilité possible.
+ En résumé, le développement d'algorithmes de segmentations automatiques doit répondre à un compromis visant à réduire au maximum le temps de calcul tout en assurant la plus grande exactitude et reproductibilité possible.
 %
-Dans la suite de ce manuscrit, j'expliquerai comment une plate-forme d'imagerie à moyen débit a été développée, et les difficultés rencontrées pou optimiser les algorithmes de traitement automatisant la détection du cerveau et du corps de l'alevin du poisson-zèbre.
+Dans la suite de ce manuscrit, j'expliquerai comment une plate-forme d'imagerie à moyen débit a été développée, et les difficultés rencontrées pour optimiser les algorithmes de traitement d'images automatisant la détection du cerveau et du corps de l'alevin du poisson-zèbre.
 
 \end{document}

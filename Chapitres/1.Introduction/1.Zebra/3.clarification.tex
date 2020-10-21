@@ -6,8 +6,11 @@
 
 \sectionmark{La clarification permet l'imagerie de tissus épais}
 \section{La clarification de tissu, une approche récente permettant l'imagerie d'échantillons épais}
+\sectionmark{La clarification permet l'imagerie de tissus épais}
 
 \subsection{L'absorbance et la réfraction, les deux limites à la pénétration de la lumière}
+
+\label{sec:clarification:principes}
 
 %%
 %
@@ -25,10 +28,10 @@ De plus, la passage d'un photon d'un milieu à un autre peut être impossible si
 
 %%
 %
-Au sein de tissu biologique, la réfraction est due à des hétérogénéités à deux échelles. Au niveau cellulaire, les lipides contenus dans les membranes de la cellule ou du noyau entraînent des changements d'indice de réfraction au sein d'une cellule. Au niveau d'un organe, un type cellulaire peut avoir un indice de réfraction très différent d'un autre, et donc être plus ou moins différent du milieu d'imagerie.
+Au sein de tissu biologique, la réfraction est due à des hétérogénéités à deux échelles. Au niveau cellulaire, les lipides contenus dans les membranes de la cellule ou du noyau entraînent les changements d'indice de réfraction. Au niveau d'un organe, un type cellulaire peut avoir un indice de réfraction très différent d'un autre, et donc être plus ou moins différent du milieu d'imagerie.
 %%
 %
-Les méthodes de clarification de tissu ont donc en partie pour objectif de diminuer l'importance de ces hétérogénités.
+Les méthodes de clarification de tissu ont donc en partie pour objectif de diminuer l'importance de ces hétérogénéités.
 
 \subsection{Les quatres étapes de la clarification de tissus\label{sec:clarification:etapes}}
 
@@ -43,7 +46,7 @@ Au sein des tissus, la plupart des protéines n'induisent pas de modifications d
 %
 La dépigmentation consiste à détruire chimiquement les pigments par l'utilisation de peroxyde d'hydrogène, qui va entraîner une oxydation des protéines, avec deux effets principaux. Le premier est bien sûr de détruire les pigments mélaniques. De plus, en dénaturant les protéines, le peroxyde d'hydrogène va diminuer les interactions entre les protéines et les photons.
 %
-Les réactions utilisant le peroxyde d'hydrogène sont catalysées par la lumière. Il peut donc être compliqué d'obtenir un traitement adapté car il n'est pas simple de parfaitement maîtriser la lumière environnante. De plus, les protéines sont dénaturées sans sélectivité, et les protéines fluorescentes perdent leur activité. On doit balors à nouveau mlarqyuer ces protéines à l'aide d'anticoros ce qui rallonge considérablement le protocole.
+Les réactions utilisant le peroxyde d'hydrogène sont catalysées par la lumière. Il peut donc être compliqué d'obtenir un traitement adapté car il n'est pas simple de parfaitement maîtriser la lumière environnante. De plus, les protéines sont dénaturées sans sélectivité, et les protéines fluorescentes perdent leur activité. On doit alors à nouveau marquer ces protéines à l'aide d'anticorps, ce qui rallonge considérablement le protocole.
 %
 Pour imager de telles lignées, il est ainsi préférable d'utiliser des lignées de  mutants ne présentant pas de pigmentations sur le corps~\cite{white_2008,antinucci_2016}.
 
@@ -61,11 +64,11 @@ Cette étape consiste donc simplement à effectuer des bains de solutions pour c
 Deux types de solutions sont utilisés pour réaliser l'appariement d'indice de réfraction.
 
 %
-On peut utiliser des solvant organiques comme l'éther dibenzylique ou le tetrahydrofurane.solutions, qui possèdent une indice de réfraction (1.56) proche de l'indice du verre (1.54).
+On peut utiliser des solvant organiques comme l'éther dibenzylique ou le tetrahydrofurane, solutions qui possèdent une indice de réfraction (1.56) proche de l'indice du verre (1.54).
 %
-Elles sont très efficaces mais déshydratent les échantillons, ce qui eqs fragilise et complexifie l'acquisition micrscopique. En effet, ces solutions présentent des risques importants pour la santé humaine et pour l'environnement.
+Elles sont très efficaces mais déshydratent les échantillons, ce qui les fragilise et complexifie l'acquisition microscopique. En effet, ces solutions présentent des risques importants pour la santé humaine et pour l'environnement.
 %
-Ces solutions sont donc à privilégier seulemnt pour l'imagerie d'échantillons de très grandes tailles quand les autres méthodes ne sont pas assez efficaces. En utilisant alors des macroscopes, il est plus facile de construire des cuves étanches pour l'imagerie, la distance de travai et la taille des champs étant très grandes. 
+Ces solutions sont donc à privilégier seulement pour l'imagerie d'échantillons de très grandes tailles quand les autres méthodes ne sont pas assez efficaces. En utilisant alors des macroscopes, il est plus facile de construire des cuves étanches pour l'imagerie, la distance de travail et la taille des champs étant très grandes. 
 
 %%
 %
@@ -76,13 +79,14 @@ L'indice de réfraction de la solution étant proportionnel à la concentration,
 \subsection{Particularités des méthodes par deshydratation et hyperhydratation}
 
 %
-Au fil du temps, de très nombreux protocoles de clarification de tissus ont été publiés. Je présente ici les plus emblématiques, certains été adaptés par TPS au poisson zèbre, et étant couramment utilisés.
+Au fil du temps, de très nombreux protocoles de clarification de tissus ont été publiés. Je présente ici les plus emblématiques, certains été ayant adaptés par TPS au poisson zèbre, et étant couramment utilisés.
 %
 
 %% Simple immersion (Z-Fact)
 
 Sans clarification, le signal obtenu avec un microscope confocal est très dégradé si la lumière a parcouru quelques centaines de microns dans une larve ou un cerveau de poisson zèbre.
-Pour des échantillons présentant une épaisseur maximale jusqu'à 800microns, tel qu'un eleuthéroembryon de 4Jours post-fécondation, il est possible d'utiliser une procédure de clarification relativement simple et rapide n'impliquant que deux étapes : la dépigmentation et l'appariement de l'indice de réfraction~\cite{affaticati_2018}.
+Pour des échantillons présentant une épaisseur maximale de 800 microns, tel qu'un EE de \pz{}, il est possible d'utiliser une procédure de clarification relativement simple et rapide n'impliquant que deux étapes : la dépigmentation et l'appariement de l'indice de réfraction~\cite{affaticati_2018}.
+
 %%
 % iDisco
 iDISCO~\cite{renier_2014} est une méthode de clarification commençant par la déshydratation des tissus par méthanolisation avec les avantages décrits précédemment. 
@@ -115,7 +119,7 @@ La matrice d'hydrogel va remplacer le milieu intersticiel, limitant ainsi la mod
 
 %%
 %
-CUBIC présente l'avantage de pouvoir être utilisé avec une grande variété de solutions de clarification, adaptées à une grande diversité de tissus la clarification de tissus.
+CUBIC présente l'avantage de pouvoir être utilisé avec une grande variété de solutions de clarification, adaptées à une grande diversité de tissus.
 %
 
 \end{document}

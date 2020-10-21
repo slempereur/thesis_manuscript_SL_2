@@ -8,22 +8,23 @@
 
 \begin{document}
             
+\sectionmark{Stratégies de segmentations automatiques}
 \section{Présentation de différentes stratégies de segmentation automatique}
-
+\sectionmark{Stratégies de segmentations automatiques}
 %
 La segmentation d'image consiste à grouper des pixels afin d'extraire une information de l'image, par exemple identifier une ou plusieurs régions d'intérêt.
 %
 Dans le cadre d'imageries de tissus biologiques,
 ces régions d'intérêt peuvent être un organe entier ou une sous\hyp{}région de cet organe~\cite{early_2018,liu_2020,gupta_2018},
 une anomalie dans une structure~\cite{wadhwa_2019,huang_2019,ruikar_2019}
-ou un caractère particulier~\cite{teixid_2019,hinfray_2018} .
+ou un caractère particulier~\cite{teixid_2019}.
 %
 L'approche la plus simple de segmentation consiste à manuellement annoter l'image que l'on souhaite étudier pixel par pixel.
 %
 Cette approche permet en principe d'avoir le résultat le plus précis,
 mais c'est une procédure extrêmement longue, ce qui rend son emploi incompatible avec le traitement d'un grand nombre d'image.
 %
-Il est interminale de définir de façon précise manuellement les limites d'une région, et la segmentation manuelle présente de fort risque de biais inter et intra\hyp{}individuels~\cite{heye_2013}.
+Il est interminable de définir manuellement et de façon précise les limites d'une région, et la segmentation manuelle présente de fort risque de biais inter et intra\hyp{}individuels~\cite{heye_2013}.
 %
 Les biais intra\hyp{}individuels peuvent être limité par l'utilisation d'outil de segmentation semi\hyp{}manuels~\cite{berg_2019,benenson_2019} qui permettent à l'utilisateur de définir un ensemble de paramètres qui seront ensuite appliqués à toutes les segmentations manuelles effectués par cet utilisateur.
 %
@@ -33,7 +34,7 @@ Pour accélérer la segmentation et le rendre plus précise, il est possible de 
 %
 Nous allons donc maintenant faire un état de l'art de différentes approches de la segmentations automatiques, et aussi exposer les limites inhérentes à ces algorithmes.
 
-    \subsection{Le seuillage, une approche simple mais insuffisante}
+    \subsection{Le seuillage, une approche simple mais insuffisante\label{sec:intro:seuilage}}
     
 %
 Le seuillage est une procédure d'étiquetage des pixels en deux classes en fonction des valeurs de gris des pixels. Elle consiste à conserver tous les pixels supérieurs à une valeur définie. De par sa simplicité, elle a été une des premières stratégie de segmentation automatique~\cite{sakai_1969,otsu_1979}.
@@ -49,22 +50,47 @@ Nous allons donc maintenant présenter diverses approches de seuillages présent
 L'approche la plus simple est l'emploi d'une valeur de seuil définie à priori~\cite{hinfray_2018}.
 %
 De nombreux outils de visualisation d'images permettent d'effectuer rapidement ce type ces procédures et de les automatiser, par exemple avec des macros ImageJ.
+
+%%
 %
 Cependant, la détermination de la valeur seuil est un point limitant de cette méthode, du fait de la variabilité des niveaux de gris entre acquisitions, en particulier si les dispositifs d'imagerie ne sont pas calibrés.
 %
 Si les images ne sont pas saturées , le même histogramme de valeur de gris pour une modalité donnée est obtenu quelque soit l'opérateur ou l'appareil employé.
 %
 Différentes approches de seuillage utilisent cet histogramme pour choisir la valeur seuil.
+
+%%
 %
 La solution la plus simple consiste à ne conserver qu'une proportion de pixels en choisissant la valeur seuil de manière à ce que le nombre de pixels ayant une valeur supérieure à ce seuil soit équivalent à la proportion de pixels que l'on souhaite conserver.
 %
 Cette méthode présente toutefois le défaut de devoir prédéfinir la surface totale de la segmentation ce qui peut induire des défauts importants de segmentations si la taille ou la forme des objets varient.
 %
 Il est donc souhaitable de tenter de définir automatiquement la valeur seuil, une des premières approches de ce type ayant été proposé par \textsc{Nobuyuki Otsu}~\cite{otsu_1979}.
+
+\ajout{
+%%
 %
-Considérons une image, scindée en deux classes de valeurs de gris, avec une variance de valeurs de gris inter\hyp{}groupe différente. En utilisant l'histogramme des valeurs de gris, il est possible de définir une valeur de gris qui permet de maximiser la variance inter\hyp{}groupe.
+Considérons une image pouvant être scindée en deux classes de valeurs de gris.
 %
-Cette approche est facilement généralisable à la segmentation de plusieurs classes de pixels. Pour une segmentation en $n$ classes, il suffit alors de chercher les $n-1$ critères permettant de maximiser les variances entre chaque groupes~\cite{kugler_2019,ibrahim_2020,huang_2020}.
+Il existe alors une valeur de gris permettant de maximiser la variance inter\hyp{}groupe des valeurs de gris au sein des deux classes définies par cette valeur.
+%
+On appelle cette valeur de gris critère d'\textsc{Otsu}.
+%
+Ce critère est intéressant car en maximisant la variance inter\hyp{}classe, on minimise les variances intra\hyp{}classes.
+%
+Or, on suppose que des classes ayant une variance internes minimales possèdent une plus grande cohérence.
+%
+On utilise ainsi l'histogramme des valeurs de gris de l'image pour chercher le critère d'\textsc{Otsu} qui coupe alors l'image en deux régions cohérentes.
+%
+Cet méthode est encore régulièrement employée pour réaliser des segmentations automatiques
+~\cite{kugler_2019,ibrahim_2020,huang_2020}.
+
+%%
+%
+Cette approche est facilement généralisable à la segmentation de plusieurs classes de pixels.
+%
+Pour une segmentation en $n$ classes, il suffit alors de chercher les $n-1$ critères permettant de maximiser les variances entre chaque groupes.
+}
 
 %% Défauts
 %
@@ -77,28 +103,33 @@ Ne prenant pas en compte le voisinage de chaque pixel, ces algorithmes considèr
 %
 Enfin, ces procédures n'étant basées que sur la séparation de l'image en deux classes de valeurs de gris, il n'est pas possible de segmenter des régions ayant des valeurs de gris similaires mais séparées par un changement de textures ou séparées par un changement local d'intensité lumineuse.
 %%
-Il faut donc mettre en place un ensemble de filtre permettant de corriger les images avant de les seuiller. La morphologie mathématique apporte un certain nombre de ces filtres, ainsi que ses propres procédures de segmentation.
+\ajout{
+Dans certains cas, l'emploi de filtre avant et après le seuillage peut permettre d'obtenir malgré tout une segmentation correcte.
 %
-Nous allons donc maintenant voir comment la morphologie mathématique peut permettre d'améliorer la segmentation automatique d'images.
+La morphologie mathématique apporte certains filtres, mais aussi ses propres procédures de segmentation.
+}
 
-    \subsection{La morphologie mathématique améliore la précision des segmentations}
+    \subsection{La morphologie mathématique améliore la précision des segmentations\label{sec:intro:morpho}}
     
 %
 La morphologie mathématique est un théorie mathématique principalement développée afin de mettre au point des procédures d'analyse d'image.
 %
 Deux opérateurs de bases sont employés, l'érosion et la dilatation.
 %
-Pour une image en niveaux de gris, il s'agit de calculer respectivement le minimum ou le maximum au voisinage de chaque pixel (Voir \autoref{fig:morpho:operateurs}).
+Pour une image en niveaux de gris, il s'agit de calculer respectivement le minimum ou le maximum au sein du voisinage de chaque pixel (Voir \autoref{fig:morpho:operateurs}).
 %
-Le voisinage concerné est appelé élément structurant, et peut avoir un grand nombre de formes.
+Ce voisinage est appelé élément structurant, et peut avoir un grand nombre de formes .
+
+
+%%%
 %
-L'utilisation d'une forme particulière peut alors permettre de révéler une structure particulière dans une image.
+L'utilisation d'une forme particulière peut permettre de révéler une structure particulière dans une image (voir \autoref{fig:morpho:es}).
 %
-Par exemple, une érosion par un ensemble de lignes tournant autour du point d'intérêt peut permettre de faire disparaître des structures linéaires.
+Par exemple, une érosion par un ensemble de lignes ayant différents angles peut permettre de faire disparaître les structures linéaires.
 %
-Un troisième opérateur est le filtre de rang, qui consiste à conserver pour chaque pixel la $n$\textsuperscript{ième} valeur du voisinage, $n$ étant le rang de l'élément.
+Un troisième opérateur est le filtre de rang, qui consiste à conserver pour chaque pixel la $n$\textsuperscript{ième} valeur de gris au sein de l'élément structurant, $n$ étant le rang de l'élément.
 %
-L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace chaque pixel par la valeur médiane au sein  de l'élément structurant choisi.
+L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace le pixel par la valeur médiane au sein de l'élément structurant choisi.
 
 \begin{figure}[h!]
     \centering
@@ -155,7 +186,7 @@ L'exemple de filtre de rang le plus connu est le filtre médian, qui remplace ch
        \centering \includegraphics[width=\textwidth]{\Images/operators_reference_dilated_ellips_0.png}
     \end{subfigure}
     \caption{
-        \label{fig:morpho:operateurs}
+        \label{fig:morpho:es}
         Exemple d'application d'une dilatation avec différentes formes d'éléments structurants, comme indiquant au dessus de chaque panneau.
         \newline
         Le choix de l'élément structurant utilisé à un impact important sur le résultat.
@@ -179,7 +210,7 @@ A l'inverse, la succession d'une dilatation puis d'une érosion est appelée une
 %
 A l'inverse de l'ouverture, cet opérateur permet de remplir des aires et permet de joindre des éléments proches entre eux.
 %
-L'ouverture, la fermeture et le filtre de rang sont ainsi des outils de choix pour le pré\hyp{}traitement d'images, en permettant d'apporter une cohérence topographique à l'image que l'on veut étudier).
+L'ouverture, la fermeture et le filtre de rang sont ainsi des outils de choix pour le pré\hyp{}traitement d'images, en permettant d'apporter une cohérence topographique à l'image que l'on veut étudier.
 
 
 \begin{figure}[h!]
@@ -215,7 +246,7 @@ L'ouverture, la fermeture et le filtre de rang sont ainsi des outils de choix po
     
 \end{figure}
 %
-Grâce à ces deux opérateurs, il est possible de définir deux transformations, les chapeaux haut-de-forme blanc et noir.
+La fermeture et l'ouverture permettent de définir deux transformations, les chapeaux haut-de-forme blanc et noir.
 %
 Le chapeau haut-de-forme blanc consiste en la soustraction d'une ouverture à l'image d'origine, alors que le chapeau haut-de-forme noir est la soustraction de l'image d'origine à une fermeture de cette image.
 %
@@ -226,7 +257,7 @@ A l'inverse, le chapeau haut-de-forme noir permet la mise en évidence de la pro
 Enfin, une dernière transformation est le gradient morphologique.
 %
 Calculé comme la soustraction d'une érosion à une dilatation d'une image,
-le gradient morphologique permet de connaître l'évolution des valeurs de gris en chaque point de l'image.
+le gradient morphologique permet de connaître l'évolution des valeurs de gris en chaque point de l'image (voir \autoref{fig:lpe:marqueurs}).
 
 \begin{figure}[h!]
     \centering
@@ -239,14 +270,14 @@ le gradient morphologique permet de connaître l'évolution des valeurs de gris 
     \begin{subfigure}[b]{0.30\textwidth}
        \caption{
        \label{fig:tophat:blanc}
-            Chapeau haut-de-forme blanc
+            Chapeau \\ haut-de-forme blanc
             }
        \centering \includegraphics[width=\textwidth]{\Images/tophat_blanc.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.30\textwidth}
        \caption{
            \label{fig:tophat:noir}
-            Chapeau haut-de-forme noir
+            Chapeau \\ haut-de-forme noir
             }
        \centering \includegraphics[width=\textwidth]{\Images/tophat_noir.png}
     \end{subfigure}
@@ -258,13 +289,11 @@ le gradient morphologique permet de connaître l'évolution des valeurs de gris 
         Les chapeaux haut-de-forme permettent ainsi de détecter des éléments isolés,
         de mettre en avant des démarcations
         ou des régions situées entre deux objets proches.
-        
     }
-    
 \end{figure}
 %
 Ces différents opérateurs et transformations sont régulièrement employés conjointement à une segmentation par seuillage,
-que ce soit pour préparer le seuillage ou améliorer ses résultats~\cite{ilhan_2019,siri_2020,liu_2019}.
+que ce soit pour préparer le seuillage ou améliorer ses résultats~\cite{ilhan_2017,bahadarkhan_2016}.
 
 %
 De plus, la morphologie mathématique propose un outil de segmentation, la ligne de partage des eaux~\cite{meyer_1994}.
@@ -281,7 +310,7 @@ Un algorithme de ligne de partage des eaux aura ainsi pour but de définir à qu
 Pour définir son appartenance,
 cet algorithme calculera à quel bassin versant appartient chaque pixel.
 %
-Pour cela, il utilise deux informations: une image qui servira de carte topographique, comme le gradient d'une image, et une liste de marqueurs qui serviront à définir les bassins versants(voir \autoref{fig:lpe:marqueurs}).
+Pour cela, il utilise deux informations: une image qui servira de carte topographique, comme le gradient d'une image, et une liste de marqueurs qui serviront à définir les bassins versants (voir \autoref{fig:lpe:marqueurs}).
 %
 L'algorithme va alors attribuer à chaque pixel un label définissant à quel bassin versant il appartient (voir \autoref{fig:lpe:lines} et \autoref{fig:lpe:zones}).
 %
@@ -324,7 +353,6 @@ Cette approche permet ainsi de relier entre eux des régions présentant des val
         La \watershed{} est calculée en utilisant le gradient morphologique de l'image d'origine et les marqueurs représentés en (b).
         Le gradient morphologique est un opérateur de morphologie mathématique consistant à soustraire une érosion à une dilatation de l'image d'entrée, ce qui permet de connaître l'évolution locale des niveaux de gris.
         La ligne de partage des eaux fourni ainsi une démarcation entre différentes bassins versants, ce qui fournit une segmentation une segmentation de l'image.
-        
     }
     
 \end{figure}
@@ -363,9 +391,7 @@ De plus, un marqueur absent ou mal positionné induira une mauvaise segmentation
 \end{figure}
 
 %
-En plus d'une forte sensibilité aux paramètres fournis, ces algorithmes sont pour la plupart relativement lents.
-%
-Ils ont ainsi été remplacés au cours de la dernière décennie par des algorithmes utilisant les réseaux de neurones profonds.
+Ces approches ont été remplacés au cours de la dernière décennie par des algorithmes utilisant les réseaux de neurones profonds.
 
     \subsection{Une approche émergente, la segmentations par réseaux de neurones profonds}
 
@@ -383,7 +409,7 @@ Les signaux vont ensuite être propagés vers les couches plus profondes jusqu'�
 %
 Cependant, pour chaque neurone, les signaux reçus doivent être pondérés afin de faire réagir chaque neurone d'une même couche différemment.
 %
-L'étape d'apprentissage du réseau de neurones consiste ainsi à faire varier ces poids pour que les résultats du réseau de neurones convergent vers une situation d'équilibre donnant les meilleurs résultats pour la classification des signaux d'entrée.
+L'étape d'apprentissage du réseau de neurones consiste ainsi à faire varier ces poids pour que les résultats du réseau de neurones convergent vers une situation d'équilibre donnant les meilleurs résultats pour la classification des signaux d'entrée utilisés pour l'entrainement.
 %
 La profondeur du réseau de neurones est alors défini par le nombre de couches employé.
 %
@@ -445,7 +471,8 @@ Nous allons maintenant discuter cet a priori.
     \subsection{Le fond peut\hyp{}il toujours être différencié  de l'objet?}
 
 %
-La plus grande partie des approches de segmentation automatique considèrent que l'objet est toujours différent du fond. Ces différences peuvent par exemple concerner les valeurs de gris, de forme ou de texture.
+La plus grande partie des approches de segmentation automatique considèrent que l'objet est toujours différent du fond.
+Ces différences peuvent par exemple être des différence de valeurs de gris, de forme ou de texture.
 %
 Cet a priori est souvent considéré comme un axiome dans le développement d'algorithmes de segmentations automatiques.
 %
@@ -465,26 +492,29 @@ Il est alors possible que l'intensité lumineuse d'une région d'intérêt ne pu
 L'emploi d'une méthode de segmentation visant à attribuer un label en fonction de l'intensité lumineuse des pixels devient alors incapable de déterminer la classe à attribuer à chaque pixel.
 
 %
-Il est aussi possible que l'échantillon imagé présente en son sein des variations d'intensités lumineuses au sein d'une même région.
+Il est aussi possible que l'échantillon imagé présente en son sein des variations d'intensités lumineuses au sein d'une même région (voir \autoref{fig:apriori:raw}).
 %
-Il devient alors possible qu'une région d'intérêt présente les mêmes valeurs de gris que le fond, ce qui empêche l'utilisation d'une méthode de segmentation basée sur les différences de valeurs de gris.
+Il devient alors possible qu'une région d'intérêt présente les mêmes valeurs de gris que le fond, ce qui empêche l'utilisation d'une méthode de segmentation basée sur les différences de valeurs de gris (voir \autoref{fig:apriori:gt}, \autoref{fig:apriori:seg} et \autoref{fig:apriori:com}).
 
 \begin{figure}[h!]
 \begin{center}
     \begin{subfigure}[b]{0.2245\textwidth}
         \caption{
+            \label{fig:apriori:raw}
         Image brute
             }
        \centering \includegraphics[width=\textwidth]{\Images/hu_grad_roaw.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.2245\textwidth}
         \caption{
+            \label{fig:apriori:gt}
         Vérité terrain
             }
        \centering \includegraphics[width=\textwidth]{\Images/hu_grad_gt.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.2245\textwidth}
         \caption{
+            \label{fig:apriori:seg}
             \centering{
                 Segmentation automatique
                 }
@@ -493,12 +523,12 @@ Il devient alors possible qu'une région d'intérêt présente les mêmes valeur
     \end{subfigure}
     \begin{subfigure}[b]{0.2245\textwidth}
         \caption{
+            \label{fig:apriori:com}
             Comparaison
             }
        \centering \includegraphics[width=\textwidth]{\Images/hu_grad_sup.png}
     \end{subfigure}
     \caption{
-    \label{apriori:grad}
         Résultat de segmentation sur une coupe transversale d'un échantillon de \pz{} à 5dpf marquée par anticorps anti\hyp{}HuC/D et acquise en microscopie confocale.
         \newline
         La présence d'un important défaut de marquage peut entraîner simultanément une sous-segmentation et une sur\hyp{}segmentation. Ce défaut peut ainsi compromettre la distinction entre le fond et l'objet d'intérêt.

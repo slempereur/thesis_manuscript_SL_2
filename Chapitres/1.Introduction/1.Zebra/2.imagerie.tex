@@ -5,8 +5,9 @@
 
 \begin{document}
             
-\sectionmark{Le \pz{}, un modèle idéal pour l'imagerie}
+\sectionmark{Imagerie en fluorescence du \pz{}}
 \section{La transparence du \pz{} en fait un modèle idéal pour l'imagerie en fluorescence}
+\sectionmark{Imagerie en fluorescence du \pz{}}
 
 \label{sec:imagerie}
 
@@ -28,7 +29,7 @@ La simplicité, la rapidité et le faible coût de cette approche la rends parti
 %
 Son défaut principal est sa forte profondeur de champs.
 %
-Quelque soit la position du plan focal, le détecteur recevra des photons d'autres positions en Z, ce qui limite fortement la résolution de l'image, même si des post-traitements dits de déconvolution sont effectués.
+Quelque soit la position du plan focal, le détecteur recevra des photons d'autres positions en Z, ce qui limite fortement la résolution de l'image, même si des post-traitements par déconvolution sont effectués.
 
 
 %% confocal
@@ -36,16 +37,6 @@ Quelque soit la position du plan focal, le détecteur recevra des photons d'autr
 La microscopie confocale par balayage laser est une des premières méthodes d'imagerie ayant été mise au point pour compenser ce défaut. 
 %
 Brevetée en 1957 (voir \autoref{fig:confocal}), la microscopie confocale repose sur l'utilisation d'une source lumineuse laser et d'un iris.
-%
-Placé dans le plan focal conjugué de l'objectif utilisé, ce sténopé va empêcher les photons ne se trouvant pas dans le plan focal de l'objectif d'atteindre le détecteur.
-%
-De cette manière, seuls les photons provenant du plan focal observé retournent au détecteur, ce qui permet d'obtenir une profondeur de champs très faible.
-%
-Cette dernière sera proportionnelle au diamètre de l'iris. Au minimum, une profondeur de champs d'environ $400 nm$ peut être obtenue.
-%
-En déplaçant l'objet avec une platine motorisée, il devient alors possible de réaliser des images 3D ayant des résolutions inférieures au micron.
-%
-La grande précision de cette méthode et la versatilité permise par les méthodes de marquages en ont ainsi fait un outil de choix pour l'étude de phénomènes cellulaires et sub-cellulaires.
 
 \begin{figure}[h!]{\textwidth} 
     \centering
@@ -60,29 +51,64 @@ La grande précision de cette méthode et la versatilité permise par les métho
             Schéma issu du brevet de \textsc{Marvin Minksy} déposé en 1957.
             }
 \end{figure}
+%
+Placé dans le plan focal conjugué de l'objectif utilisé, cet iris va empêcher les photons ne se trouvant pas dans le plan focal de l'objectif d'atteindre le détecteur.
+%
+De cette manière, seuls les photons provenant du plan focal observé retournent au détecteur, ce qui permet d'obtenir une profondeur de champs très faible.
+%
+Cette dernière sera proportionnelle au diamètre de l'iris. Au minimum, une profondeur de champs d'environ $400 nm$ peut être obtenue.
+%
+En déplaçant l'objet avec une platine motorisée, il devient alors possible de réaliser des images 3D ayant des résolutions inférieures au micron.
+%
+La grande précision de cette méthode et la versatilité permise par les méthodes de marquages en ont ainsi fait un outil de choix pour l'étude de phénomènes cellulaires et sub-cellulaires.
 
 %
 Cependant, cette méthode présente deux défauts majeurs.
 %
-Premièrement, l'énergie nécessaire pour l'illumination de l'objet est importante, ce qui produit un risque de photo\hyp{}toxicité et de photo\hyp{}blanchiment. Deuxièmement, l'atténuation lumineuse des faisceaux lasers utilisés ne permet pas d'étudier des échantillons épais sans clarification préalable.
+Premièrement, l'énergie nécessaire pour l'illumination de l'objet est importante, ce qui produit un risque de photo\hyp{}toxicité et de photo\hyp{}blanchiment.
+%
+Deuxièmement, l'atténuation lumineuse des faisceaux lasers utilisés ne permet pas d'étudier des échantillons épais sans clarification préalable.
 
 %%
 %
 La microscopie par excitation biphotons améliore la pénétration au sein de l'échantillon.
 %
-Le concept d'excitation à deux photons est basé sur le fait que pour exciter un électron à un niveau quantique supérieur, plusieurs photons (d’énergie plus basse) peuvent de façon combinée apporter l’énergie nécessaire à l’excitation. Chaque photon transporte environ la moitié de l'énergie nécessaire pour exciter la molécule.Pour que deux photons ayant une forte longueur d'onde et une faible énergie soient en mesure d'exciter un fluorophore, ils doivent être absorbés simultanément. Sans dispositif particulier, la probabilité d'un tel évènement est très faible.  Une excitation entraîne l'émission ultérieure d'un photon de fluorescence. La probabilité d'absorption quasi simultanée de deux photons est extrêmement faible. Par conséquent, une puissance pic élevée de photons d'excitation est généralement requise, ce qui peut généralement être générée par un laser femto\hyp{}seconde.
+Le concept d'excitation à deux photons est basé sur le fait que pour exciter un électron à un niveau quantique supérieur, plusieurs photons (d’énergie plus basse) peuvent de façon combinée apporter l’énergie nécessaire à l’excitation (voir \autoref{fig:biphoton}).
+%
+Chaque photon transporte environ la moitié de l'énergie nécessaire pour exciter la molécule.
+%
+Cet excitation entraîne l'émission ultérieure d'un photon de fluorescence.%
+%
+Pour que deux photons ayant une forte longueur d'onde et une faible énergie soient en mesure d'exciter un fluorophore, ils doivent être absorbés simultanément. Sans dispositif particulier, la probabilité d'un tel évènement est très faible.
+%
+Par conséquent, un puissant pic de photons d'excitation est généralement requis, ce qui peut être généré par un laser femto\hyp{}seconde.
+
+\begin{figure}[h!]{\textwidth} 
+    \centering
+       \centering \includegraphics[width=0.5\textwidth]{\Figures/bi_photon_trad.png}
+       \caption{
+            \label{fig:biphoton}
+            Principe des excitations mono\hyp{}photons et bi\hyp{}photons.
+            \newline
+            Pour exciter une molécule, il est nécessaire que le photon interagissant avec cette molécule est une énergie supérieure à l'écart d'énergie entre l'état fondamental et l'état excité.
+            %
+            Cependant, si deux photons incapables d'exciter un molécule interagissent simultanément avec la molécule, leurs énergies seront sommées, ce qui peut permettre de fournir assez d'énergie. 
+            \newline
+            Traduit et adapté de Obeidy, Tong et Weninger, Journal of Investigative Dermatology, 2018~\cite{obeidy_2018}.
+            }
+\end{figure}
+
 %%
 %
-L'utilisation de l'excitation bi-photons présentent plusieurs avantages. Tout d'abord, la réduction de l'énergie des photons infra-rouge émis permet de réduire la photo-toxicité et le photo-blanchiment.
+L'utilisation de l'excitation biphotons présentent plusieurs avantages. Tout d'abord, la réduction de l'énergie des photons infra\hyp{}rouge émis permet de réduire la photo\hyp{}toxicité et le photo\hyp{}blanchiment.
 %
-La lumière infra-rouge pénètre mieux et diffuse moins dans les tissus, ce qui permet d'imager des tissus plus épais.
+La lumière infra\hyp{}rouge pénètre mieux et diffuse moins dans les tissus, ce qui permet d'imager des tissus plus épais (voir \autoref{sec:clarification:principes}).
 %
 Cependant, l'utilisation de laser femto\hyp{}secondes implique une forte augmentation des coûts d'achat et de maintenance relativement à l'emploi d'un microscope confocal à balayage laser.
 
 
 %% SPIM
-\label{sec:spim}
-Une autre stratégie permettant l'imagerie en fluorescence est l'imagerie par nappe de lumière~\cite{voie_1993} (voir \autoref{fig:light}. Cette dernière consiste principalement à rajouter une lentille sphérique dans le trajet du faisceau laser émis, pour générer une fine nappe lumineuse qui va se former autour du point focal de cette lentille.
+Une autre stratégie permettant l'imagerie en fluorescence est l'imagerie par nappe de lumière~\cite{voie_1993} (voir \autoref{fig:light}). Cette dernière consiste principalement à rajouter une lentille sphérique dans le trajet du faisceau laser émis, pour générer une fine nappe lumineuse qui va se former autour du point focal de cette lentille.
 %
 En plaçant l'échantillon à imager dans le plan focal de la lentille,
 il est alors possible d'exciter les fluorophores sur une très faible épaisseur.
@@ -94,25 +120,25 @@ Il suffit alors de placer l'objectif perpendiculairement aux faisceaux émis pou
        \centering \includegraphics[width=\textwidth]{\Figures/light_sheet.png}
        \caption{
             \label{fig:light}
-            Principe de fonctionnement d'un microscope à feuille de lumière.
+            Principe de fonctionnement d'un microscope par nappe de lumière.
             \newline
-            Une lentille circulaire permet de créer une feuille de lumière au niveau de la zone focale.
-            En plaçant l'échantillon au sein de cette feuille de lumière, il est alors possible de diminuant la quantité de lumière traversant l'échantillon, ce qui réduit la photo\hyp{}toxicité. 
+            Une lentille circulaire permet de créer une nappe de lumière au niveau de la zone focale.
+            En plaçant l'échantillon au sein de cette nappe, il est alors possible de diminuant la quantité de lumière traversant l'échantillon, ce qui réduit la photo\hyp{}toxicité. 
             \newline
-            Traduction d'une figure provenant de Voie et al, 1993~\cite{voie_1993}.
+            Traduction d'une figure provenant de Voie, Burns et Spelman, Journal of Microsocpy, 1993~\cite{voie_1993}.
             }
 \end{figure}
 
 %%
-Cette approche présente plusieurs avantages. En illuminant l'ensemble du plan en une seule fois, il est possible d'acquérir le signal avec une caméra avec une rapidité supérieure aux scanners qui captent la lumière point par point.
-Cela réduit considérablement la photo-toxicité et le photo\hyp{}blanchiment, ce qui est particulièrement avantageux pour les observations  \textit{in vivo}.
+Cette approche présente plusieurs avantages. En illuminant l'ensemble du plan en une seule fois, il est possible d'acquérir le signal avec une caméra qui ont une vitesse d'acquisition supérieure aux scanners qui captent la lumière point par point.
+Cela réduit considérablement la photo\hyp{}toxicité et le photo\hyp{}blanchiment, ce qui est particulièrement avantageux pour les observations \textit{in vivo}.
 %
 De nombreuses améliorations sont apparues au fil du temps, comme par exemple des feuilles de lumière plus homogènes obtenues grâce à l'emploi de deux sources opposées~\cite{huisken_2007}, ou bien l'emploi de deux objectifs.
 %
-Cependant, l'utilisation de la nappe de lumière limite la pénétration en profondeur dans l'échantillon, ainsi que la taille du champ d'acquisition, ce qui oblige à des acquisitions chevauchantes et des opérations de stitching des images très lourdes). Enfin, cette méthode génère des images de taille considérable (typiquement 1 To par image), ce qui entraîne donc des opérations informatiques très lourdes, pour le transfert, l'archivage et le traitement des images.
+Cependant, l'utilisation de la nappe de lumière limite la pénétration en profondeur dans l'échantillon, ainsi que la taille du champ d'acquisition, ce qui oblige à des acquisitions chevauchantes et des opérations de stitching des images très lourdes. Enfin, cette méthode génère des images de taille considérable (environ 1 To par image), ce qui rallonge les opérations informatiques comme le transfert des données, leur archivage et le traitement des images.
 
     \subsection{La microscopie confocale, la méthodologie la plus adaptée au \hcs{}}
-    
+    \label{sec:acquisition_facilite}
 Deux stratégies  permettent de faciliter l'acquisition de \pz{} en grand nombre: l'utilisation de cuves contenant les échantillons, ou l'utilisation de capillaires.
    
 %% Acquisition par moules dans des plaques
@@ -122,16 +148,16 @@ Assurer une régularité de placement entre les échantillons,
 pour pouvoir paramétrer plus facilement le système d'imagerie, et assurer l'orientation des échantillons.
 %%
 %
-La première approche consiste à utiliser des plaques standardisées (par exemple avec 96 puits)qui possèdent des espacements réguliers. Un échantillon est placé dans chaque puits, puis l'ensemble du puits est imagé. Cette stratégie permet des procédures robotisées permettant de multiplier le nombre d'échantillons gérés simultanément.
+La première approche consiste à utiliser des plaques standardisées (par exemple avec 96 puits) qui possèdent des espacements réguliers. Un échantillon est placé dans chaque puits, puis l'ensemble du puits est imagé. Cette stratégie permet des procédures robotisées ce qui multiplie le nombre d'échantillons gérés simultanément.
 %
-Cependant, cette approche impose d'effectuer des images bien plus grande que l'objet d'intérêt et une grande partie des images ne contiennent donc pas d'information. Souvent, la grande taille de la zone d'acquisition rend impossible le développement d'imagerie à aute résolution.
+Cependant, cette approche impose d'effectuer des images bien plus grande que l'objet d'intérêt et une grande partie des images ne contiennent donc pas d'information. Souvent, la grande taille de la zone d'acquisition rend impossible le développement d'imagerie à haute résolution.
 
 %%
 %
 \label{sec:moule_montage}
 La seconde approche implique l'utilisation de moules de montage.
 %
-On peut soit utiliser des moules permettant de créer des puits dans un moule dans lesquels les échantillons seront insérés~\cite{donoughe_2018,kleinhans_2019}, soit à er des moules pour créer des pièges faisant appel à la microfluidique pour contraindre les échantillons~\cite{khalili_2019}. Dans les deux cas, l'orientation des échantillons peut être déterminée.
+On peut soit utiliser des moules permettant de créer des puits dans un gel, puits dans lesquels les échantillons seront insérés~\cite{donoughe_2018,kleinhans_2019}, soit des moules pour créer des pièges faisant appel à la microfluidique pour contraindre les échantillons~\cite{khalili_2019}. Dans les deux cas, ces solutions permettent d'imposer l'orientation des échantillons.
 %
 De plus, les systèmes de créations de puits ont été couplés avec l'utilisation de plaques standardisées~\cite{wittbrodt_2014}.
 %
@@ -139,9 +165,27 @@ Il est ainsi possible de coupler les avantages des deux approches afin de limite
 
 %% Vast
 \label{sec:vast}
-Le Vertebrate Automated Screening Technology bioimager~\cite{pardomartin_2010} (VAST) est la méthode de robotisation d'acquisition d'images de \pz{} par capillaire la plus représentée dans la littérature~\cite{jarque_2018,teixid_2019}. Il permet d'imager des échantillons entre 2 et 4 dpf.
+Le Vertebrate Automated Screening Technology bioimager~\cite{pardomartin_2010} (VAST) est la méthode de robotisation d'acquisition d'images de \pz{} par capillaire la plus représentée dans la littérature~\cite{jarque_2018,teixid_2019}. Il permet d'imager des échantillons entre 2 et 5 dpf (voir \autoref{fig:vast}).
+
+\begin{figure}[h!]{\textwidth} 
+    \centering
+       \centering \includegraphics[width=\textwidth]{\Figures/vast.jpg}
+       \caption{
+            \label{fig:vast}
+            VAST couplé à un microscope Zeiss Axio.
+            \newline
+            Le VAST est un système d'automatisation d'acquisitions basé sur l'utilisation de capillaires.
+            Les échantillons sont pipetés dans un capillaire.
+            Une partie du capillaire est attachée sur la platine d'un microscope de manière à permettre l'acquisition de l'échantillon.
+            Un moteur permet à cette partie de tourner afin d'orienter les échantillons.
+            La reconnaissance de cette orientation est automatique, ce qui assure à l'utilisateur une orientation optimale de l'échantillon.
+            \newline
+            Reproduit à partir de Pulack, Methods, 2016~\cite{pulak_2016}.
+            }
+\end{figure}
+
 %
-Ce système est un accessoire à associer à un microscope droit ou inversé, que ce soiet des microscopes à epifluorescences, des microscopes confocaux ou des microscopes à disque rotatif~\cite{early_2018, guo_2017}.
+Ce système est un accessoire à associer à un microscope droit ou inversé, que ce soient des microscopes à epifluorescences, des microscopes confocaux ou des microscopes à disque rotatif~\cite{early_2018, guo_2017}.
 %
 Le VAST est un système de pompes et de moteurs permettant d'aspirer des larves de \pz{} dans un capillaire, dont une partie en verre est placée sur la platine du microscope. 
 %

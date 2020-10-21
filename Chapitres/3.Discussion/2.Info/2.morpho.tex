@@ -3,8 +3,10 @@
 \documentclass[\main/main.tex]{subfiles}
 
 \begin{document}
-                    
-\section{Vers une augmentation de la quantité de mesures fournies par les segmentations}
+                 
+\sectionmark{Obtenir plus d'informations des segmentations développées}   
+\section{Vers une augmentation de la quantité de mesures fournies par les segmentations}   
+\sectionmark{Obtenir plus d'informations des segmentations développées}
 %
 Dans l'état actuel des algorithmes, la détection d'anomalies est effectuée sur la seule estimation du volume total de chaque région segmentée. Cette stratégie permet la détection de certains défauts dans le développement des tissus, mais ne détecte pas certaines anomalies de formes, qui n'affecteraient pas le volume total de celui-ci, comme la réduction d'une région particulière au profit d'une autre.
 
@@ -43,18 +45,21 @@ Ces mesures ne nécessiteraient pas la mise en place de procédure longues à d�
     
 Grâce à la méthode d'imagerie mise en place au cours de cette thèse,
 il est maintenant possible d'imager un grand nombre d'échantillons en peu de temps. A partir de ces nombreux échantillons, il est aussi possible par recalage de créer rapidement un modèle statistique de cerveau de poisson-zèbre pour le stade de développement désiré. La variabilité existante entre les échantillons est gommée pour correspondre à un modèle statistiquement représentatif de \pz.
-A TPS, Arnim Jenett développe de telles stratégies.%
+A TPS, Arnim Jenett développe de telles stratégies.
 Plus le nombre d'échantillons utilisés pour calculer le modèle est grand, plus le modèle statistique se rapprochera de la réalité biologique d'un échantillon prototypique.
+
 %
 Ce modèle statistique peut ensuite servir de modèle afin de recaler un échantillon supplémentaire, normal ou anormal. La mesure du champ de déformation ayant permis de recaler cet échantillon sur le modèle statistique est ensuite conservée comme métrique pour des analyses ultérieures.
 
 %
 Cette méthode peut de plus être améliorée par l'emploi des atlas. La segmentation d'une liste définie de régions peut être effectuée au sein du modèle statistique. Dans la suite, l'atlas des segmentations manuelles sera nommé atlas statistique.
-Une fois ce dernier obtenu, on recale les échantillons que l'on veut étudier sur le modèle statistique. On obtient ainsi une carte des déformations nécessaires pour recaler chaque région de l'échantillon sur le modèle statistique. Ces déformations permettent ensuite d'effectuer la transformation inverse pour transformer l'atlas statistique en segmentation des sous-régions de l'échantillon à traiter.
-On obtient pour chaque échantillon une segmentation de chaque sous-région ainsi qu'une carte des déformations nécessaires pour faire correspondre cet échantillon à un modèle statistique.
-Il est alors possible de décrire quelles sont les sous-régions les plus fortemment affectées par un polluant ou par une mutation.
 
-En revanche, la mise en place d'une telle stratégie est relativement longue et coûteuse car la création du modèle statistique demande d'imager un grand nombre d'échantillons sauvages. La création manuelle de l'atlas statistique demande l'effort de plusieurs spécialistes pour s'assurer d'avoir un modèle le plus correct possible. Les calculs de recalage dits élastiques sont très lourds, et donc peu adaptés à une stratégie d'\hta. 
-Cette stratégie reste néanmoins la plus robuste  pour obtenir un grand nombre de descripteurs,  ce qui peut améliorer l'automatisation de la détection d'anomalies discrètes au sein des échantillons.
+Une fois ce dernier obtenu, on recale les échantillons que l'on veut étudier sur le modèle statistique. On obtient ainsi une carte des déformations nécessaires pour recaler chaque région de l'échantillon sur le modèle statistique. Ces déformations permettent ensuite d'effectuer la transformation inverse pour transformer l'atlas statistique en segmentation des sous-régions de l'échantillon à traiter.
+
+On obtient pour chaque échantillon une segmentation de chaque sous-région ainsi qu'une carte des déformations nécessaires pour faire correspondre cet échantillon à un modèle statistique.
+Il est alors possible de décrire quelles sont les sous-régions les plus fortement affectées par un polluant ou par une mutation.
+
+En revanche, la mise en place d'une telle stratégie est relativement longue et coûteuse car la création du modèle statistique demande d'imager un grand nombre d'échantillons sauvages. La création manuelle de l'atlas statistique demande l'effort de plusieurs spécialistes pour s'assurer d'avoir un modèle le plus correct possible. Les calculs de recalage élastiques sont très lourds, et donc peu adaptés à une stratégie d'\hta. 
+Cette stratégie reste néanmoins la plus robuste  pour obtenir un grand nombre de descripteurs, ce qui peut améliorer l'automatisation de la détection d'anomalies discrètes au sein des échantillons.
 
 \end{document}

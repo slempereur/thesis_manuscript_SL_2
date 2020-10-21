@@ -3,14 +3,15 @@
 \documentclass[\main/main.tex]{subfiles}
 
 \begin{document}
-                    
-\section{
-    \label{sec:automatisation}
+          
+\sectionmark{Piste d'automatisation du HTI}          
+\section{\label{sec:automatisation}
    Plusieurs pistes pour accélérer et rendre plus reproductibles les acquisitions
     }
+\sectionmark{Piste d'automatisation du HTI}
  
 %   
-Dans l'état actuel du projet, de nombreuses étapes du protocole de \hti{} nécessitent encore de lourds et longs investissements en main d'oeuvre..
+Dans l'état actuel du projet, de nombreuses étapes du protocole d'\hti{} nécessitent encore de lourds et longs investissements en main d'oeuvre.
 %
 L'automatisation de ces étapes pourrait ainsi permettre d'augmenter le rendement de ce procédé.
 %
@@ -39,12 +40,12 @@ De plus, avec des robots,  il serait possible de lancer un plus grand nombre de 
 %
 Actuellement, l'expérience montre qu'un opérateur humain ne peut pas traiter plus de cent larves par semaine.
 %
-L'imagerie d'un échantillon de \pz à cinq dpf est effectué en moyenne en huit minutes.
+L'imagerie d'un échantillon d'un EE de \pz{} est effectué en moyenne en huit minutes.
 %
 Il est donc possible d'imager cent échantillons en moins d'une journée.
 %
 En tenant compte du temps nécessaire au montage de ces échantillons,
-à l'équilibration du milieu d'imagerie et du temps nécessaire à la mise en place des paramètres d'imagerie
+à l'équilibration du milieu d'imagerie et du temps nécessaire à la mise en place des paramètres d'imagerie,
 il est donc possible d'imager cent échantillons par jour sur un seul microscope. 
 %
 De son coté, les segmentations présentées précédemment demandent dix minutes de calcul sur un ordinateur ayant une architecture standard.
@@ -53,15 +54,15 @@ Sans parallélisation des calculs, il est donc possible de traiter cent échanti
 %
 En prenant donc compte des week-ends, il serait en principe possible d'imager et de segmenter cinq cents échantillons par semaine.
 %
-Le traitement par \ihc{} par un opérateur humain induit donc une perte de rendement de quatre-vingts pourcents.
+Le traitement \ihc{} par un opérateur humain induit donc une perte de rendement de quatre-vingts pourcents.
 %
 L'automatisation de ce traitement pourrait donc permettre d'atteindre les pleines capacités de traitement de ce processus sans nécessité de personnel supplémentaire.
 
 %
-Ce problème peut être résolu par l'emploi de robots pipeteurs comme ceux de la marque Eppendorf (présents à TPS) et qui sont en cours d'adaptation pour ces protocoles..
+Ce problème peut être résolu par l'emploi de robots pipeteurs comme ceux de la marque Eppendorf (présents à TPS) et qui sont en cours d'adaptation pour ces protocoles.
 %
 Ces robots,
-comme l'\href{https://online-shop.eppendorf.fr/FR-fr/Automates-de-pipetage-44509.html#goto-Automates-de-pipetage-WebPMain-44509}{epmotion d'ependorf},
+comme l'\href{https://online-shop.eppendorf.fr/FR-fr/Automates-de-pipetage-44509.html#goto-Automates-de-pipetage-WebPMain-44509}{epmotion d'Eppendorf},
 permettent d'automatiser les changements de milieu, d'automatiser les lavages entres les différentes étapes
 et d'assurer une plus grande reproductibilité des résultats en limitant les opérations à effectuer par des opérateurs humains.
 %
@@ -94,7 +95,7 @@ Cependant, l'utilisation de robot pipeteur nécessite souvent l'utilisation de p
 Il est donc nécessaire de placer une larve par puits,
 ce qui est aussi une tâche longue et fastidieuse.
 %
-Cependant, la mise en place des échantillons dans des plaques 96 puits peut être accélérée par un robot pipeteur d(embryons mis au point par le KIT à Karslruhe (citer leur site). Son acquisition avait été envisagée par TPS dans le cadre du projet d'investissement d'avenir TEFOR mais il n 'a pas été réalisé par manque de temps et de demande des utilisateurs pour des traitements à grande échelle par TPS.
+Cependant, la mise en place des échantillons dans des plaques 96 puits peut être accélérée par un robot pipeteur d'embryons mis au point par le \href{https://www.ezrc.kit.edu/59.php}{KIT} à Karslruhe. Son acquisition avait été envisagée par TPS dans le cadre du projet d'investissement d'avenir TEFOR mais il n 'a pas été réalisé par manque de temps et de demande des utilisateurs pour des traitements à grande échelle par TPS.
 
     \subsection{Le montage, un enjeu important pour réduire le temps du \hcs{}}
 
@@ -140,36 +141,37 @@ De cette manière, la semelle d'agarose possède déjà l'indice de réfraction 
 Ceci entraîne donc une réduction du nombre de changement de bains.
 Cette solution n'avait pas été envisagé précédemment car la viscosité des premières versions de milieu d'appariement de l'indice de réfraction empéchait la solubilisation de l'agarose.
 %
-Cependant, le développement récent du \MD{}, version du MD ayant une viscosité réduire, a permis de résoudre ce problème.
+Cependant, le développement récent du \MD{}, solution moins visqueuse, a permis de résoudre ce problème.
 
 % Automatisation du montage
 L'automatisation du montage est difficilement réalisable en utilisant le dispositif actuel.
 %
 En effet,
-la forme des puits imprimés dans les semelles d'agarose empêche de monter les larves avec un volume de liquide important, d'où la stratégie de montageb avec un pinceau.
+la forme des puits imprimés dans les semelles d'agarose empêche de monter les larves avec un volume de liquide important, d'où la stratégie de montage avec un pinceau.
 %
 Si une trop grande quantité de liquide était déposé en même temps que l'échantillon,
-l'échantillon risquerait de sortir de son puit ou d'être mal stabilisé par le phytagel.
+l'échantillon risquerait de sortir de son puits ou d'être mal stabilisé par le phytagel.
 %
 Pour des échantillons de \pz{} à 5 dpf, les puits ont un volume inférieur à $2 mm^{3}$. 
 %
 Le pipetage d'échantillon de \pz{} nécessite au minimum une dizaine de microlitres, ce qui empêcherait l 'emploi de robot de pipettage de larve qui distribuent les larves dans un volume minimum d'environ 100 microlitres.
 %
-Afin de permettre le pipetage des échantillons par un robot, il pourrait simplement être nécessaire de créer de nouveaux tampons permettant de former dans l'agarose des pyramides au dessus des puits initiales ne contenant pas d'agarose, afin de ne pas géner l'imagerie par nos très gros objectifs.
+Afin de permettre le pipetage des échantillons par un robot, il pourrait simplement être nécessaire de créer de nouveaux tampons permettant de former dans l'agarose des pyramides au dessus des puits initiales ne contenant pas d'agarose, afin de ne pas gêner l'imagerie par nos très gros objectifs.
 %
-Aussi, en augmentant la distance existante entre deux échantillons et l'épaisseur d'agaroe,
-il serait possible de pipeter une plus grande quantité de liquide tout en assurant que les échantillons ne ressortent pas des puits. Mais aussi en séchant légèrement au préalable les moules d'agarose, il est probable que l'agarose ait la capacité d'absorber le liquide déposé. Une autre possibilité, impliquant probablemlnt des imprimantes plus performantes serait d'imprimer une grille sous les puits dans un tampon qui serait placé sous le moule d'agarose. Ainsi on pourrait favoriser l'écoulement du liquide
+Aussi, en augmentant la distance existante entre deux échantillons et l'épaisseur d'agarose,
+il serait possible de pipeter une plus grande quantité de liquide tout en assurant que les échantillons ne ressortent pas des puits. Mais aussi en séchant légèrement au préalable les moules d'agarose, il est probable que l'agarose ait la capacité d'absorber le liquide déposé. Une autre possibilité, impliquant probablement des imprimantes plus performantes serait d'imprimer une grille sous les puits dans un tampon qui serait placé sous le moule d'agarose. Ainsi on pourrait favoriser l'écoulement du liquide
+
 %
 %
-De plus, un autre problèe du montage automatisé est l'orientation aléatoire des échantillons, certaines étant imcompatibles avec la mise en place d'une procédure de \hcs{}.
+De plus, un autre problème du montage automatisé est l'orientation aléatoire des échantillons, certaines étant imcompatibles avec la mise en place d'une procédure de \hcs{}.
 %
 Ainsi, l'orientation parfaitement latérale induit par exemple des abérations lors de l'imagerie du cerveau moyen, car même si la dépigmentation a été préalablement réalisée, l'épithélium de la rétine n'est pas transparent aux rayons des lasers des microscopes confocaux et induit une perte d'information dans les tissus situés sous elle.
 
 %
-Une solution à court terme pour résoudre ce problème d'orientations pourrait être d'enlever les yeux avant imagerie, une opération relativement rapude. On pourrait aussi optimiser un protocole permettant d'imager au travers des yeux, ou finalement trouver un forme de puits adaptée permettant de contraindre la larve à être dans une orientation pseudo-dorsale dans son puits. De tels, puits ont été développés par l'équipe der Wittbrodt (ref) pour des stades plus précoces (24-48h).
+Une solution à court terme pour résoudre ce problème d'orientations pourrait être d'enlever les yeux avant imagerie, une opération relativement rapide. On pourrait aussi optimiser un protocole permettant d'imager au travers des yeux, ou finalement trouver un forme de puits adaptée permettant de contraindre la larve à être dans une orientation pseudo-dorsale dans son puits. De tels, puits ont été développés par l'équipe der Wittbrodt~\cite{wittbrodt_2014} pour des stades plus précoces (de 24 à 48 hpf).
 
 %
-Une autre possibilité de montage a émergé  ces dernières années.
+Une autre possibilité de montage a émergé ces dernières années.
 %
 Il s'agit de l'utilisation de dispositifs utilisant la microfluidique~\cite{khalili_2019}.
 %
@@ -197,17 +199,21 @@ Mais de nombreuses limites existent encore.
 %
 Je vais donc maintenant décrire deux de ces limites,
 tout en proposant à chaque fois une solution.
+
+%%
 %
 Une première limitation est la détection des échantillons.
 %
 Il est actuellement obligatoire de demander à un opérateur humain de fournir la position du premier échantillon,
 puis de lui faire calibrer la position du premier champ d'acquisition en fonction de l'ensemble des échantillons.
 %
-En effet, la position des échantillons dans chaque puit n'est pas identique, en fonction de la taille de l'échantillon. 
+En effet, la position des échantillons dans chaque puits n'est pas identique, en fonction de la taille de l'échantillon. 
 %
 La mise en place d'une procédure de pré-scan en utilisant une loupe fluorescente ou une procédure précédant l'acquisition sur le microscope confocal utilisé pourrait ainsi permettre d'automatiser la détection de la position de chaque échantillon au sein de la plaque fournie.
 %
 Une fois ces positions connues, il serait alors possible de déterminer automatiquement la position optimale des  champs d'acquisition.
+
+%%
 %
 Une seconde limitation est la détection du nombre de plan d'acquisitions nécessaires en Z.
 %
@@ -236,6 +242,6 @@ Pour résoudre ce problème, sil serait possible de mettre en place un préscan 
 %
 Durant ce pré-scan, les positions des plans seraient repoussés d'un plan vers l'extérieur si le plan limite étudié contient de l'information.
 
-En conclusion, l'essentiel de l'optimisation de l'imagerie consistera en la reconnaissance par des pré-scans par les microscopes confocaux des échantillons, afin d'éviter les pertes de temps liées à l'acquisition de zones sans échantillons (actuellement programmées pour éviter de rogner l'image d'une larve par une acquisition trop justement programmée)? cette optimisation devrait être facilement réalisable en raison des marqueurs utilisés. Aussi, avec l'augmentation de la taille des échantillons (par exemple des alevins entiers d'un mois) , il sera nécessaire d'augmenter la vitesse d'acquisition, ce qui pourra se faire par de futures générations de microscopes. En effet, à l'heure actuelle, pour de tels échantillons, nous sommes contraints de diminuer la résolution des images jusqu'à quatre microns si plus de douze échantillons sont acquis en une nuit, ce qui pourrait limiter la bonne détection de fibres, vaisseaux petites cellules ou noyaux.
+En conclusion, l'essentiel de l'optimisation de l'imagerie consistera en la reconnaissance par des pré-scans par les microscopes confocaux des échantillons, afin d'éviter les pertes de temps liées à l'acquisition de zones sans échantillons (actuellement programmées pour éviter de rogner l'image d'une larve par une acquisition trop justement programmée) cette optimisation devrait être facilement réalisable en raison des marqueurs utilisés. Aussi, avec l'augmentation de la taille des échantillons (par exemple des alevins entiers d'un mois), il sera nécessaire d'augmenter la vitesse d'acquisition, ce qui pourra se faire par de futures générations de microscopes. En effet, à l'heure actuelle, pour de tels échantillons, nous sommes contraints de diminuer la résolution des images jusqu'à quatre microns si plus de douze échantillons sont acquis en une nuit, ce qui pourrait limiter la bonne détection de fibres, vaisseaux petites cellules ou noyaux.
 
 \end{document}

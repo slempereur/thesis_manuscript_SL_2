@@ -4,14 +4,16 @@
 
 \begin{document}
 
+\sectionmark{Algorithme de segmentation de la larve entière}
 \section{La segmentation de la larve entière doit tenir compte de la déperdition lumineuse, fonction de l'épaisseur de tissu traversé
 \label{sec:algo:larva}
 }
+\sectionmark{Algorithme de segmentation de la larve entière}
 
 \subsection{Pourquoi segmenter la larve entière et quelles sont les difficultés?}
 
 %
-La segmentation de la larve entière est une étape essentielle, car elle permet évidemment, d'abord d'obtenir un important volume pour l'analyse, mais en plus d'initier des calculs ultérieurs.
+La segmentation de la larve entière est une étape essentielle, car elle permet d'abord d'obtenir un important volume pour l'analyse, mais en plus d'initier des calculs ultérieurs.
 %
 En permettant de mesurer le volume total de l'alevin, on peut par exemple déterminer si un échantillon présente un nanisme. De plus, la mesure du volume de la matière blanche doit être comparée au volume de l'alevin,  pour par exemple caractériser si un polluant a un impact plus fort sur le développement du cerveau que sur le reste du corps.
 %
@@ -32,7 +34,7 @@ Afin de réduire le temps de calcul, une première segmentation par watershed es
 %
 Appelons $D$ l'image sous\hyp{}échantillonnée.
 %
-Le sous-échantillonage est réalisé en calculant une un spline d'interpolation de degré 3 avec un facteur de zoom de $0.25$.
+Le sous-échantillonage est réalisé en calculant un spline d'interpolation de degré 3 avec un facteur de zoom de $0.25$.
 %
 $D$ subit tout d'abord une fermeture par un élément structurant cubique de 5 voxel d'arête~\eqref{eq:larva:down:clos}.
 %
@@ -97,7 +99,7 @@ Ce plus gros objet est considéré comme une première segmentation de la larve 
 \end{equation}
 
 \begin{equation}
-    \label{eq:larva:down:water}
+    \label{eq:larva:down:ultime}
     D_{9}= \gamma^{\alpha}_{u}(D_8)
 \end{equation}
 
@@ -105,17 +107,17 @@ En effectuant cette procédure sur une image sous-échantillonnée, on obtient u
 %
 Cependant, cette première segmentation peut servir à la définition d'une boîte englobante qui permet d'effectuer un nouveau calcul de \watershed{} sur l'image à résolution originale.
 %
-En réduisant ainsi la taille de l'image à traiter, cette approche permet ainsi de réduire le temps nécessaire au calcul de cette première étape.
+En réduisant la taille de l'image à traiter, cette approche permet ainsi de réduire le temps nécessaire au calcul de cette première étape.
 %
 Appelons $B$ la région de $I$ se trouvant au sein de la boite englobante.
 %
-On commence par appliquer à $I_{bb}$ une fermeture par un élément structurant cubique de 7 voxels d'arête \eqref{eq:larva:closing_1}.
+On commence par appliquer à $B$ une fermeture par un élément structurant cubique de 7 voxels d'arête \eqref{eq:larva:closing_1}.
 %
 On applique ensuite une ouverture par le même élément structurant~\eqref{eq:larva:open_1}.
 %
 On calcule ensuite deux seuillages, un premier conservant les voxels de $B_2$ ayant une valeur supérieure à 200~\eqref{eq:larva:thresh:high} et un second conservant les voxels ayant une valeur inférieure à 50~\eqref{eq:larva:thresh:low}.
 %
-Grâce à ces deux seuillages, on définit une carte de zones internes et externes~\eqref{eq:larva:zones}).
+Grâce à ces deux seuillages, on définit une carte de zones internes et externes~\eqref{eq:larva:zones}.
 %
 On calcule ensuite la position des maxima locaux~\eqref{eq:larva:max_loc}, pour ensuite définir une liste de racines~\eqref{eq:larva:seeds}.
 %
@@ -123,7 +125,7 @@ On calcule ensuite un gradient morphologique de $B_2$~\eqref{eq:larva:grad}.
 %
 On calcule une \watershed{} en utilisant $B_7$ et $B_8$~\eqref{eq:larva:water}.
 %
-Enfin, on calcule une ouverture ultime par volume pour ne conserver que le plus gros objet obtenu par le calcul de la \watershed{}.
+Enfin, on calcule une ouverture ultime par volume pour ne conserver que le plus gros objet obtenu par le calcul de la \watershed{} \eqref{eq:larva:open_volume}.
 
 \begin{equation}
     \label{eq:larva:closing_1}
@@ -171,8 +173,8 @@ Enfin, on calcule une ouverture ultime par volume pour ne conserver que le plus 
 \end{equation}
 
 \begin{equation}
-    \label{eq:larva:down:water}
-    B_{10}= \gammB_{\alpha}_{u}(B_9)
+    \label{eq:larva:open_volume}
+    B_{10}= \gamma_{\alpha}_{u}(B_9)
 \end{equation}
 
 %%
@@ -212,7 +214,7 @@ Enfin, afin de supprimer les trous au sein de l'échantillon, on applique une de
 
 \begin{equation}
     \label{eq:larva:acq:thresh}
-    L_3 = T_{500}(I) * L_2 + B_{10} \cap T_{d_max}(L_1)
+    L_3 = T_{500}(I) * L_2) + B_{10} \cap T_{d_max}(L_1)
 \end{equation}
 
 \begin{equation}

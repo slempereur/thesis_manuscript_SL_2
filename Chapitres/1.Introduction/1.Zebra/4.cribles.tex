@@ -6,6 +6,7 @@
             
 \sectionmark{Le HCS, une approche de choix pour la toxicologie}
 \section{Le \hcs{}, une approche de choix pour l'étude toxicologique}
+\sectionmark{Le HCS, une approche de choix pour la toxicologie}
 
     \subsection{Les \hcss{} nécessitent des expertises multiples}
     
@@ -13,7 +14,7 @@
 %
 A l'origine, le \hcs{} est un ensemble de méthodes développé pour étudier rapidement les effets d'un grand nombre de molécules chimiques.
 %
-Ces méthodes sont particulièrement utilisés en toxicologie~\cite{na_2016} ou dans la recherche de médicaments candidats~\cite{macarron_2011}.
+Ces méthodes sont particulièrement utilisés en toxicologie~\cite{na_2016} ou dans la recherche de candidats médicaments~\cite{macarron_2011}.
 
 %%
 %
@@ -67,7 +68,7 @@ Les solutions de \hcs{} utilisant l'imagerie de \pz{} sont actuellement peu nomb
 %
     \subsection{Différentes approches de \hcs{} utilisent déjà le \pz{}}
 
-Nous avons vu dans la \autoref{sec:easy_acq} que différentes méthodes permettant de faciliter l'acquisition d'images de \pz{}
+Nous avons vu dans la \autoref{sec:acquisition_facilite} que différentes méthodes permettant de faciliter l'acquisition d'images de \pz{}
 ont été mises au point.
 %
 Pour pouvoir utiliser ces méthodes dans le cadre de \hcs{}, il est nécessaire de mettre au point des procédures de traitement d'images automatiques.
@@ -111,7 +112,7 @@ Cette étude propose donc une méthode permettant d'automatiser le positionnemen
 %
 En couplant cette procédure à un robot de traitement des échantillons, il est ainsi possible de réaliser un \hcs{} complet permettant d'étudier des défauts morphologiques chez le \pz{}.
 %
-Cependant, cette méthode ne semble pas être en mesure d'effectuer des analyses de signaux fluorescents que le VAST implique des microscopes à fluorescence. Les images ont aussi des abérrations dues à l'acquisition en capillaire.
+Cependant, cette méthode ne semble pas être en mesure d'effectuer des analyses de signaux fluorescents alors que le VAST peut être placé sur des microscopes à fluorescence. Les images ont aussi des abérrations dues à l'acquisition en capillaire.
 
 %% Aquifer
 %
@@ -128,7 +129,7 @@ Différentes routines d'analyses des images obtenues ont été proposées pour �
 %
 Les méthodes de cribles employant le \pz{} utilise des méthodes d'imagerie 2D ou des méthodes ayant une faible résolution en profondeur.
 %
-Comme vu en section \ref{sec:imagerie}, les limitations imposés par les capillaires du VAST impose l'emploi d'image 2D, et les microscopes à épifluorescence ont une profondeur de champ importante, ce qui implique un manque de précision dans l'acquisition.
+Comme vu en \autoref{sec:vast}, les limitations imposés par les capillaires du VAST impose l'emploi d'image 2D, et les microscopes à épifluorescence ont une profondeur de champ importante, ce qui implique un manque de précision dans l'acquisition.
 
 %%
 %
@@ -150,21 +151,19 @@ Imaginons que l'on essaie d'imager une toile d'araignée parfaitement plane
 faisant 1 millimètre de diamètre et une épaisseur négligeable
 avec un dispositif d'acquisition ayant une profondeur de champs de 1 microns.
 %
-Afin de s'assurer que l'ensemble de la toile soit nette, il serait nécessaire que l'angle formé par la lentille de l'objectif et le support d'acquisition est un angle inférieur à $0.06^{\circ}$.
+Afin de s'assurer que l'ensemble de la toile soit incluse dans la profondeur de champ, il serait nécessaire que l'angle formé par la lentille de l'objectif et le support d'acquisition soit inférieur à $0.06^{\circ}$.
 
 %%
 Deux situations peuvent alors se produire.
 %
-Si on utilise un système d'imagerie ne filtrant pas les photons qui proviennent de la couoe optique désirée, tout élément de la toile sortant de la zone couverte par la profondeur de champs sera flou.
+Si on utilise un système d'imagerie ne filtrant pas les photons qui proviennent de la coupe optique désirée, tout élément de la toile sortant de la zone couverte par la profondeur de champs sera flou.
 %
 A l'inverse, si on utilise un système ne permettant de capter que les photons provenant de l'épaisseur décrite par la profondeur de champ, comme un microscope confocal, alors tout élément sortant de cette zone ne sera pas visible.
 %
 Il est donc quasi impossible d'imager correctement des structures planes en utilisant des images 2D.
 %
-De plus, la plupart des structures biologiques ne  pas planes mais au contraire très complexes en 3D.
+De plus, la plupart des structures biologiques ne sont pas planes mais au contraire très complexes en 3D.
 %
 Ainsi, le développement de cribles pour l'étude de structures cérébrales par imagerie 2D est souvent insuffisante pour donner des informations ne risquant pas de comporter des artefacts, sauf si l'objet peut être réorienté automatiquement et précisément, comme dans le cas de la plateforme ZeBraInspector que nous avons développé, qui implique des images 3D permettant de capturer des images 2D dans n'importe quelle orientation.
-%
-
 
 \end{document}

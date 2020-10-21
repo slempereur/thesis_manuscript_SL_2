@@ -5,32 +5,34 @@
 
 \begin{document}
 
-\chaptermark{SBLC}
 \chapter{Résultat non publié 1 :
 SBLC: Un algorithme pour compenser des gradients de marquages 
 \label{sec:sblc}
 }
+\chaptermark{\slbc{}}
 
 %
 %
-Du fait de nombreuses étapes de traitements, d'échantillons potentiellement variables, et d'événements perturbateurs comme l'adhérence des échantillons aux parois des tubes ou l'adhérence des échantillons entre eux, les marquages immuno-histochimiques peuvent être de qualité variable. Il est donc souvent compliqué d'optimiser un marquage par anticorps, en particulier pour des expériences dites in toto , impliquant par exemple une larve de \pz{} entière.
+Du fait de nombreuses étapes de traitements, d'échantillons potentiellement variables, et d'événements perturbateurs comme l'adhérence des échantillons aux parois des tubes ou l'adhérence des échantillons entre eux, les marquages immuno-histochimiques peuvent être de qualité variable. Il est donc souvent compliqué d'optimiser un marquage par anticorps, en particulier pour des expériences dites in toto, impliquant par exemple une larve de \pz{} entière.
 %
-Les difficultés rencontrées avec le marquage par anticorps anti-HuC/D (qui marque les cellules en neurogenèse de façon complémentaire aux marqueurs lipophiles qui marquent principalement les fibres neuronales)) nous a obligé à mettre au point une procédure de compensation des défauts de marquage.
-En partant d'une hypothèse physique simple, nous avons supposé que la concentration de marquage au sein d'un tissu suivait une loin de décroissance exponentielle.
+Les difficultés rencontrées avec le marquage par anticorps anti-HuC/D (qui marque les cellules en neurogenèse de façon complémentaire aux marqueurs lipophiles qui marquent principalement les fibres neuronales) nous a obligé à mettre au point une procédure de compensation des défauts de marquage.
+En partant d'une hypothèse physique simple, nous avons supposé que la concentration de marquage au sein d'un tissu suivait une loin de décroissance exponentielle selon la profondeur.
 %
 L'algorithme de compensation de défaut de marquage
 a été nommé \sblc{} (SBLC).
 %
-Dans la suite de cette section seront présentées les hypothèses, une description de l'algorithme créé, une présentation des résultats obtenus et finalement une discussion des limites de ce procédé.
+Dans la suite de cette section je présente les hypothèses, une description de l'algorithme créé, une présentation des résultats obtenus et finalement une discussion des limites de ce procédé.
 
+\sectionmark{Modélisation des défauts de marquage}
     \section{La décroissance des marquages suit une loi exponentielle fonction de l'épaisseur des tissus traversés}
+\sectionmark{Modélisation des défauts de marquage}
   
 %%
 %
 Dans un tissu fixé, la diffusion des anticorps peut être modélisée 
 comme un mouvement brownien.
 %
-Dans le cadre d'une coupe mince, les anticorps vont circuler dans le milieu environnant le tissu sans contrainte.
+Dans le cadre d'une coupe mince, les anticorps vont circuler dans le milieu sans contrainte.
 %
 Une coupe mince de cerveau de poisson-zèbre a une épaisseur comprise entre  2 et 25 µm.
 %
@@ -43,26 +45,28 @@ De manière homologue à la diffusion de la chaleur, on peut alors modéliser la
 %
 En partant de ce principe, on peut en déduire que la concentration en anticorps est corrélée à l'épaisseur de tissu traversé.
 %
-Ainsi, il est parait possible de corriger un défaut de marquage par l'application d'une correction suivant la profondeur des tissus pénétrés par l'anticorps.
+Ainsi, il parait possible de corriger un défaut de marquage par l'application d'une correction suivant la profondeur des tissus pénétrés par l'anticorps.
 %
 Les hypothèses posées m'ont donc permis de mettre au point une méthode de correction d'un défaut de marquage immuno-histochimique se basant sur la profondeur de tissus pénétrée par les anticorps.
 %
-En utilisant une méthode de correction similaire au SBDDCC (voir mansucrit), nous avons ainsi mis au point un algorithme permettant la correction d'un tel défaut de marquage.
+En utilisant une méthode de correction similaire au SBDDCC (voir \autoref{sec:sbddcc} et \autoref{sec:lempereur_info}), nous avons ainsi mis au point un algorithme permettant la correction d'un tel défaut de marquage.
     
-    \subsection{SBLC corrige les défauts de pénétration des marqueurs selon une stratégie similaire à celle développée pour corriger les défauts de pénétration de la lumière}
+\sectionmark{Présentation de l'algorithme}
+    \section{SBLC corrige les défauts de pénétration des marqueurs selon une stratégie similaire à celle développée pour corriger les défauts de pénétration de la lumière}
+\sectionmark{Présentation de l'algorithme}
  
 %%
 %
-L'obtention de la segmentation de l'échantillon entier est un pré-requis au calcul de cette algorithme.
+L'obtention de la segmentation de l'échantillon entier est un pré-requis au calcul de cet algorithme.
 %
-Une manière de réaliser cette segmentation a été présenté en \autoref{sec:lempereur_info}.
+Une manière de réaliser cette segmentation a été présentée en \autoref{sec:lempereur_info}.
 
 %%
 %
 La première étape de l'algorithme est le calcul
-d'une carte de distance.
+d'une carte des distances.
 %
-Cette distance est mesuré depuis la surface de la segmentation.
+Ces distances sont mesurées depuis la surface de la région segmentée.
 %
 Ainsi, cette carte indiquera le nombre de voxels minimal qu'il faut
 traverser pour atteindre chaque voxel au sein de la segmentation.
@@ -74,9 +78,9 @@ De cette manière, il est possible de modéliser l'épaisseur de tissus qu'un an
 
 %%
 %
-En utilisant cette carte, il est alors possible de mesurer la valeur médiane de fluorescence pour chaque épaisseur de tissu.
+En utilisant cette carte, on peut alors mesurer la valeur médiane de fluorescence pour chaque épaisseur de tissu.
 %
-De manière analogue au SBDDCC, on normalise la valeur des médians des valeurs de gris eau médian le plus élevé. Si la profondeur d'une couche est supérieure à la profondeur de la couche ayant le plus grand médian, on multiplie tous les pixels de cette profondeur par le quotient de la valeur médiane maximale et de la valeur médiane de la profondeur de la couche.
+De manière analogue au SBDDCC, on normalise la valeur des médians des valeurs de gris au médian le plus élevé. Si la profondeur d'une couche est supérieure à la profondeur de la couche ayant le plus grand médian, on multiplie tous les pixels de cette profondeur par le quotient de la valeur médiane maximale et de la valeur médiane de la profondeur de la couche.
 %
 De cette manière, un défaut de marquage immuno-histochimique 
 induisant une perte croissante de l'intensité de la fluorescence avec
@@ -88,7 +92,7 @@ compensé.
 Afin de visualiser les résultats de cet algorithme, un fantôme théorique a été créé.
 %
 Pour cela, une ellipse comportant des valeurs de gris 
-aléatoirement attribués entre 1 et 4095 a été générée.
+aléatoirement attribuées entre 1 et 4095 a été générée.
 %
 Cette image est appelé $F$ (voir \autoref{fig:sblc:algo:model}).
 %
@@ -96,15 +100,15 @@ On conserve les contours de l'ellipse, que l'on considérera par la suite comme 
 %
 On calcule la carte des distances au sein de l'ellipse originelle.
 %
-Cette carte est appelé appelé $P$ (voir \autoref{fig:sblc:algo:dist}).
+Cette carte est appelée $P$ (voir \autoref{fig:sblc:algo:dist}).
 %
 On va ensuite calculer pour chaque couche un coefficient de décroissance.
 %
-En prenant pour demi-vie le quart de la profondeur maximale dans l'échantillon (Eq.\eqref{eq:sblc:half}), on calcule alors la valeur d'une exponentielle décroissante pour chaque profondeur (Eq.\eqref{eq:sblc:exp}).
+En prenant pour demi-vie le quart de la profondeur maximale dans l'échantillon \eqref{eq:sblc:half}, on calcule alors la valeur d'une exponentielle décroissante pour chaque profondeur \eqref{eq:sblc:exp}.
 %
-Ces coefficients sont alors utilisés pour reproduire l'effet d'une déperdition exponentielle au sein de chaque couche en multipliant les valeurs de gris d'une couche par le coefficient calculé pour cette profondeur (Eq.\eqref{eq:sblc:decay}).
+Ces coefficients sont alors utilisés pour reproduire l'effet d'une déperdition exponentielle au sein de chaque couche en multipliant les valeurs de gris d'une couche par le coefficient calculé pour cette profondeur \eqref{eq:sblc:decay}.
 %
-De plus, un seuillage est appliqué (Eq.\eqref{eq:sblc:seuillage} pour supprimer les valeurs trop basses dans les zones ayant été dégradées.
+De plus, un seuillage est appliqué \eqref{eq:sblc:seuillage} pour supprimer les valeurs trop basses dans les zones ayant été dégradées.
 %
 Le résultat de l'application de cette décroissance exponentielle est visible en \autoref{fig:sblc:algo:decay}.
 
@@ -135,11 +139,11 @@ Le résultat de l'application de cette décroissance exponentielle est visible e
 
 %%
 %
-L'image ainsi produite est ensuite corrigée en utilisant le \sblc{} (voir \autoref{fig:sblc:algo:correction}).
+L'image ainsi produite est ensuite corrigée en utilisant le SBLC (voir \autoref{fig:sblc:algo:correction}).
 %
 En comparant visuellement le résultat au modèle d'origine, il est difficile d'observer une différence à l'oeil nu.
 %
-Afin de confirmer cette impression, on a calculé pour chaque voxel le ratio entre le modèle et le résultat de la correction sur l'image dégradée (Eq.\eqref{eq:sblc:ratio}).
+Afin de confirmer cette impression, on a calculé pour chaque voxel le ratio entre le modèle et le résultat de la correction sur l'image dégradée \eqref{eq:sblc:ratio}.
 %
 La visualisation de ce ratio est visible en \autoref{fig:sblc:algo:ratio}.
 
@@ -214,7 +218,9 @@ La visualisation de ce ratio est visible en \autoref{fig:sblc:algo:ratio}.
 \end{figure}
 
 
+\sectionmark{Limites de cette approche}
     \section{Cette approche, bien que rapide, n'est pas applicable à tous les marqueurs}
+\sectionmark{Limites de cette approche}
     
 
 %%
@@ -233,7 +239,7 @@ En raison des pré-requis nécessaires à l'emploi de cette méthode, plusieurs 
 
 %%
 %
-Tout d'abord, cette méthode nécessite que le marquage à corriger soit réparti de façon homogène sur l'ensemble de l'échantillon, ou tout du moins qu'il suive une répartition homogène suivant la profondeur de tissus.
+Tout d'abord, cette méthode nécessite que le marquage à corriger suive un gradient régulier suivant la profondeur de tissus.
 %
 L'emploi d'un anticorps marquant une zone limitée dans l'espace pourrait ainsi être problématique, car le signal qui serait amplifié ne serait que du bruit de fond.
 
@@ -293,7 +299,7 @@ Imaginons le marquage d'un antigène se trouvant dans l'hypothalamus d'un \pz{} 
 %
 Cette région étant une des régions les plus profondes au sein d'un \pz{} à ce stade, un défaut de marquage ne pourrait pas être compensé, car il serait alors impossible de différencier le signal positif du bruit de fond se trouvant au niveau de la peau.
 %
-Ce défaut présente en soit une qualité car il permet de s'assurer qu'aucun signal faux-positif ne sera créé par l'algorithme  (voir \autoref{fig:sblc:defaut:deep}).
+Ce défaut présente en soit une qualité car il permet de s'assurer qu'aucun signal ne sera créé \emph{ex-nihilo}  (voir \autoref{fig:sblc:defaut:deep}).
 
 \begin{figure}[h!]
     \centering
@@ -323,7 +329,7 @@ Ce défaut présente en soit une qualité car il permet de s'assurer qu'aucun si
 %%
 %
 Par ailleurs, cet algorithme étant basé sur la multiplication de chaque couche par
-un coefficient, un signal ayant complètement disparu ne pourra pas être récupéré (voir \autoref{fig:sblc:defaut:surface0}). Les méthodes de clarification des larves de poisson zèbre restent donc insipensables. En leur abssence, le centre de la larve possède en effet des sign	aux trop faible pour que cet algorithme puisse compenser la perte trop forte de signal.
+un coefficient, un signal ayant complètement disparu ne pourra pas être récupéré (voir \autoref{fig:sblc:defaut:surface0}). Les méthodes de clarification des larves de poisson zèbre restent donc indispensables. En leur absence, le centre de la larve possède en effet des signaux trop faibles pour que cet algorithme puisse compenser la perte trop forte de signal.
 %
 \begin{figure}[h!]
     \centering
@@ -355,6 +361,6 @@ un coefficient, un signal ayant complètement disparu ne pourra pas être récup
 %
 Enfin, cette approche se basant sur un quotient entre valeur médiane maximale et valeur médiane pour la profondeur considérée, cette méthode permet de ne pas modifier un échantillon ayant été correctement marqué.
 %
-En effet, si les valeurs médianes ne sont que peu modifiées au fur et à mesure que l'on pénètre dans l'échantillon, le SBLC ne modifiera que très peu les valeurs de gris des couches concernant.
+En effet, si les valeurs médianes ne sont que peu modifiées au fur et à mesure que l'on pénètre dans l'échantillon, le SBLC ne modifiera que très peu les valeurs de gris des couches.
 
 \end{document}
